@@ -1,4 +1,4 @@
-# product-lab
+# launchpad
 
 Product sketches and launch-ready structures. Each branch is a deployable product skeleton.
 
