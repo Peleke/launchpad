@@ -1,5 +1,7 @@
 # The DevOps Decision Kit
 
+![DevOps Decision Kit](hero.png)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
