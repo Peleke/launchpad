@@ -5,24 +5,22 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-**Stop reading comparison blog posts. Start making infrastructure decisions.**
+Every comparison post about Terraform vs. Pulumi, ECS vs. EKS, or GitHub Actions vs. GitLab CI ends the same way: "it depends." None of them tell you what it depends _on_.
 
-You know what Terraform, Pulumi, ECS, EKS, GitHub Actions, and Datadog are. You do not know which one to use for YOUR team, YOUR budget, and YOUR stack. Every comparison post ends with "it depends" without telling you what it depends on.
+This repo gives you decision trees for the 5 infrastructure choices that stall most DevOps engineers. You answer questions about your team, your constraints, and your existing stack. You get a specific recommendation with reasoning you can defend to your team lead. You deploy from a companion template the same day.
 
-This repo contains decision trees for the 5 infrastructure choices that paralyze most DevOps engineers. Answer a few questions about your situation. Get a specific recommendation with reasoning. Deploy from the companion templates.
+**The typical path:** You read comparison blog posts for three weeks. You still cannot decide. You copy a Terraform config from a Medium article written for a company 100x your size.
 
-**Before:** Three weeks of comparison blog posts. Still cannot decide. Copies Terraform from a Medium article written for a company 100x your size.
-
-**After:** 15 minutes. One decision. Justified reasoning you can explain to your team. A deployable template to start building today.
+**The path through this repo:** You spend 15 minutes answering questions about your situation. You get one recommendation backed by decision criteria. You clone a template and start building.
 
 ---
 
-## What's In This Repo
+## What Is In This Repo
 
 ```
 devops-decision-kit/
 ├── decision-trees/          # Decision frameworks for 5 infrastructure choices
-│   ├── 00-quick-start/      # 4-question master tree -> your first decision in 15 min
+│   ├── 00-quick-start/      # 4-question master tree: your first decision in 15 min
 │   ├── 01-iac-tool/         # Terraform vs. Pulumi vs. CDK vs. CloudFormation
 │   ├── 02-container-orchestration/  # ECS vs. EKS vs. Docker vs. Lambda
 │   ├── 03-cicd-pipeline/    # GitHub Actions vs. GitLab CI vs. Jenkins vs. CircleCI
@@ -59,18 +57,18 @@ Answer these four questions:
 
 | Answer | IaC Recommendation |
 |--------|-------------------|
-| Python | **Pulumi** (Python SDK) -- define infra in a language you already know |
+| Python | **Pulumi** (Python SDK): define infra in a language you already know |
 | TypeScript / JavaScript | **CDK** (if AWS-only) or **Pulumi** (TypeScript SDK, if multi-cloud) |
 | Go | **Pulumi** (Go SDK) |
-| Java / C# / Other | **Terraform** (HCL) -- purpose-built for infra, no language bias needed |
-| No strong preference | **Terraform** (HCL) -- the constraints of a DSL are a feature for infra |
+| Java / C# / Other | **Terraform** (HCL): purpose-built for infra, no language bias needed |
+| No strong preference | **Terraform** (HCL): the constraints of a DSL are a feature for infra |
 
 ### 3. Do you need multi-cloud support?
 
 | Answer | IaC Recommendation |
 |--------|-------------------|
 | Single cloud (AWS/GCP/Azure) | **CDK** (if AWS + TypeScript team) or **Terraform** (otherwise) |
-| Multi-cloud or hybrid | **Terraform** (broadest provider coverage) or **Pulumi** (better language support) -- decide based on Q2 |
+| Multi-cloud or hybrid | **Terraform** (broadest provider coverage) or **Pulumi** (better language support); decide based on Q2 |
 
 ### 4. What existing infrastructure do you have?
 
@@ -85,7 +83,7 @@ Answer these four questions:
 
 ## IaC Decision Tree (Full)
 
-This is the complete Infrastructure-as-Code decision tree. It is free. Use it.
+The complete Infrastructure-as-Code decision tree. Free to use.
 
 ### The Decision Matrix
 
@@ -109,15 +107,15 @@ This is the complete Infrastructure-as-Code decision tree. It is free. Use it.
 
 #### Solo / Small Team (1-3 engineers)
 
-**If your team writes Python daily -> Pulumi (Python SDK)**
+**If your team writes Python daily: Pulumi (Python SDK)**
 
-Why: Pulumi lets you define infrastructure using real Python -- with loops, conditionals, type checking, and your existing IDE setup. For a small team, the ramp-up speed of using a familiar language outweighs Terraform's larger ecosystem. You will be writing `for` loops over subnets, not copy-pasting HCL blocks.
+Why: Pulumi lets you define infrastructure using real Python, including loops, conditionals, type checking, and your existing IDE setup. For a small team, the ramp-up speed of using a familiar language outweighs Terraform's larger ecosystem. You will be writing `for` loops over subnets instead of copy-pasting HCL blocks.
 
-When to reconsider: If you hire and your new engineers do not know Python, or if you find yourself fighting Pulumi's state management on complex multi-stack deployments. Terraform's state management is more battle-tested at scale.
+When to reconsider: If you hire engineers who do not know Python. Or if you find yourself fighting Pulumi's state management on complex multi-stack deployments. Terraform's state management is more battle-tested at scale.
 
 Template: [`templates/pulumi/python-ecs/`](templates/pulumi/python-ecs/)
 
-**If your team writes TypeScript daily -> CDK (AWS-only) or Pulumi TypeScript SDK (multi-cloud)**
+**If your team writes TypeScript daily: CDK (AWS-only) or Pulumi TypeScript SDK (multi-cloud)**
 
 Why: CDK compiles to CloudFormation, giving you the tightest AWS integration and the ability to use every CloudFormation feature on day one. If you are AWS-only, CDK is the path of least resistance. If you need GCP or Azure, Pulumi's TypeScript SDK gives you the same language benefits without the AWS lock-in.
 
@@ -125,17 +123,17 @@ When to reconsider: CDK's CloudFormation dependency means you are subject to CFN
 
 Template: [`templates/pulumi/typescript-eks/`](templates/pulumi/typescript-eks/)
 
-**If your team writes Go daily -> Pulumi (Go SDK)**
+**If your team writes Go daily: Pulumi (Go SDK)**
 
 Why: Same reasoning as Python. Use the language your team knows. Pulumi's Go SDK is well-maintained and Go's type system catches infrastructure misconfigurations at compile time.
 
-When to reconsider: Pulumi's Go SDK has a smaller community than the Python/TypeScript SDKs. If you are blocked on a provider issue, check community activity before committing.
+When to reconsider: Pulumi's Go SDK has a smaller community than the Python and TypeScript SDKs. If you are blocked on a provider issue, check community activity before committing.
 
-**If no strong language preference -> Terraform (HCL)**
+**If no strong language preference: Terraform (HCL)**
 
-Why: HCL is a domain-specific language built for infrastructure. It is declarative by design, which prevents the "I accidentally wrote an infinite loop in my infrastructure code" class of bugs. For a team without existing language preferences, the constraint of a DSL is a feature -- it forces infrastructure-appropriate patterns. Terraform also has the largest ecosystem: the module registry, provider coverage, and community support are unmatched.
+Why: HCL is a domain-specific language built for infrastructure. It is declarative by design, which prevents the "I accidentally wrote an infinite loop in my infrastructure code" class of bugs. For a team without existing language preferences, the constraint of a DSL is a feature because it forces infrastructure-appropriate patterns. Terraform also has the largest module registry and the broadest provider coverage of any IaC tool.
 
-When to reconsider: If your team grows and wants to share logic between application code and infrastructure code, or if HCL's limited programming constructs (no real functions, limited loops before 1.x) frustrate your team.
+When to reconsider: If your team grows and wants to share logic between application code and infrastructure code, or if HCL's limited programming constructs frustrate your team.
 
 Template: [`templates/terraform/aws-ecs-fargate/`](templates/terraform/aws-ecs-fargate/)
 
@@ -143,41 +141,41 @@ Template: [`templates/terraform/aws-ecs-fargate/`](templates/terraform/aws-ecs-f
 
 The team-size dynamics shift at 4+ engineers. Code review, module sharing, and onboarding new engineers matter more than individual productivity.
 
-**Single cloud -> Evaluate CDK vs. Terraform**
+**Single cloud: Evaluate CDK vs. Terraform**
 
-- CDK if: your team is TypeScript-heavy, you are AWS-only, and you want the tightest cloud integration.
-- Terraform if: you want provider-agnostic patterns (useful even within a single cloud for portability), or your team is not TypeScript-heavy.
+- CDK if your team is TypeScript-heavy, you are AWS-only, and you want the tightest cloud integration.
+- Terraform if you want provider-agnostic patterns (useful even within a single cloud for portability), or your team is not TypeScript-heavy.
 
-**Multi-cloud -> Terraform or Pulumi**
+**Multi-cloud: Terraform or Pulumi**
 
-- Terraform if: you need the broadest provider coverage and want the largest hiring pool.
-- Pulumi if: your team has a strong language preference (Python/TS/Go) and values using general-purpose languages over HCL.
+- Terraform if you need the broadest provider coverage and want the largest hiring pool.
+- Pulumi if your team has a strong language preference (Python/TS/Go) and values using general-purpose languages over HCL.
 
 #### Large Team (10+ engineers)
 
 **Default: Terraform.**
 
-At this scale, ecosystem matters more than language elegance. Terraform gives you: the largest hiring pool (most DevOps job postings list Terraform), the most mature module registry, battle-tested state management patterns (remote state, workspaces, state locking), and the broadest provider coverage. The HCL learning curve is a one-time cost that pays dividends in team scalability.
+At this scale, ecosystem matters more than language elegance. Terraform gives you the largest hiring pool (most DevOps job postings list Terraform as a requirement), the most mature module registry, and battle-tested state management with remote state, workspaces, and state locking. The HCL learning curve is a one-time cost that pays dividends in team scalability.
 
 ### The Reversibility Check
 
-**This is the part no comparison post covers.**
+Comparison posts never cover this, so we will.
 
 Every IaC tool has migration paths to every other IaC tool:
-- Terraform -> Pulumi: `pulumi import` can read Terraform state files
-- CDK -> Terraform: Export CloudFormation, import into Terraform
-- Pulumi -> Terraform: Export state, import resources
-- Any tool -> Any tool: At worst, you `import` existing cloud resources into the new tool
+- Terraform to Pulumi: `pulumi import` reads Terraform state files directly
+- CDK to Terraform: export CloudFormation, then import into Terraform
+- Pulumi to Terraform: export state, import resources
+- Any tool to any tool: at worst, you `import` existing cloud resources into the new tool
 
-**None of these decisions are permanent.** The real cost of switching is not technical -- it is the team knowledge and module library you have built. That cost grows over time, which is why making a good-enough decision now matters more than making a perfect decision in three months.
+None of these decisions are permanent. The real cost of switching is the team knowledge and module library you have built, not the technical migration. That cost grows over time, which is why making a good-enough decision now matters more than making a perfect decision in three months.
 
-**Rule of thumb:** If you are spending more than one week deciding, you are overthinking it. Pick the option that matches your team's existing skills. Build for 6 months. Revisit with real production data. The data will make the next decision obvious.
+If you are spending more than one week deciding, you are overthinking it. Pick the option that matches your team's existing skills. Build for 6 months. Revisit with real production data.
 
 ---
 
 ## Container Orchestration Preview: "Do You Actually Need Kubernetes?"
 
-Before you decide between ECS and EKS, answer this question honestly:
+Before you decide between ECS and EKS, answer this honestly:
 
 ### The Kubernetes Necessity Check
 
@@ -189,32 +187,32 @@ Before you decide between ECS and EKS, answer this question honestly:
 | Do you need multi-cloud workload portability? | K8s is the only real option | Cloud-native services are fine |
 | Are you running ML/AI workloads that need GPU scheduling? | K8s (EKS) for GPU node pools | Probably do not need K8s |
 
-**If you answered "No" to 3+ of these questions: you do not need Kubernetes.**
+**If you answered "No" to 3+ of these questions, you do not need Kubernetes.**
 
-Use ECS Fargate (for container workloads) or Lambda (for event-driven workloads). You will save money, operational complexity, and late-night debugging sessions.
+Use ECS Fargate for container workloads or Lambda for event-driven workloads. You will save money and operational complexity.
 
-**The number most people do not know:** EKS costs $2,400/year just for the control plane ($0.10/hr x 24hrs x 365 days) -- before you run a single container. ECS has no control plane cost. For a small team with a tight budget, that $2,400 buys a lot of ECS tasks.
+Here is the number most people do not know: EKS costs $2,400/year just for the control plane ($0.10/hr x 24hrs x 365 days), before you run a single container. ECS has no control plane cost. For a small team on a tight budget, that $2,400 buys a lot of ECS tasks.
 
-> The full container orchestration decision tree (including ECS vs. EKS vs. Lambda vs. plain Docker branching by workload type, team experience, and budget) is in the complete Decision Kit.
+> The full container orchestration decision tree (covering ECS vs. EKS vs. Lambda vs. plain Docker, branching by workload type, team experience, and budget) is in the complete Decision Kit.
 
 ---
 
 ## What the Full Kit Includes
 
-The free content in this repo covers the complete IaC decision tree, the "Do you need Kubernetes?" analysis, the Jenkins migration guide, deployable ECS Fargate and Lambda templates, GitHub Actions workflows, and two end-to-end architecture examples.
+The free content in this repo covers the complete IaC decision tree, the Kubernetes necessity analysis, the Jenkins migration guide, deployable ECS Fargate and Lambda templates, and GitHub Actions workflows.
 
 **The full DevOps Decision Kit ($29) adds:**
 
 - Complete decision trees for container orchestration, CI/CD pipelines, and monitoring stacks
 - The 15-point AI infrastructure review checklist (for Copilot/ChatGPT-generated Terraform)
-- Cost-at-scale analysis for monitoring stacks (the Datadog pricing surprise)
+- Cost-at-scale analysis for monitoring stacks (the Datadog pricing surprise at 500+ hosts)
 - Deployable EKS, Pulumi, GitLab CI, and Prometheus+Grafana templates
-- "When to switch" reversibility analysis for every decision
+- Reversibility analysis for every decision: when to switch and what it costs
 - Multi-cloud end-to-end architecture example
 
-One payment. Yours forever. 30-day money-back guarantee.
+One payment, yours permanently. 30-day money-back guarantee.
 
-**[Get the Full DevOps Decision Kit -- $29](link)**
+**[Get the Full DevOps Decision Kit ($29)](link)**
 
 ---
 
@@ -222,39 +220,36 @@ One payment. Yours forever. 30-day money-back guarantee.
 
 The infrastructure landscape changes. Decision trees should too.
 
-Sign up for the DevOps Decision Kit newsletter and get:
-- Updates when decision trees are revised (new tools, changed pricing, shifted ecosystems)
-- One real infrastructure decision breakdown per week -- what was chosen, why, and what happened
+The DevOps Decision Kit newsletter sends:
+- Updates when decision trees are revised for new tools, changed pricing, or shifted ecosystems
+- One real infrastructure decision breakdown per week: what was chosen, why, and what happened
 - Early access to new decision frameworks before they hit the repo
 
 **[Subscribe for decision tree updates](link)**
 
-No spam. No "10x your DevOps" marketing. Just infrastructure decisions, analyzed.
+The newsletter covers infrastructure decisions. Nothing else.
 
 ---
 
 ## About the Author
 
-Built by an engineer who designed production infrastructure for:
-- **Qortex** -- complex backend systems handling real production traffic
-- **MindMirror** -- enterprise federated GraphQL platform + Expo mobile application
-- **24-week cybersecurity curriculum** -- built and ran at a company doing $60MM+ ARR
+Built by an engineer who designed production infrastructure for Qortex (complex backend systems handling real production traffic), MindMirror (enterprise federated GraphQL platform and Expo mobile application), and a 24-week cybersecurity curriculum at a company doing $60MM+ ARR.
 
-Previously the 13th most popular author on Scotch.io (the go-to frontend education platform before its acquisition). That background means this is not just a practitioner writing docs -- it is a proven technical educator who builds production systems.
+Previously the 13th most popular author on Scotch.io, the frontend education platform before its acquisition. That background means this is a technical educator who also builds production systems.
 
-Every decision tree in this repo traces back to a real infrastructure decision made under real production pressure. Not hypothetical. Not theoretical. Real teams, real budgets, real consequences.
+Every decision tree in this repo traces back to a real infrastructure decision made under real production pressure with real teams and real budgets.
 
 ---
 
 ## Contributing
 
-This repo gets better when practitioners share their decisions.
+This repo improves when practitioners share their decisions.
 
 **How to contribute:**
 
-- **Report a scenario the trees do not cover:** Open an issue using the [scenario request template](.github/ISSUE_TEMPLATE/scenario-request.md). Describe your team size, budget, stack, and what you need to decide. I will add a branch or clarify an existing one.
-- **Share your decision outcome:** Used a decision tree and deployed? Tell me what happened. Open an issue using the [decision feedback template](.github/ISSUE_TEMPLATE/decision-feedback.md). Real-world feedback makes the trees more accurate.
-- **Submit a case study:** If you used the Decision Kit to make an infrastructure choice and have 6+ months of production data, I would love to include your case study (anonymized if needed). This is the highest-value contribution.
+- **Report a scenario the trees do not cover:** Open an issue using the [scenario request template](.github/ISSUE_TEMPLATE/scenario-request.md). Describe your team size, budget, stack, and what you need to decide.
+- **Share your decision outcome:** Used a decision tree and deployed? Open an issue using the [decision feedback template](.github/ISSUE_TEMPLATE/decision-feedback.md). Real-world feedback makes the trees more accurate.
+- **Submit a case study:** If you used the Decision Kit to make an infrastructure choice and have 6+ months of production data, we would love to include it (anonymized if needed).
 - **Fix errors:** Found a factual mistake, outdated pricing, or broken template? PRs welcome.
 
 Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
@@ -265,4 +260,4 @@ Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 MIT License. See [LICENSE](LICENSE) for details.
 
-The decision trees, templates, and documentation in this repo are free to use, modify, and share. The [full DevOps Decision Kit](link) is a paid product that includes additional decision trees, templates, and analysis not available in this repo.
+The decision trees, templates, and documentation in this repo are free to use, modify, and share. The [full DevOps Decision Kit](link) is a paid product that includes additional decision trees, templates, and analysis.

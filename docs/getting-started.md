@@ -1,9 +1,9 @@
 # Getting Started
 
 ## Prerequisites
-- Mid-level experience (2-10 years) in DevOps, SRE, Platform Engineering, or Infrastructure Engineering
+- Mid-level infrastructure experience (2-10 years). The target audience is DevOps engineers, SREs, and platform engineers.
 - A terminal, git, and an AWS account (free tier is sufficient for most templates)
-- Conceptual understanding of infrastructure-as-code, containers, and CI/CD pipelines
+- Working knowledge of infrastructure-as-code concepts, containers, and CI/CD pipelines
 
 ## Your First Decision (15 Minutes)
 1. Open the README.md and go to **Quick Start**
