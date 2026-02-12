@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From 1 to Prod — I finished the tutorial. Now what?</title>
+  <meta name="description" content="One real app. Eight modules. From Linux to production Kubernetes. No videos to watch — code to ship.">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+      --green: #3fb950;
+      --orange: #d29922;
+      --red: #f85149;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero .sub {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 560px;
+      margin: 0 auto 32px;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: #000;
+    }
+
+    .btn-primary:hover { background: #46d05a; }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover { background: #1c2129; }
+
+    /* Sections */
+    section {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+
+    section p {
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-size: 1.05rem;
+    }
+
+    /* Quotes */
+    blockquote {
+      border-left: 3px solid var(--accent);
+      padding: 12px 20px;
+      margin: 20px 0;
+      background: var(--surface);
+      border-radius: 0 6px 6px 0;
+    }
+
+    blockquote p {
+      color: var(--text);
+      font-style: italic;
+      margin-bottom: 4px;
+    }
+
+    blockquote cite {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-style: normal;
+    }
+
+    /* Module table */
+    .modules-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 24px 0;
+      font-size: 0.95rem;
+    }
+
+    .modules-table th {
+      text-align: left;
+      padding: 12px 16px;
+      border-bottom: 2px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .modules-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .modules-table td:first-child {
+      font-weight: 600;
+      white-space: nowrap;
+      color: var(--accent);
+    }
+
+    .modules-table td:last-child {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .modules-table tr:hover { background: var(--surface); }
+
+    /* How it works */
+    .steps {
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .steps li {
+      counter-increment: steps;
+      padding: 16px 0 16px 56px;
+      position: relative;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .steps li::before {
+      content: counter(steps);
+      position: absolute;
+      left: 0;
+      top: 14px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .steps li strong { color: var(--text); }
+
+    /* Before/After */
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .ba-card {
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .ba-card.before { background: rgba(248, 81, 73, 0.06); border-color: var(--red); }
+    .ba-card.after { background: rgba(63, 185, 80, 0.06); border-color: var(--green); }
+
+    .ba-card h3 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .ba-card.before h3 { color: var(--red); }
+    .ba-card.after h3 { color: var(--green); }
+
+    .ba-card p { color: var(--text); font-size: 0.95rem; margin: 0; }
+
+    /* Pricing */
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .price-card {
+      padding: 28px 24px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .price-card.featured {
+      border-color: var(--green);
+      position: relative;
+    }
+
+    .price-card .price {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .price-card .price-label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+
+    .price-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .price-card li {
+      padding: 6px 0;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .price-card li::before {
+      content: "✓ ";
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* FAQ */
+    details {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 8px;
+      background: var(--surface);
+    }
+
+    summary {
+      padding: 16px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 1rem;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::before {
+      content: "+";
+      margin-right: 12px;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    details[open] summary::before { content: "−"; }
+
+    details div {
+      padding: 0 20px 16px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Credibility */
+    .cred {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 28px;
+      margin: 24px 0;
+    }
+
+    .cred p { margin-bottom: 12px; }
+    .cred p:last-child { margin-bottom: 0; }
+
+    /* Comparison */
+    .compare-list {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+
+    .compare-list li {
+      padding: 8px 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .compare-list .price-tag { color: var(--text); font-weight: 600; }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* Final CTA */
+    .final-cta {
+      text-align: center;
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .final-cta h2 { margin-bottom: 12px; }
+    .final-cta p { margin-bottom: 28px; }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2rem; }
+      .hero .sub { font-size: 1.05rem; }
+      .before-after, .pricing-cards { grid-template-columns: 1fr; }
+      .modules-table { font-size: 0.85rem; }
+      .modules-table th, .modules-table td { padding: 10px 8px; }
+      .container { padding: 0 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <h1>I finished the tutorial.<br>Now what?</h1>
+      <p class="sub">One real app. Eight modules. From Linux to production Kubernetes. No videos to watch&mdash;code to ship.</p>
+      <div class="cta-group">
+        <a href="https://github.com/Peleke/launchpad/tree/from-1-to-prod" class="btn btn-primary">Clone the Repo</a>
+        <a href="#community" class="btn btn-secondary">Join the Community</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Problem -->
+  <section>
+    <div class="container">
+      <h2>You&rsquo;ve been doing this for years.</h2>
+      <p>Bouncing between Docker, Terraform, and Kubernetes tutorials. Starting courses and never finishing them. Watching YouTube walkthroughs at 2x speed, feeling like you understand everything and nothing at the same time.</p>
+
+      <blockquote>
+        <p>&ldquo;I&rsquo;m basically a &lsquo;Jack of all tools, master of none.&rsquo; This has led me into a never ending tutorial hell for YEARS.&rdquo;</p>
+        <cite>&mdash; u/deadphoenix1986, r/devops (58 upvotes, 57 comments)</cite>
+      </blockquote>
+
+      <p>You push code. The pipeline breaks. You google the error. You add a commit called &ldquo;fix pipeline error.&rdquo; You push again. It breaks again. Sixty commits later, you still don&rsquo;t understand what went wrong.</p>
+
+      <blockquote>
+        <p>&ldquo;If you don&rsquo;t have 60 consecutive commits called &lsquo;fix pipeline error,&rsquo; can you really call yourself DevOps?&rdquo;</p>
+        <cite>&mdash; u/Reverent, r/devops (377 upvotes)</cite>
+      </blockquote>
+
+      <p>You interview. They ask why you chose Kubernetes over serverless. You don&rsquo;t have an answer. Not because you&rsquo;re dumb&mdash;because no one ever taught you the <em>why</em>.</p>
+
+      <blockquote>
+        <p>&ldquo;I interviewed 12 candidates and only hired one&hellip; when asking why specifically kubernetes and not serverless, or autoscaling spot instances on aws&hellip; they didn&rsquo;t know the answer.&rdquo;</p>
+        <cite>&mdash; u/Gotxi, r/devops (196 upvotes)</cite>
+      </blockquote>
+
+      <p>And the worst part? You know exactly what you need. You just can&rsquo;t find it anywhere.</p>
+
+      <blockquote>
+        <p>&ldquo;I don&rsquo;t want another random list of videos/courses to watch. I need: STRUCTURE. ACTIONABLE sequence. REAL capstone projects end to end that simulate real production DevOps architecture.&rdquo;</p>
+        <cite>&mdash; u/deadphoenix1986, r/devops</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- Before / After -->
+  <section>
+    <div class="container">
+      <h2>The transformation</h2>
+      <div class="before-after">
+        <div class="ba-card before">
+          <h3>Before</h3>
+          <p>You&rsquo;ve done 50 tutorials and can&rsquo;t deploy anything to production.</p>
+        </div>
+        <div class="ba-card after">
+          <h3>After</h3>
+          <p>You built a production 3-tier app with CI/CD, monitoring, and infrastructure-as-code. You can explain every layer. You can explain <em>why</em> you chose each tool.</p>
+        </div>
+      </div>
+
+      <ol class="steps">
+        <li><strong>Clone the repo.</strong> Each module is a branch. Start at <code>01-linux</code>, finish at <code>08-kubernetes</code>.</li>
+        <li><strong>Build one real app.</strong> Not 8 isolated exercises. One 3-tier application that evolves through every module. By Module 3, it&rsquo;s containerized. By Module 4, it has CI/CD. By Module 8, it runs on Kubernetes&mdash;and you can explain why.</li>
+        <li><strong>Ship at every checkpoint.</strong> Every module produces something deployable. Stop after Module 4 and you already have a containerized app with CI/CD. That&rsquo;s more than most tutorials deliver in 40 hours.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Modules -->
+  <section>
+    <div class="container">
+      <h2>What&rsquo;s inside</h2>
+      <table class="modules-table">
+        <thead>
+          <tr>
+            <th>Module</th>
+            <th>What You Build</th>
+            <th>Why It Matters</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>01: Linux</td>
+            <td>Working dev environment, SSH, file permissions, process management</td>
+            <td>The foundation everything else sits on.</td>
+          </tr>
+          <tr>
+            <td>02: Scripting</td>
+            <td>Automation scripts: backup, health check, log rotation, deployment helper</td>
+            <td>&ldquo;At least 1 or more people on a team who do not even know how to create a bash script.&rdquo;</td>
+          </tr>
+          <tr>
+            <td>03: Docker</td>
+            <td>Containerized 3-tier app: frontend + API + database with Docker Compose</td>
+            <td>Container fundamentals before orchestration. A real multi-service app.</td>
+          </tr>
+          <tr>
+            <td>04: CI/CD</td>
+            <td>GitHub Actions pipeline: build, test, lint, security scan, deploy</td>
+            <td>&ldquo;60 consecutive commits called &lsquo;fix pipeline error&rsquo;&rdquo; ends here.</td>
+          </tr>
+          <tr>
+            <td>05: Terraform</td>
+            <td>AWS infrastructure as code: VPC, subnets, security groups, RDS, ECS</td>
+            <td>Terraform with proper guardrails. No more 1,000-line scripts that destroy environments.</td>
+          </tr>
+          <tr>
+            <td>06: Serverless</td>
+            <td>Lambda, API Gateway, SQS/SNS, DynamoDB</td>
+            <td>Serverless <em>before</em> K8s. This is what most people should use.</td>
+          </tr>
+          <tr>
+            <td>07: Monitoring</td>
+            <td>Prometheus + Grafana, alerting, structured logging, incident runbook</td>
+            <td>&ldquo;Everything&rsquo;s working, why do we need you?&rdquo;&mdash;this makes your value visible.</td>
+          </tr>
+          <tr>
+            <td>08: Kubernetes</td>
+            <td>K8s deployment. Side-by-side: serverless vs K8s. When to use which.</td>
+            <td>Last on purpose. K8s is for scale. This teaches <em>when</em>, not just how.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Credibility -->
+  <section>
+    <div class="container">
+      <h2>Built by someone who ships</h2>
+      <div class="cred">
+        <p><strong>Not someone who teaches.</strong></p>
+        <p>I built a 24-week cybersecurity program at a company doing $60MM+ ARR. I built Qortex, MindMirror, and Interlinear. I learned DevOps because I had to ship real things&mdash;not because I watched a course.</p>
+        <p>Every example in this repo comes from real engineering decisions. When Module 6 asks &ldquo;why serverless and not Kubernetes?&rdquo;&mdash;the answer comes from production experience.</p>
+        <p style="color: var(--text-muted);"><strong>Built from the community&rsquo;s own pain.</strong> The positioning, the module sequence, the fundamentals-first architecture&mdash;all from 25 direct quotes pulled from r/devops threads. This is not what I think you need. This is what you told me you need, in your own words.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="community">
+    <div class="container">
+      <h2>Pricing</h2>
+
+      <div class="pricing-cards">
+        <div class="price-card">
+          <div class="price">$0</div>
+          <div class="price-label">The repo. Forever.</div>
+          <ul>
+            <li>All 8 modules</li>
+            <li>Full source code</li>
+            <li>Tests for every milestone</li>
+            <li>README guides every step</li>
+            <li>Open-source, MIT licensed</li>
+          </ul>
+          <br>
+          <a href="https://github.com/Peleke/launchpad/tree/from-1-to-prod" class="btn btn-primary" style="width:100%;text-align:center;">Clone the Repo</a>
+        </div>
+        <div class="price-card featured">
+          <div class="price">$49-99<span style="font-size:1rem;font-weight:400;color:var(--text-muted)">/mo</span></div>
+          <div class="price-label">Skool Community</div>
+          <ul>
+            <li>Peer code review on every checkpoint</li>
+            <li>Weekly office hours&mdash;real debugging</li>
+            <li>Advanced challenges: canary deploys, blue-green</li>
+            <li>Direct access for architecture questions</li>
+            <li>Cohort of builders doing the same work</li>
+          </ul>
+          <br>
+          <a href="#" class="btn btn-primary" style="width:100%;text-align:center;background:var(--accent);">Join the Community</a>
+        </div>
+      </div>
+
+      <p style="text-align:center;margin-top:16px;font-size:0.9rem;">The guarantee: finish Module 4 and don&rsquo;t have a working CI/CD pipeline? Open an issue. I&rsquo;ll fix the repo.</p>
+
+      <h3 style="margin-top:32px;margin-bottom:12px;font-size:1.1rem;">What comparable resources cost</h3>
+      <ul class="compare-list">
+        <li><span>Udemy DevOps courses</span><span class="price-tag">$10-15 each (and you&rsquo;ve bought 12)</span></li>
+        <li><span>KodeKloud</span><span class="price-tag">$15/mo</span></li>
+        <li><span>A Cloud Guru</span><span class="price-tag">$35/mo</span></li>
+        <li><span>DevOps bootcamp</span><span class="price-tag">$5,000-15,000</span></li>
+        <li><span>5 more years of tutorials</span><span class="price-tag">Priceless, but not in a good way</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="container">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>How is this different from another course?</summary>
+        <div><p>It&rsquo;s a repo. You clone it and build. No videos. No quizzes. No certificates. Just code, tests, and infrastructure that actually deploys. Every module produces something you can show in an interview.</p></div>
+      </details>
+
+      <details>
+        <summary>I don&rsquo;t have time.</summary>
+        <div><p>Each module is a weekend. Module 1 takes 4-6 hours. Finish Module 4 and stop&mdash;you have a Dockerized app with CI/CD. That&rsquo;s more than most tutorials deliver in 40 hours.</p></div>
+      </details>
+
+      <details>
+        <summary>My company uses Azure/GCP, not AWS.</summary>
+        <div><p>The concepts transfer. Linux, Docker, CI/CD, IaC patterns, monitoring&mdash;these are universal. The AWS specifics are one layer. The architecture thinking is the real product.</p></div>
+      </details>
+
+      <details>
+        <summary>I&rsquo;m too senior for this.</summary>
+        <div><p>Then explain why 11 of 12 senior candidates couldn&rsquo;t answer &ldquo;why Kubernetes and not serverless?&rdquo; Fundamentals aren&rsquo;t beneath you&mdash;they&rsquo;re what separates you from the 11 who got rejected.</p></div>
+      </details>
+
+      <details>
+        <summary>Why is Kubernetes last?</summary>
+        <div><p>Because K8s is for scale, and most of you don&rsquo;t need it. Serverless handles 90% of use cases more simply. Learn K8s first, you use it for everything. Learn serverless first, you use K8s only when it&rsquo;s the right call. That distinction is what hiring managers test for.</p></div>
+      </details>
+
+      <details>
+        <summary>What if I get stuck?</summary>
+        <div><p>Open an issue on the repo. Or join the community where other builders can help you debug. Either way, you&rsquo;re not stuck alone in a YouTube comment section hoping someone replies.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <div class="final-cta">
+    <div class="container">
+      <h2>Start Module 1 this weekend.</h2>
+      <p><code>git clone</code> and go.</p>
+      <div class="cta-group">
+        <a href="https://github.com/Peleke/launchpad/tree/from-1-to-prod" class="btn btn-primary">Clone the Repo</a>
+        <a href="#community" class="btn btn-secondary">Join the Community</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>Built by <a href="https://github.com/Peleke">Peleke</a> &middot; <a href="https://github.com/Peleke/launchpad/tree/from-1-to-prod">GitHub</a> &middot; MIT License</p>
+    </div>
+  </footer>
+
+</body>
+</html>
