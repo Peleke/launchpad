@@ -68,8 +68,8 @@ To share a product preview with someone before launch, send them the Vercel prev
 
 | Branch | Product | Price | Status | PR | Preview |
 |--------|---------|-------|--------|----|---------|
-| [`devops-decision-kit`](https://github.com/Peleke/launchpad/tree/devops-decision-kit) | The DevOps Decision Kit | $29 | spec | [#1](https://github.com/Peleke/launchpad/pull/1) | [Preview](https://launchpad-git-devops-decision-kit-pelekes-projects.vercel.app) |
-| [`from-1-to-prod`](https://github.com/Peleke/launchpad/tree/from-1-to-prod) | From 1 to Prod | $49-99/mo | spec | [#2](https://github.com/Peleke/launchpad/pull/2) | [Preview](https://launchpad-git-from-1-to-prod-pelekes-projects.vercel.app) |
+| [`devops-decision-kit`](https://github.com/Peleke/launchpad/tree/devops-decision-kit) | The DevOps Decision Kit | $29 | spec | [#1](https://github.com/Peleke/launchpad/pull/1) | [Preview](https://product-acys9vbcu-kwayet-fs-projects.vercel.app) |
+| [`from-1-to-prod`](https://github.com/Peleke/launchpad/tree/from-1-to-prod) | From 1 to Prod | $49-99/mo | spec | [#2](https://github.com/Peleke/launchpad/pull/2) | [Preview](https://product-f2hgfws1r-kwayet-fs-projects.vercel.app) |
 
 ## The Pipeline Behind This
 
