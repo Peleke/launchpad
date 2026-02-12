@@ -1,89 +1,143 @@
-# Launchpad
+# From 1 to Prod
 
-This repo is your product launch surface. Each branch is a complete, deployable product skeleton. Main is the index. Vercel auto-deploys every branch as a preview URL you can share.
+<!-- IMAGE_INTENT: Isometric dark-background illustration showing a progressive pipeline from a simple terminal/Linux icon on the left flowing through containers, CI/CD gears, cloud infrastructure, monitoring dashboards, to a Kubernetes cluster on the right. Teal and blue accent colors. Clean, technical, minimal.
+     PROMPT: isometric technical illustration, dark navy background, progressive DevOps pipeline flowing left to right, Linux terminal icon, Docker container, CI/CD gear mechanism, AWS cloud, Grafana dashboard, Kubernetes wheel, connected by glowing teal pipeline lines, clean minimal style, no text, 1280x640
+     DIMENSIONS: 1280x640 -->
 
-## What This Repo Does
+> **"I don't want another random list of videos/courses to watch. I need: STRUCTURE. ACTIONABLE sequence. REAL capstone projects end to end that simulate real production DevOps architecture."** -- r/devops
 
-You have a pipeline that takes a product idea from signal scan through persona research, offer scoping, and pitch generation. The pitch skill produces 1,300+ lines of launch material: landing page copy, platform-specific posts, a GitHub README, a 5-email nurture sequence, an hour-by-hour launch checklist, A/B test specs, and kill criteria.
+One real app. Eight modules. From Linux to production Kubernetes. No videos to watch -- code to ship.
 
-Launchpad is where all of that becomes real. When the pitch skill runs, it:
+## The Problem
 
-1. **Creates a branch** named after the product (e.g., `devops-decision-kit`)
-2. **Scaffolds the full product directory** with README, templates, examples, docs, issue templates, LICENSE, CONTRIBUTING.md
-3. **Generates a hero image** via ComfyUI (or leaves an HTML comment with the image intent for later)
-4. **Splits the email sequence** into individual files in `emails/` (ready to paste into ConvertKit/Buttondown)
-5. **Opens a PR against main** so you can review every file line-by-line, leave comments, and have the agent fix feedback
+You have done 50 tutorials. You can spin up a Docker container. You can follow a Terraform walkthrough. But hand you a blank terminal and ask you to deploy a 3-tier app to production? You freeze.
 
-Meanwhile, in your Obsidian vault, the pitch skill simultaneously deploys:
-- **Content seeds** to `Writing/Content-Briefs/` (one per platform: Reddit, LinkedIn, Twitter)
-- **A launch checklist kanban** to `Admin/Product-Discovery/Pitches/` (Pre-Launch, Launch Day, Week 1, Ongoing columns with dated tasks)
-- **Review reminder tasks** appended to the pitch document (Week 1, Month 1, Month 3 review dates with `#hunter/review` tags, queryable by Obsidian Tasks)
+This repo fixes that.
 
-The result: after one pitch run, you have a reviewable PR on GitHub, a deployable preview on Vercel, content seeds in your vault ready for editing, a kanban board for launch execution, and timed review reminders so you check the numbers instead of rationalizing them.
+## What This Is
 
-## The Review Workflow
+A progressive capstone project. One user-facing, 3-tier application that evolves through 8 modules:
 
-This is how you go from "pitch generated" to "product shipped":
+| Module | Branch | What You Build | Time |
+|--------|--------|---------------|------|
+| 01: Linux Fundamentals | `01-linux` | Working dev environment, SSH, file permissions | 4-6 hrs |
+| 02: Scripting | `02-scripting` | Bash + Python automation: backup, health check, deploy | 4-6 hrs |
+| 03: Docker | `03-docker` | Containerized 3-tier app with Docker Compose | 6-8 hrs |
+| 04: CI/CD | `04-cicd` | GitHub Actions pipeline that tests locally first | 6-8 hrs |
+| 05: Terraform | `05-terraform` | AWS infrastructure as code: VPC, subnets, RDS, ECS | 8-10 hrs |
+| 06: Serverless | `06-serverless` | Lambda, API Gateway, SQS/SNS, DynamoDB | 6-8 hrs |
+| 07: Monitoring | `07-monitoring` | Prometheus + Grafana dashboards, alerting, runbook | 6-8 hrs |
+| 08: Kubernetes | `08-kubernetes` | K8s deployment + serverless vs K8s decision framework | 8-10 hrs |
 
-**Step 1: Open the PR.** The pitch skill opens a PR (e.g., [#1](https://github.com/Peleke/launchpad/pull/1)) with every generated file. The PR body includes a review checklist and links to all upstream pipeline artifacts (offer spec, persona, SWOT, decision log, signal scan).
+**Why Kubernetes is Module 8, not Module 1:** If you learn K8s first, you use K8s for everything. If you learn serverless first (Module 6), you learn when K8s is the right call and when it isn't. That distinction is what separates the candidate who gets hired from the 11 who don't.
 
-**Step 2: Review line-by-line.** Read the README as a buyer would. Read the emails as a recipient would. Comment on anything that feels wrong, weak, or off-voice. GitHub's PR review UI is your editing surface.
+## Quick Start
 
-**Step 3: Fix feedback.** Tell the agent (via Telegram, Claude Code, or however you talk to it) to address your PR comments. It pushes fixes to the same branch. The PR updates. Repeat until clean.
-
-**Step 4: Check the Vercel preview.** Every branch auto-deploys to a preview URL. Open it. See how the README renders. Share the preview URL with a trusted friend for a gut check.
-
-**Step 5: Merge when ready.** Merging the PR means the product structure is approved. The branch stays alive for future updates (template improvements, README iterations, new content).
-
-**Step 6: Execute the kanban.** Open the launch checklist in Obsidian. It has every pre-launch, launch-day, and post-launch task with dates. Check them off as you go.
-
-## What Lives Where
-
-| Artifact | Location | Purpose |
-|----------|----------|---------|
-| Product skeleton (README, templates, emails) | Branch on this repo | The deployable product |
-| PR for review | This repo, against main | Your editing and approval surface |
-| Vercel preview | Auto-deployed per branch | Shareable preview URL |
-| Content seeds (Reddit, LinkedIn, Twitter posts) | Obsidian `Writing/Content-Briefs/` | Raw posts for you to edit before publishing |
-| Launch checklist kanban | Obsidian `Admin/Product-Discovery/Pitches/` | Day-by-day execution plan |
-| Review reminders | Appended to pitch doc in Obsidian | Timed tasks so you check kill criteria on schedule |
-| Full pitch document (all 7 phases) | Obsidian `Admin/Product-Discovery/Pitches/` | The source of truth for all generated material |
-| Upstream pipeline artifacts | Obsidian `Admin/Product-Discovery/` subfolders | Signal scan, decision, persona, SWOT, offer spec |
-
-## Deploy-Only Mode
-
-Already have a pitch document but the artifacts were never split out? The pitch skill has a deploy-only mode that reads an existing pitch doc from the vault and deploys all the artifacts without re-generating content.
-
-Trigger it with: `/pitch --deploy-only devops-decision-kit-pitch-2026-02-08`
-
-It parses the pitch by section headers, checks what has already been deployed (skips duplicates), and writes only what is missing. You get a deployment report showing what was created and where.
-
-## Vercel Setup
-
-Vercel is connected to this repo. Configuration is in `vercel.json` on main. Every branch gets a preview deployment automatically. No build step needed (static files only). The preview URL pattern is `https://launchpad-{branch-slug}.vercel.app` or similar.
-
-To share a product preview with someone before launch, send them the Vercel preview URL for that branch.
-
-## Products
-
-| Branch | Product | Price | Status | PR | Preview |
-|--------|---------|-------|--------|----|---------|
-| [`devops-decision-kit`](https://github.com/Peleke/launchpad/tree/devops-decision-kit) | The DevOps Decision Kit | $29 | spec | [#1](https://github.com/Peleke/launchpad/pull/1) | [Preview](https://launchpad-git-devops-decision-kit-pelekes-projects.vercel.app) |
-
-## The Pipeline Behind This
-
-```
-signal-scan → decision-log → persona-extract → swot-analysis → offer-scope → pitch → launchpad
-                                                                                 ↓
-                                                                          Obsidian vault
-                                                                          (seeds, kanban,
-                                                                           review tasks)
+```bash
+git clone https://github.com/Peleke/from-1-to-prod.git
+git checkout 01-linux
+cat README.md  # Each module has its own guide
 ```
 
-Each skill in the pipeline produces structured output that feeds the next. By the time the pitch skill runs, it has persona pain stories, SWOT risk analysis, offer positioning, and kill criteria to draw from. The pitch assembles all of that into launch-ready materials. Launchpad is where those materials become reviewable, deployable, and shareable.
+Each module branch has:
+- A README with step-by-step instructions
+- Tests that validate each milestone (`make test`)
+- The complete code from all prior modules
 
-The pipeline skills live in [`Peleke/skills`](https://github.com/Peleke/skills) (see PR [#7](https://github.com/Peleke/skills/pull/7) for the latest pitch extensions including deploy-only mode).
+## Portfolio-Ready at Every Checkpoint
+
+Stop after Module 3 and you have a containerized 3-tier app.
+Stop after Module 4 and you have full CI/CD.
+Stop after Module 5 and you have production IaC on AWS.
+Every checkpoint is a portfolio piece.
+
+## The Decision Framework: Serverless vs Kubernetes
+
+This is free. This is the 80% that matters.
+
+**Use serverless when:**
+- Request volume is bursty or unpredictable
+- Individual functions do one thing (< 15 min execution)
+- You want zero infrastructure management
+- Your team is small (< 5 engineers)
+- Cold start latency is acceptable for your use case
+
+**Use Kubernetes when:**
+- You need persistent connections (WebSockets, gRPC streaming)
+- You have steady, predictable traffic at scale
+- You need fine-grained control over networking, storage, and scheduling
+- Your team has dedicated platform/infra engineers
+- You're running stateful workloads that need custom orchestration
+
+**Use both when:**
+- Event-driven async processing (Lambda) + steady API traffic (K8s)
+- Background jobs (Lambda) + real-time serving (K8s)
+- Most production systems at scale use both -- the question is which workload goes where
+
+The full decision framework with real-world case studies is in Module 8: [`docs/serverless-vs-k8s.md`](docs/serverless-vs-k8s.md)
+
+## Project Structure
+
+```
+from-1-to-prod/
+├── README.md
+├── LICENSE
+├── CONTRIBUTING.md
+├── .github/
+│   ├── workflows/ci.yml
+│   └── ISSUE_TEMPLATE/
+├── app/
+│   ├── frontend/           # React/Vue/Svelte frontend
+│   ├── api/                # Node/Python/Go API server
+│   ├── database/           # Schema, migrations, seeds
+│   └── docker-compose.yml  # Local development environment
+├── scripts/                # Module 2: Automation scripts
+├── infrastructure/
+│   ├── terraform/          # Module 5: AWS IaC
+│   ├── serverless/         # Module 6: Lambda + API Gateway
+│   └── kubernetes/         # Module 8: K8s manifests
+├── monitoring/             # Module 7: Prometheus + Grafana
+├── tests/                  # Unit, integration, E2E
+└── docs/                   # ADRs, module guides, decision frameworks
+```
+
+## Prerequisites
+
+- Basic programming ability (any language)
+- A computer with terminal access
+- An AWS account (free tier is sufficient)
+- No prior DevOps experience required
+
+## Who Built This
+
+I learned DevOps by shipping real things, not by watching courses.
+
+- Built a 24-week cybersecurity program at a company doing $60MM+ ARR
+- Built production systems: Qortex, MindMirror, Interlinear
+- Every example in this repo comes from real engineering decisions
+
+This repo is free because the best way to prove you can teach something is to give it away and let the work speak.
+
+## Community
+
+Building in the open is good. Building with peers is better.
+
+The Skool community is where builders doing this capstone get:
+- Peer code review on every module checkpoint
+- Weekly office hours for production debugging
+- Advanced challenges beyond the 8 modules
+- Direct access to the builder
+
+[Join the community](#) or [get notified when new modules drop](#).
+
+## Contributing
+
+Found a bug? Open an issue.
+Disagree with the module sequence? Start a discussion.
+Built something cool on top of this? Submit a PR.
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## License
 
-MIT
+MIT. Use it, fork it, build on it. Attribution appreciated but not required.
