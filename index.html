@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>qortex: Knowledge that learns</title>
-  <meta name="description" content="Your agent finds 22% more of what it needs. One import swap. Zero overhead. Works with CrewAI, AutoGen, LangChain, Agno, Mastra, and more.">
-  <meta property="og:title" content="qortex: Your agent's memory, upgraded">
-  <meta property="og:description" content="Better retrieval than every framework's default. One import swap. Zero config. The graph learns from every query.">
+  <meta name="description" content="A retrieval backend that learns. Graph-enhanced retrieval with typed relationships, domain rules, and a feedback loop. Drop-in adapters for CrewAI, LangChain, AutoGen, Agno, Mastra.">
+  <meta property="og:title" content="qortex: A retrieval backend that learns">
+  <meta property="og:description" content="Same shelf as ChromaDB and Pinecone, different architecture. Knowledge graph with typed edges, domain rules, and Thompson sampling feedback. uv add qortex.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://launchpad-git-qortex-kwayet-fs-projects.vercel.app">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="qortex: Your agent's memory, upgraded">
-  <meta name="twitter:description" content="Better retrieval than every framework's default. One import swap. Zero config. The graph learns from every query.">
+  <meta name="twitter:title" content="qortex: A retrieval backend that learns">
+  <meta name="twitter:description" content="Same shelf as ChromaDB and Pinecone, different architecture. Knowledge graph with typed edges, domain rules, and Thompson sampling feedback. uv add qortex.">
   <style>
     :root {
       --bg: #0d1117;
@@ -152,11 +152,11 @@
   <!-- Hero -->
   <header class="hero">
     <div class="container">
-      <h1>Your agent&rsquo;s memory<br><span class="accent">should learn from every query</span></h1>
-      <p class="sub">Right now your agent embeds docs, runs cosine similarity, and returns the same results forever. qortex replaces that with a knowledge graph that improves retrieval accuracy by 22% on the first query and keeps improving from there. One command to install. Nothing to configure.</p>
+      <h1>A retrieval backend<br><span class="accent">that learns from every query</span></h1>
+      <p class="sub">Same shelf as ChromaDB, Pinecone, and SQLite-vec. Different architecture. qortex is a knowledge graph with typed relationships, domain rules, and a feedback loop that improves retrieval accuracy over time. Drop it into any framework you already use.</p>
       <div class="hero-install">
-        <span class="p">$ </span>claude mcp add qortex -- uvx qortex mcp-serve<br>
-        <span class="c"># Done. Your agent now has 33 knowledge graph tools.</span>
+        <span class="p">$ </span>uv add qortex<br>
+        <span class="c"># or: pip install qortex[all]</span>
       </div>
       <div class="cta-group">
         <a href="https://github.com/Peleke/qortex" class="btn btn-primary">GitHub</a>
@@ -164,10 +164,10 @@
         <a href="https://pypi.org/project/qortex/" class="btn btn-secondary">PyPI</a>
       </div>
       <div class="stats-row">
-        <div><span class="stat-num">33</span> <span class="stat-label">MCP tools</span></div>
+        <div><span class="stat-num">v0.5.2</span> <span class="stat-label">on PyPI</span></div>
         <div><span class="stat-num">1,960</span> <span class="stat-label">tests</span></div>
         <div><span class="stat-num">7</span> <span class="stat-label">framework adapters</span></div>
-        <div><span class="stat-num">v0.5.2</span> <span class="stat-label">on PyPI</span></div>
+        <div><span class="stat-num">33</span> <span class="stat-label">MCP tools</span></div>
       </div>
     </div>
   </header>
@@ -175,31 +175,30 @@
   <!-- Quickstart -->
   <section>
     <div class="container">
-      <h2>One command. Every MCP client.</h2>
-      <p>No config files. No API keys. Your agent gets a knowledge graph with typed relationships, domain rules, and a feedback loop that improves retrieval accuracy over time. All of it works out of the box.</p>
+      <h2>Install it. Pick your adapter. Go.</h2>
+      <p>qortex is a Python package. Add it as a dependency, select the adapter for your framework, and your retrieval layer now has a knowledge graph behind it. No API keys for the knowledge layer. No config files.</p>
       <div class="code-block">
-        <span class="c"># Claude Code</span><br>
-        <span class="p">$ </span>claude mcp add qortex -- uvx qortex mcp-serve<br><br>
-        <span class="c"># Cursor / Windsurf</span><br>
-        <span class="p">$ </span>uvx qortex mcp-serve  <span class="c"># add as stdio MCP server</span><br><br>
-        <span class="c"># Any MCP client</span><br>
-        <span class="p">$ </span>pip install qortex[all] &amp;&amp; qortex mcp-serve
+        <span class="c"># As a backend for your framework</span><br>
+        <span class="p">$ </span>uv add qortex<br>
+        <span class="p">$ </span>pip install "qortex[all]"  <span class="c"># embeddings + production graph + everything</span><br>
+        <span class="c"># or pick: [vec] [vec-sqlite] [memgraph]</span><br><br>
+        <span class="c"># As an MCP server (Claude Code, Cursor, Windsurf)</span><br>
+        <span class="p">$ </span>claude mcp add qortex -- uvx qortex mcp-serve<br>
+        <span class="p">$ </span>uvx qortex mcp-serve  <span class="c"># any MCP client</span>
       </div>
-      <p>After that, your agent automatically searches the graph before answering. It retrieves structurally related concepts (not just textually similar ones), applies domain rules, and persists everything to SQLite across restarts. Python 3.11+.</p>
+      <p>Your retrieval layer now returns structurally related concepts (not just textually similar ones), applies domain rules, and persists everything to SQLite across restarts. Python 3.11+. macOS, Linux, Windows.</p>
     </div>
   </section>
 
   <!-- The story -->
   <section>
     <div class="container">
-      <h2>We had the same problem you do</h2>
-      <p>We were building agents. They were bad at remembering things. Not because the LLM was dumb, but because the retrieval was. Every framework does the same thing: embed your docs, cosine similarity, return the top 5. Simple questions work fine. But ask something that spans multiple concepts (&ldquo;How do I implement enterprise SSO?&rdquo; where SAML, OpenID Connect, and OAuth2 are all relevant but share zero vocabulary) and half the answers go missing.</p>
+      <h2>Why we built a different kind of backend</h2>
+      <p>We were building agents. They were bad at remembering things. Not because the LLM was dumb, but because the retrieval layer was limited. The standard approach (embed, cosine, top-k) works well for simple lookups. But ask something that spans multiple concepts (&ldquo;How do I implement enterprise SSO?&rdquo; where SAML, OpenID Connect, and OAuth2 are all relevant but share zero vocabulary) and flat vector search misses the connections.</p>
 
-      <p>So we looked at what everyone else was building. CrewAI shipped a long-term memory system. <a href="https://github.com/crewAIInc/crewAI/blob/main/src/crewai/memory/storage/ltm_sqlite_storage.py" style="color:var(--accent);text-decoration:none;">It sorts results by ascending score</a>: worst first. Still unfixed. Agno released a &ldquo;LearningMachine.&rdquo; It&rsquo;s <code>json.dumps()</code> into a Postgres table. No reward signal. No feedback loop. MemGPT burns ~16,900 tokens <em>per memory cycle</em> asking the LLM to manage its own context.</p>
+      <p>The agent frameworks themselves are excellent. CrewAI, LangChain, AutoGen, Agno, Mastra: they handle orchestration, tool use, planning, and a hundred other things well. But retrieval backends are a different problem. We wanted a backend that could follow typed relationships between concepts, apply domain rules, and learn from feedback over time. That backend did not exist, so we built it.</p>
 
-      <p><strong>Nobody was actually making retrieval learn.</strong></p>
-
-      <p>So we built one that does. A knowledge graph where every edge carries a probability distribution. Accept a result, the path strengthens. Reject it, the path weakens. The graph remembers what worked and surfaces it first next time. Then we plugged it into every major framework and ran the benchmarks.</p>
+      <p>qortex is a knowledge graph where every edge carries a probability distribution. Accept a result, the path strengthens. Reject it, the path weakens. The graph remembers what worked and surfaces it first next time. We plugged it into every major framework as a drop-in adapter and ran the benchmarks to see if the architectural choices would show up in the numbers.</p>
 
       <table class="bench-table">
         <thead>
@@ -237,19 +236,19 @@
         </tbody>
       </table>
 
-      <p>20-concept authentication domain. Head-to-head against the default cosine similarity in every framework. <a href="https://github.com/Peleke/qortex/blob/main/contrib/integration-audit/reproduction-guide.md" style="color:var(--accent);text-decoration:none;">Every number is reproducible.</a></p>
+      <p>20-concept authentication domain. The &ldquo;Framework default&rdquo; column is standard cosine similarity, the same retrieval every framework ships. <a href="https://github.com/Peleke/qortex/blob/main/contrib/integration-audit/reproduction-guide.md" style="color:var(--accent);text-decoration:none;">Every number is reproducible.</a></p>
 
-      <p>On cross-cutting queries (the ones that span vocabulary boundaries, like &ldquo;enterprise SSO&rdquo; pulling in SAML + OAuth2 + OpenID Connect) the gap blows open: <strong>+50% precision</strong> and <strong>+71% ranking quality</strong>. That&rsquo;s not a rounding error. That&rsquo;s the difference between your agent finding the answer and your agent hallucinating one.</p>
+      <p>On cross-cutting queries (the ones that span vocabulary boundaries, like &ldquo;enterprise SSO&rdquo; pulling in SAML + OAuth2 + OpenID Connect) the gap widens further: <strong>+50% precision</strong> and <strong>+71% ranking quality</strong>. That is where graph structure pays off most, because typed edges (REQUIRES, REFINES, USES) connect concepts that share zero vocabulary.</p>
 
-      <p>And here&rsquo;s the part that matters most: <strong>it gets better every day you use it.</strong> Static vector stores return the same results on day 1 and day 1,000. qortex learns which paths through your knowledge graph lead to good answers and doubles down on them. The longer it runs, the sharper it gets. That&rsquo;s why we built it. That&rsquo;s why you&rsquo;re here.</p>
+      <p>The numbers are a consequence of the architecture, not a trick. A knowledge graph with typed relationships and a feedback loop finds connections that flat vector search cannot. And because the feedback loop accumulates signal over time, accuracy increases the longer the system runs. That is why we built it.</p>
     </div>
   </section>
 
   <!-- Integration story + 7 Frameworks -->
   <section>
     <div class="container">
-      <h2>Works with whatever you use</h2>
-      <p>qortex is not another framework. It&rsquo;s a drop-in upgrade to the framework you already chose. Swap one import, keep your existing tests passing, and your agent starts returning 22% more relevant results immediately.</p>
+      <h2>Plugs into the frameworks you already use</h2>
+      <p>qortex is a backend, not a framework. These frameworks are great at what they do. We built adapters so you can use qortex as the retrieval layer behind them. Swap one import, keep your existing tests passing, and the graph architecture does the rest.</p>
 
       <div class="fw-grid">
         <div class="fw-card">
@@ -294,15 +293,15 @@
         <span class="c"># Before</span><br>
         from crewai.knowledge.storage.chroma import ChromaKnowledgeStorage<br>
         storage = ChromaKnowledgeStorage()<br><br>
-        <span class="c"># After (same interface, +22% precision, retrieval that learns)</span><br>
+        <span class="c"># After (same interface, graph-backed retrieval)</span><br>
         from qortex.adapters.crewai import QortexKnowledgeStorage<br>
         storage = QortexKnowledgeStorage(client=client, domains=["auth"])
       </div>
 
-      <p>All test counts are against the <strong>frameworks&rsquo; own test suites</strong>, not ours. We implement their interfaces. TypeScript adapters (Mastra, LangChain.js) work cross-language over MCP with no WASM or FFI required.</p>
+      <p>All test counts are against the <strong>frameworks&rsquo; own test suites</strong>, not ours. We implement their native interfaces because we respect what these frameworks built. TypeScript adapters (Mastra, LangChain.js) work cross-language over MCP with no WASM or FFI required.</p>
 
-      <h3>Three layers of agent memory</h3>
-      <p>Most tools conflate user memory, agent state, and domain knowledge into a single system. They serve different purposes.</p>
+      <h3>Where qortex fits in the stack</h3>
+      <p>Agent memory has three distinct layers. Each serves a different purpose and they compose well together.</p>
 
       <div class="compare-grid">
         <div class="compare-card">
@@ -327,7 +326,7 @@
         </div>
       </div>
 
-      <p>Your agent can use mem0 for user context, MemGPT for persona state, and qortex for domain knowledge at the same time. qortex works with any vector store you already have. It does not replace your stack; it adds the layer that makes retrieval improve with use.</p>
+      <p>Your agent can use mem0 for user context, MemGPT for persona state, and qortex for domain knowledge at the same time. qortex works with any vector store you already have (Chroma, Pinecone, Qdrant, SQLite-vec). It does not replace your stack; it adds a layer on top that follows typed relationships and learns from feedback.</p>
     </div>
   </section>
 
@@ -562,7 +561,7 @@
 
       <details>
         <summary>How is this different from ChromaDB / Pinecone / Qdrant?</summary>
-        <div><p>Those are vector databases. qortex is a knowledge graph that works with any vector store, including those. Same embedding step, then qortex adds structural traversal, domain rules, and a feedback loop that improves retrieval over time. You keep your existing vector store.</p></div>
+        <div><p>Those are vector databases. qortex is a knowledge graph that sits on top of any of them. You keep your existing vector store for embedding and similarity search. qortex adds a second layer: structural traversal across typed relationships, domain rules, and a feedback loop. They are complementary, not competing.</p></div>
       </details>
       <details>
         <summary>Does this need an API key?</summary>
@@ -594,10 +593,10 @@
   <!-- Final CTA -->
   <div class="final-cta">
     <div class="container">
-      <h2>22% more relevant results from the first query</h2>
-      <p>Your agent&rsquo;s retrieval improves with every accept/reject signal. Start now and let it learn your domain.</p>
+      <h2>A retrieval backend that learns your domain</h2>
+      <p>Same interface as the backends you already use. Different architecture underneath. Give it a try.</p>
       <div class="hero-install" style="margin: 0 auto 24px; text-align: left;">
-        <span class="p">$ </span>claude mcp add qortex -- uvx qortex mcp-serve
+        <span class="p">$ </span>uv add qortex
       </div>
       <div class="cta-group">
         <a href="https://github.com/Peleke/qortex" class="btn btn-primary">GitHub</a>
