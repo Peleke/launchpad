@@ -99,6 +99,7 @@ Vercel is connected to this repo via GitHub integration. Configuration is in `ve
 | [`devops-decision-kit`](https://github.com/Peleke/launchpad/tree/devops-decision-kit) | The DevOps Decision Kit | $29 | spec | [#1](https://github.com/Peleke/launchpad/pull/1) | No landing page (predates Phase 3e) |
 | [`from-1-to-prod`](https://github.com/Peleke/launchpad/tree/from-1-to-prod) | From 1 to Prod | $49-99/mo | spec | [#2](https://github.com/Peleke/launchpad/pull/2) | [Preview](https://launchpad-git-from-1-to-prod-kwayet-fs-projects.vercel.app) |
 | [`buildlog`](https://github.com/Peleke/launchpad/tree/buildlog) | buildlog | OSS (MIT) | landing page | [#3](https://github.com/Peleke/launchpad/pull/3) | [Preview](https://launchpad-git-buildlog-kwayet-fs-projects.vercel.app) |
+| [`qortex`](https://github.com/Peleke/launchpad/tree/qortex) | qortex | OSS (MIT) | landing page | [#4](https://github.com/Peleke/launchpad/pull/4) | [Preview](https://launchpad-git-qortex-kwayet-fs-projects.vercel.app) |
 
 ## The Pipeline
 
