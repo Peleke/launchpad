@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>qortex &mdash; Knowledge that learns</title>
-  <meta name="description" content="Graph-enhanced agent memory with Thompson sampling feedback. +22% precision, +26% recall, zero overhead. 33 MCP tools. 7 framework adapters. Open source.">
+  <meta name="description" content="Graph-enhanced agent memory. +22% precision over vanilla cosine similarity. Zero overhead. 33 MCP tools. 7 framework adapters. Works with CrewAI, AutoGen, LangChain, and more.">
   <meta property="og:title" content="qortex &mdash; Knowledge that learns">
   <meta property="og:description" content="Graph-enhanced agent memory. +22% precision over vanilla vectors. Zero overhead. Works with CrewAI, AutoGen, Agno, LangChain, Mastra, and more.">
   <meta property="og:type" content="website">
@@ -426,7 +426,7 @@
   <header class="hero">
     <div class="container">
       <h1>Your agent&rsquo;s memory<br><span class="accent">should learn from every query</span></h1>
-      <p class="sub">qortex adds a knowledge graph with typed relationships, domain rules, and a Thompson sampling feedback loop on top of any vector store. +22% precision, +26% recall, zero overhead. Tested across 7 frameworks.</p>
+      <p class="sub">qortex adds a knowledge graph on top of any vector store. <a href="https://github.com/Peleke/qortex/blob/main/contrib/integration-audit/reproduction-guide.md" style="color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);">+22% precision over vanilla cosine similarity</a> &mdash; the default retrieval in every agent framework. Zero overhead. Works with whatever you use.</p>
       <div class="hero-install">
         <span class="p">$ </span>claude mcp add qortex -- uvx qortex mcp-serve<br>
         <span class="c"># That&rsquo;s it. 33 MCP tools, zero config.</span>
@@ -475,14 +475,14 @@
   <section>
     <div class="container">
       <h2>The numbers are real</h2>
-      <p>20-concept authentication domain. qortex graph-enhanced retrieval vs vanilla cosine similarity. <strong>Every number is reproducible.</strong></p>
+      <p>20-concept authentication domain. qortex graph-enhanced retrieval vs <strong>vanilla cosine similarity</strong> &mdash; the same flat top-k search that ships as the default in CrewAI, AutoGen, LangChain, and every other framework. <a href="https://github.com/Peleke/qortex/blob/main/contrib/integration-audit/reproduction-guide.md" style="color:var(--accent);text-decoration:none;">Every number is reproducible.</a></p>
 
       <table class="bench-table">
         <thead>
           <tr>
             <th>Metric</th>
-            <th>qortex</th>
-            <th>Vanilla</th>
+            <th>qortex (graph + vec)</th>
+            <th>Vanilla cosine</th>
             <th>Delta</th>
           </tr>
         </thead>
@@ -517,15 +517,15 @@
       <p>That last row. The graph layer adds <strong>negative overhead</strong> in batch. The graph traversal itself takes 0.02ms. Feedback recording takes less than 0.01ms. The embedding step (3.97ms) dominates everything.</p>
 
       <h3>Where the graph dominates</h3>
-      <p>On simple queries (&ldquo;What is OAuth2?&rdquo;), graph and vanilla perform identically. The gap opens on <strong>cross-cutting queries</strong> &mdash; the ones agents actually ask:</p>
+      <p>On simple queries (&ldquo;What is OAuth2?&rdquo;), graph and vanilla cosine perform identically. The gap opens on <strong>cross-cutting queries</strong> &mdash; the ones agents actually ask &mdash; where concepts are related by structure, not vocabulary:</p>
 
       <table class="bench-table">
         <thead>
           <tr>
             <th>Query</th>
-            <th>P@5 &Delta;</th>
-            <th>R@5 &Delta;</th>
-            <th>nDCG &Delta;</th>
+            <th>P@5 vs cosine</th>
+            <th>R@5 vs cosine</th>
+            <th>nDCG vs cosine</th>
           </tr>
         </thead>
         <tbody>
