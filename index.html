@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>buildlog — A measurable learning loop for AI coding agents</title>
-  <meta name="description" content="Capture engineering decisions. Extract patterns. Select rules with Thompson Sampling. Render to any AI agent. Measure what works.">
+  <title>buildlog — Make your AI agent suck less</title>
+  <meta name="description" content="buildlog reduces AI coding agent error rates. Capture decisions, extract patterns, select rules, measure results. Open source.">
   <style>
     :root {
       --bg: #0d1117;
@@ -15,8 +15,10 @@
       --accent: #58a6ff;
       --accent-hover: #79c0ff;
       --green: #3fb950;
+      --green-dim: rgba(63, 185, 80, 0.15);
       --orange: #d29922;
       --red: #f85149;
+      --purple: #bc8cff;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -30,140 +32,199 @@
     }
 
     .container {
-      max-width: 760px;
+      max-width: 840px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
     /* Hero */
     .hero {
-      padding: 80px 0 60px;
+      padding: 80px 0 48px;
       text-align: center;
     }
 
     .hero h1 {
-      font-size: 2.6rem;
+      font-size: 2.8rem;
       font-weight: 800;
-      line-height: 1.15;
+      line-height: 1.1;
       margin-bottom: 20px;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
     }
 
+    .hero h1 .accent { color: var(--green); }
+
     .hero .sub {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       color: var(--text-muted);
-      max-width: 620px;
-      margin: 0 auto 32px;
+      max-width: 600px;
+      margin: 0 auto 28px;
       line-height: 1.7;
     }
+
+    .hero-install {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 24px;
+      margin: 0 auto 24px;
+      max-width: 440px;
+      text-align: left;
+      font-family: 'SF Mono', 'Fira Code', Menlo, Consolas, monospace;
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+
+    .hero-install .p { color: var(--text-muted); user-select: none; }
+    .hero-install .c { color: #6e7681; }
 
     .cta-group {
       display: flex;
       gap: 12px;
       justify-content: center;
       flex-wrap: wrap;
+      margin-bottom: 24px;
     }
 
     .btn {
       display: inline-block;
-      padding: 12px 28px;
+      padding: 11px 24px;
       border-radius: 6px;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 600;
       text-decoration: none;
-      transition: background 0.15s;
+      transition: all 0.15s;
     }
 
-    .btn-primary {
-      background: var(--green);
-      color: #000;
-    }
-
+    .btn-primary { background: var(--green); color: #000; }
     .btn-primary:hover { background: #46d05a; }
-
-    .btn-secondary {
-      background: var(--surface);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
     .btn-secondary:hover { background: #1c2129; }
 
-    /* Code blocks */
+    .stats-row {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+    }
+
+    .stat-num { font-weight: 800; color: var(--text); }
+    .stat-label { color: var(--text-muted); }
+
+    /* Sections */
+    section { padding: 64px 0; border-top: 1px solid var(--border); }
+    section h2 { font-size: 1.65rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.01em; }
+    section h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px; }
+    section p { color: var(--text-muted); margin-bottom: 14px; font-size: 0.98rem; line-height: 1.7; }
+    section p strong { color: var(--text); }
+
     .code-block {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 8px;
-      padding: 16px 24px;
-      margin: 20px auto;
-      max-width: 520px;
-      text-align: left;
-      font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
-      font-size: 0.9rem;
-      color: var(--text);
+      padding: 14px 20px;
+      margin: 16px 0;
+      font-family: 'SF Mono', 'Fira Code', Menlo, Consolas, monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
       overflow-x: auto;
-      line-height: 1.7;
     }
 
-    .code-block .prompt { color: var(--text-muted); user-select: none; }
-    .code-block .comment { color: #6e7681; }
+    .code-block .p { color: var(--text-muted); user-select: none; }
+    .code-block .c { color: #6e7681; }
 
-    /* Sections */
-    section {
-      padding: 60px 0;
-      border-top: 1px solid var(--border);
+    /* SVG diagram */
+    .diagram-wrap {
+      margin: 32px 0;
+      overflow-x: auto;
+      text-align: center;
     }
 
-    section h2 {
-      font-size: 1.7rem;
-      font-weight: 700;
-      margin-bottom: 20px;
-      letter-spacing: -0.01em;
-    }
+    .diagram-wrap svg { max-width: 100%; height: auto; }
 
-    section h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 8px;
-      margin-top: 28px;
-    }
-
-    section p {
-      color: var(--text-muted);
-      margin-bottom: 14px;
-      font-size: 1rem;
-      line-height: 1.7;
-    }
-
-    section p strong { color: var(--text); }
-
-    /* Stack cards */
-    .stack-grid {
+    /* Flip cards */
+    .card-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(4, 1fr);
       gap: 14px;
-      margin: 24px 0;
+      margin: 28px 0;
     }
 
-    .stack-card {
-      padding: 20px;
-      border-radius: 8px;
+    .flip-card {
+      perspective: 800px;
+      height: 220px;
+      cursor: pointer;
+    }
+
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-inner { transform: rotateY(180deg); }
+
+    .flip-front, .flip-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
       border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 14px;
+      text-align: center;
+    }
+
+    .flip-front { background: var(--surface); }
+
+    .flip-back {
       background: var(--surface);
+      transform: rotateY(180deg);
+      justify-content: flex-start;
+      padding-top: 24px;
     }
 
-    .stack-card .card-title {
-      font-weight: 700;
-      font-size: 0.95rem;
-      margin-bottom: 6px;
-      color: var(--accent);
-    }
-
-    .stack-card p {
+    .flip-back p {
+      font-size: 0.82rem;
       color: var(--text-muted);
-      font-size: 0.88rem;
       margin: 0;
       line-height: 1.5;
+    }
+
+    .flip-back .back-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    /* CSS icons */
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .card-icon svg { width: 48px; height: 48px; }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .card-hint {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-style: italic;
     }
 
     /* Agent targets */
@@ -175,59 +236,48 @@
     }
 
     .agent-tag {
-      padding: 8px 16px;
+      padding: 10px 16px;
       border-radius: 6px;
       border: 1px solid var(--border);
       background: var(--surface);
       font-size: 0.85rem;
       font-weight: 600;
+      transition: border-color 0.15s;
     }
+
+    .agent-tag:hover { border-color: var(--accent); }
 
     .agent-tag .file {
       color: var(--text-muted);
-      font-family: 'SF Mono', 'Fira Code', Menlo, monospace;
-      font-size: 0.75rem;
+      font-family: 'SF Mono', Menlo, monospace;
+      font-size: 0.73rem;
       font-weight: 400;
       margin-left: 6px;
     }
 
-    /* Stats row */
-    .stats-row {
-      display: flex;
-      gap: 24px;
-      margin: 24px 0 8px;
-      flex-wrap: wrap;
+    /* Limits */
+    .limits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
     }
 
-    .stats-row .stat-item {
-      font-size: 0.95rem;
-    }
-
-    .stats-row .stat-num {
-      font-weight: 800;
-      color: var(--text);
-    }
-
-    .stats-row .stat-label {
-      color: var(--text-muted);
-    }
-
-    /* Flow diagram */
-    .flow {
-      background: var(--surface);
-      border: 1px solid var(--border);
+    .limit-item {
+      padding: 16px;
       border-radius: 8px;
-      padding: 24px;
-      margin: 24px 0;
-      font-family: 'SF Mono', 'Fira Code', Menlo, monospace;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.8;
-      overflow-x: auto;
+      border: 1px solid var(--border);
+      background: var(--surface);
     }
 
-    .flow .highlight { color: var(--accent); }
-    .flow .arrow { color: var(--text-muted); }
+    .limit-item .limit-label {
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+      color: var(--orange);
+    }
+
+    .limit-item p { font-size: 0.85rem; margin: 0; line-height: 1.5; }
 
     /* FAQ */
     details {
@@ -241,74 +291,40 @@
       padding: 14px 20px;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.93rem;
       list-style: none;
     }
 
     summary::-webkit-details-marker { display: none; }
-
-    summary::before {
-      content: "+";
-      margin-right: 10px;
-      color: var(--accent);
-      font-weight: 700;
-      font-family: 'SF Mono', Menlo, monospace;
-    }
-
+    summary::before { content: "+"; margin-right: 10px; color: var(--accent); font-weight: 700; font-family: 'SF Mono', Menlo, monospace; }
     details[open] summary::before { content: "\2212"; }
-
-    details div {
-      padding: 0 20px 14px;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      line-height: 1.6;
-    }
-
-    details div code {
-      background: var(--bg);
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-size: 0.82rem;
-    }
+    details div { padding: 0 20px 14px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+    details div code { background: var(--bg); padding: 2px 6px; border-radius: 3px; font-size: 0.82rem; }
 
     /* Footer */
-    footer {
-      padding: 40px 0;
-      border-top: 1px solid var(--border);
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); font-size: 0.85rem; }
     footer a { color: var(--accent); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
     /* Final CTA */
-    .final-cta {
-      text-align: center;
-      padding: 60px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .final-cta h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
-    .final-cta p {
-      color: var(--text-muted);
-      margin-bottom: 24px;
-    }
+    .final-cta { text-align: center; padding: 60px 0; border-top: 1px solid var(--border); }
+    .final-cta h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+    .final-cta p { color: var(--text-muted); margin-bottom: 24px; }
 
     /* Responsive */
+    @media (max-width: 768px) {
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+      .flip-card { height: 200px; }
+    }
+
     @media (max-width: 640px) {
       .hero h1 { font-size: 2rem; }
       .hero .sub { font-size: 1rem; }
-      .stack-grid { grid-template-columns: 1fr; }
-      .stats-row { gap: 16px; }
+      .card-grid { grid-template-columns: 1fr 1fr; }
+      .flip-card { height: 190px; }
+      .limits-grid { grid-template-columns: 1fr; }
       .container { padding: 0 16px; }
-      .code-block { font-size: 0.82rem; padding: 14px 16px; }
+      .hero-install { font-size: 0.82rem; padding: 12px 16px; }
     }
   </style>
 </head>
@@ -317,39 +333,201 @@
   <!-- Hero -->
   <header class="hero">
     <div class="container">
-      <h1>A measurable learning loop<br>for AI coding agents</h1>
-      <p class="sub">buildlog captures engineering decisions from AI-assisted work, extracts patterns, selects which rules to surface using Thompson Sampling, renders them to any agent format, and measures whether they reduce mistakes. Open source. MIT licensed.</p>
+      <h1>Make your AI agent<br><span class="accent">make fewer mistakes</span></h1>
+      <p class="sub">buildlog captures engineering decisions, extracts patterns, selects which rules to surface, and measures whether they actually reduce error rates. If a rule doesn't help, it gets demoted. If it does, it gets promoted. The loop runs itself.</p>
+      <div class="hero-install">
+        <span class="p">$ </span>uv tool install buildlog <span class="c"># or: pipx install buildlog</span><br>
+        <span class="p">$ </span>buildlog init-mcp --global -y
+      </div>
       <div class="cta-group">
         <a href="https://github.com/Peleke/buildlog-template" class="btn btn-primary">GitHub</a>
         <a href="https://peleke.github.io/buildlog-template/" class="btn btn-secondary">Documentation</a>
         <a href="https://pypi.org/project/buildlog/" class="btn btn-secondary">PyPI</a>
       </div>
-      <div class="stats-row" style="justify-content:center;margin-top:28px;">
-        <div class="stat-item"><span class="stat-num">34</span> <span class="stat-label">MCP tools</span></div>
-        <div class="stat-item"><span class="stat-num">1,254</span> <span class="stat-label">tests</span></div>
-        <div class="stat-item"><span class="stat-num">6</span> <span class="stat-label">agent targets</span></div>
-        <div class="stat-item"><span class="stat-num">v0.15</span> <span class="stat-label">on PyPI</span></div>
+      <div class="stats-row">
+        <div><span class="stat-num">34</span> <span class="stat-label">MCP tools</span></div>
+        <div><span class="stat-num">1,254</span> <span class="stat-label">tests</span></div>
+        <div><span class="stat-num">6</span> <span class="stat-label">agent targets</span></div>
+        <div><span class="stat-num">v0.15</span> <span class="stat-label">on PyPI</span></div>
       </div>
     </div>
   </header>
 
-  <!-- What is buildlog -->
+  <!-- Quickstart -->
   <section>
     <div class="container">
-      <h2>What is buildlog?</h2>
-      <p>Every AI coding session produces decisions, corrections, and outcomes. Almost all of it is discarded. The next session starts from scratch.</p>
-      <p>buildlog sits between you and your AI agent. It captures structured work trajectories, extracts recurring patterns as rules, and uses a contextual bandit to decide which rules to surface in your agent's instruction set. Then it measures whether that selection reduced mistakes.</p>
-      <p>The core loop is: <strong>capture &rarr; extract &rarr; select &rarr; render &rarr; measure &rarr; update.</strong></p>
-
-      <div class="flow">
-        <span class="highlight">journal entries</span> <span class="arrow">&rarr;</span> extraction pipeline <span class="arrow">&rarr;</span> <span class="highlight">candidate rules</span><br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">&darr;</span><br>
-        Thompson Sampling (Beta-Bernoulli bandit, per-context posteriors)<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">&darr;</span><br>
-        <span class="highlight">selected rules</span> <span class="arrow">&rarr;</span> render to CLAUDE.md / .cursorrules / copilot-instructions.md / ...<br>
-        &nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">&darr;</span><br>
-        experiment: log mistakes <span class="arrow">&rarr;</span> compute RMR <span class="arrow">&rarr;</span> <span class="highlight">update posteriors</span> <span class="arrow">&rarr;</span> loop
+      <h2>Quickstart</h2>
+      <p>Two commands. Works in every project. Claude Code gets all 34 buildlog tools immediately.</p>
+      <div class="code-block">
+        <span class="p">$ </span>uv tool install buildlog           <span class="c"># or: pipx install buildlog</span><br>
+        <span class="p">$ </span>buildlog init-mcp --global -y      <span class="c"># register MCP + agent instructions</span><br>
+        <span class="p">$ </span>buildlog mcp-test                  <span class="c"># verify: 34 tools registered</span>
       </div>
+      <p>That's it. buildlog is now ambient. It captures, extracts, and learns across every session in every repo.</p>
+
+      <h3>Per-project setup</h3>
+      <div class="code-block">
+        <span class="p">$ </span>uv pip install buildlog<br>
+        <span class="p">$ </span>buildlog init --defaults           <span class="c"># scaffold buildlog/, register MCP, update CLAUDE.md</span>
+      </div>
+
+      <h3>With extras</h3>
+      <div class="code-block">
+        <span class="p">$ </span>uv pip install "buildlog[all]"     <span class="c"># embeddings + LLM extraction + qortex backend</span><br>
+        <span class="c"># or pick: [embeddings] [openai] [anthropic] [ollama] [qortex]</span>
+      </div>
+
+      <p>Python 3.10+. The qortex learning backend requires 3.11+.</p>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section>
+    <div class="container">
+      <h2>How it works</h2>
+      <p>buildlog runs a closed feedback loop. Every component exists because the previous one wasn't enough.</p>
+
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 660 580" xmlns="http://www.w3.org/2000/svg" fill="none" aria-label="buildlog learning loop: capture, extract, select, render, measure, update">
+          <defs>
+            <!-- Animated flow gradient -->
+            <linearGradient id="flowDown" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#58a6ff" stop-opacity="0.2"/>
+              <stop offset="50%" stop-color="#58a6ff" stop-opacity="0.7"/>
+              <stop offset="100%" stop-color="#58a6ff" stop-opacity="0.2"/>
+            </linearGradient>
+            <linearGradient id="flowGreen" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3fb950" stop-opacity="0.2"/>
+              <stop offset="50%" stop-color="#3fb950" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#3fb950" stop-opacity="0.2"/>
+            </linearGradient>
+            <!-- Arrowheads -->
+            <marker id="ad" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#58a6ff" opacity="0.7"/></marker>
+            <marker id="ag" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#3fb950" opacity="0.8"/></marker>
+            <marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#f85149" opacity="0.7"/></marker>
+            <!-- Glow filter for core layer -->
+            <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+
+          <!-- Background -->
+          <rect width="660" height="580" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+          <!-- Subtle grid -->
+          <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0V20H0" fill="none" stroke="#30363d" stroke-width="0.3" opacity="0.3"/></pattern>
+          <rect width="660" height="580" rx="12" fill="url(#grid)"/>
+
+          <!-- === LAYERS === -->
+          <!-- Layer 1: Capture -->
+          <g data-layer="capture">
+            <rect x="160" y="24" width="280" height="60" rx="8" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/>
+            <!-- Mini-icon: document -->
+            <rect x="178" y="40" width="16" height="20" rx="2" stroke="#58a6ff" stroke-width="1.2" fill="none" opacity="0.5"/><line x1="183" y1="47" x2="191" y2="47" stroke="#58a6ff" stroke-width="1" opacity="0.4"/><line x1="183" y1="52" x2="189" y2="52" stroke="#58a6ff" stroke-width="1" opacity="0.4"/>
+            <text x="206" y="48" fill="#8b949e" font-family="monospace" font-size="10">01 &middot; CAPTURE</text>
+            <text x="206" y="66" fill="#e6edf3" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">Journal Entries</text>
+            <text x="410" y="58" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; signals</text>
+          </g>
+
+          <!-- Layer 2: Extract -->
+          <g data-layer="extract">
+            <rect x="160" y="120" width="280" height="60" rx="8" fill="#0d1117" stroke="#bc8cff" stroke-width="1.5"/>
+            <!-- Mini-icon: gear -->
+            <circle cx="186" cy="150" r="10" stroke="#bc8cff" stroke-width="1.2" fill="none" opacity="0.5"/><circle cx="186" cy="150" r="3" fill="#bc8cff" opacity="0.3"/>
+            <text x="206" y="144" fill="#8b949e" font-family="monospace" font-size="10">02 &middot; EXTRACT</text>
+            <text x="206" y="162" fill="#e6edf3" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">Extraction Pipeline</text>
+            <text x="410" y="154" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; patterns</text>
+          </g>
+
+          <!-- Layer 3: Candidates -->
+          <g data-layer="candidates">
+            <rect x="160" y="216" width="280" height="60" rx="8" fill="#0d1117" stroke="#d29922" stroke-width="1.5"/>
+            <!-- Mini-icon: shield -->
+            <path d="M186 232 L176 238 V248 L186 254 L196 248 V238 Z" stroke="#d29922" stroke-width="1.2" fill="none" opacity="0.5"/>
+            <text x="206" y="240" fill="#8b949e" font-family="monospace" font-size="10">03 &middot; RULES</text>
+            <text x="206" y="258" fill="#e6edf3" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">Candidate Rules</text>
+            <text x="410" y="250" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; arms</text>
+          </g>
+
+          <!-- Layer 4: Thompson Sampling (CORE — highlighted) -->
+          <g data-layer="sampling" filter="url(#glow)">
+            <rect x="160" y="312" width="280" height="60" rx="8" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+            <!-- Pulse ring -->
+            <rect x="156" y="308" width="288" height="68" rx="12" fill="none" stroke="#3fb950" stroke-width="1" opacity="0.2">
+              <animate attributeName="opacity" values="0.3;0.08;0.3" dur="3s" repeatCount="indefinite"/>
+            </rect>
+            <!-- Mini-icon: beta curve -->
+            <path d="M174 340 Q180 320 186 332 Q192 344 198 326" stroke="#3fb950" stroke-width="1.5" fill="none" opacity="0.6"/>
+            <text x="206" y="336" fill="#8b949e" font-family="monospace" font-size="10">04 &middot; SELECT</text>
+            <text x="206" y="354" fill="#3fb950" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">Thompson Sampling</text>
+            <text x="410" y="346" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; live rules</text>
+            <!-- Core marker -->
+            <text x="456" y="348" fill="#3fb950" font-family="monospace" font-size="10" opacity="0.6">&larr; core</text>
+          </g>
+
+          <!-- Layer 5: Render -->
+          <g data-layer="render">
+            <rect x="160" y="408" width="280" height="60" rx="8" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/>
+            <!-- Mini-icon: multi-box -->
+            <rect x="175" y="426" width="10" height="10" rx="1" stroke="#58a6ff" stroke-width="1" fill="none" opacity="0.4"/><rect x="188" y="426" width="10" height="10" rx="1" stroke="#58a6ff" stroke-width="1" fill="none" opacity="0.4"/><rect x="181" y="436" width="10" height="10" rx="1" stroke="#58a6ff" stroke-width="1" fill="none" opacity="0.4"/>
+            <text x="206" y="432" fill="#8b949e" font-family="monospace" font-size="10">05 &middot; RENDER</text>
+            <text x="206" y="450" fill="#e6edf3" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">Agent Instructions</text>
+            <text x="410" y="442" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; .md / .rules</text>
+          </g>
+
+          <!-- Layer 6: Measure -->
+          <g data-layer="measure">
+            <rect x="160" y="504" width="280" height="60" rx="8" fill="#0d1117" stroke="#f85149" stroke-width="1.5"/>
+            <!-- Mini-icon: flask -->
+            <path d="M182 516 V528 L174 546 H198 L190 528 V516" stroke="#f85149" stroke-width="1.2" fill="none" opacity="0.5"/><line x1="178" y1="516" x2="194" y2="516" stroke="#f85149" stroke-width="1.2" opacity="0.5"/>
+            <text x="206" y="528" fill="#8b949e" font-family="monospace" font-size="10">06 &middot; MEASURE</text>
+            <text x="206" y="546" fill="#e6edf3" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">Experiments + RMR</text>
+            <text x="410" y="538" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; rewards</text>
+          </g>
+
+          <!-- === FLOW LINES (animated) === -->
+          <!-- Capture → Extract -->
+          <line x1="300" y1="84" x2="300" y2="120" stroke="url(#flowDown)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ad)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <!-- Extract → Candidates -->
+          <line x1="300" y1="180" x2="300" y2="216" stroke="url(#flowDown)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ad)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <!-- Candidates → Sampling -->
+          <line x1="300" y1="276" x2="300" y2="312" stroke="url(#flowDown)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ad)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <!-- Sampling → Render -->
+          <line x1="300" y1="372" x2="300" y2="408" stroke="url(#flowGreen)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ag)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <!-- Render → Measure -->
+          <line x1="300" y1="468" x2="300" y2="504" stroke="url(#flowDown)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ad)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+
+          <!-- === FEEDBACK LOOP (left side, animated upward) === -->
+          <path d="M 160 534 L 80 534 L 80 342 L 160 342" stroke="#3fb950" stroke-width="2" stroke-dasharray="4 3" fill="none" marker-end="url(#ag)">
+            <animate attributeName="stroke-dashoffset" values="0;14" dur="3s" repeatCount="indefinite"/>
+          </path>
+          <!-- Feedback label -->
+          <text x="72" y="440" fill="#3fb950" font-family="monospace" font-size="10" text-anchor="middle" transform="rotate(-90, 72, 440)" opacity="0.7">belief update</text>
+
+          <!-- === EXTERNAL I/O === -->
+          <!-- Seeds input (left of Candidates) -->
+          <line x1="100" y1="246" x2="160" y2="246" stroke="#d29922" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ad)" opacity="0.5"/>
+          <text x="96" y="250" fill="#d29922" font-family="monospace" font-size="9" text-anchor="end" opacity="0.6">seeds</text>
+
+          <!-- Metrics output (right of Measure) -->
+          <line x1="440" y1="534" x2="520" y2="534" stroke="#f85149" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ar)" opacity="0.5"/>
+          <text x="524" y="538" fill="#f85149" font-family="monospace" font-size="9" opacity="0.6">RMR</text>
+
+          <!-- Agent output (right of Render) -->
+          <line x1="440" y1="438" x2="520" y2="438" stroke="#58a6ff" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ad)" opacity="0.5"/>
+          <text x="524" y="434" fill="#8b949e" font-family="monospace" font-size="9" opacity="0.6">CLAUDE.md</text>
+          <text x="524" y="446" fill="#8b949e" font-family="monospace" font-size="9" opacity="0.6">.cursorrules</text>
+        </svg>
+      </div>
+
+      <p>Every stage is independently useful. You can capture without extracting, extract without the bandit, or render without experiments. But the full loop is where compound improvement happens.</p>
     </div>
   </section>
 
@@ -357,38 +535,143 @@
   <section>
     <div class="container">
       <h2>The buildlog stack</h2>
-      <div class="stack-grid">
-        <div class="stack-card">
-          <div class="card-title">MCP Server</div>
-          <p>34 tools exposed via Model Context Protocol. Your agent calls buildlog during sessions: log commits, run gauntlet reviews, query bandit state, close feedback loops.</p>
+      <p>Hover to flip. Eight components, each independently useful.</p>
+
+      <div class="card-grid">
+        <!-- MCP Server -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="4" stroke="#58a6ff" stroke-width="2"/><line x1="6" y1="18" x2="42" y2="18" stroke="#58a6ff" stroke-width="2"/><circle cx="14" cy="13" r="2" fill="#f85149"/><circle cx="22" cy="13" r="2" fill="#d29922"/><circle cx="30" cy="13" r="2" fill="#3fb950"/><line x1="14" y1="26" x2="34" y2="26" stroke="#30363d" stroke-width="2"/><line x1="14" y1="32" x2="28" y2="32" stroke="#30363d" stroke-width="2"/></svg>
+              </div>
+              <div class="card-title">MCP Server</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">MCP Server</div>
+              <p>34 tools via Model Context Protocol. Your agent calls buildlog during sessions: log commits, run reviews, query bandit state, close feedback loops. Native to Claude Code.</p>
+            </div>
+          </div>
         </div>
-        <div class="stack-card">
-          <div class="card-title">Thompson Sampling</div>
-          <p>Beta-Bernoulli contextual bandit. Error classes partition the state space. Seed rules start at Beta(3,1). Non-seed at Beta(1,1). ~20 observations per context for meaningful differentiation.</p>
+
+        <!-- Thompson Sampling -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><path d="M8 40 Q14 10 24 25 Q34 40 40 12" stroke="#3fb950" stroke-width="2.5" fill="none"/><path d="M8 38 Q18 20 24 30 Q30 40 40 18" stroke="#58a6ff" stroke-width="2" fill="none" opacity="0.5"/><circle cx="24" cy="25" r="3" fill="#3fb950"/><line x1="8" y1="42" x2="40" y2="42" stroke="#30363d" stroke-width="1.5"/><line x1="8" y1="8" x2="8" y2="42" stroke="#30363d" stroke-width="1.5"/></svg>
+              </div>
+              <div class="card-title">Thompson Sampling</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Thompson Sampling</div>
+              <p>Beta-Bernoulli contextual bandit. Error classes partition state space. Seeds start at Beta(3,1), non-seeds at Beta(1,1). ~20 observations for meaningful differentiation.</p>
+            </div>
+          </div>
         </div>
-        <div class="stack-card">
-          <div class="card-title">Extraction Pipeline</div>
-          <p>Regex (fast, free), OpenAI, Anthropic, or Ollama extractors. Semantic deduplication via sentence-transformers or OpenAI embeddings. Pluggable at every stage.</p>
+
+        <!-- Extraction -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="20" height="28" rx="2" stroke="#bc8cff" stroke-width="2"/><line x1="12" y1="14" x2="24" y2="14" stroke="#30363d" stroke-width="2"/><line x1="12" y1="20" x2="22" y2="20" stroke="#30363d" stroke-width="2"/><line x1="12" y1="26" x2="20" y2="26" stroke="#30363d" stroke-width="2"/><path d="M30 22 L40 18 L40 34 L30 30 Z" stroke="#bc8cff" stroke-width="2" fill="none"/><circle cx="40" cy="26" r="6" stroke="#d29922" stroke-width="2" fill="none"/></svg>
+              </div>
+              <div class="card-title">Extraction</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Extraction Pipeline</div>
+              <p>Regex (fast, free), OpenAI, Anthropic, or Ollama extractors. Semantic dedup via sentence-transformers or OpenAI embeddings. Pluggable at every stage.</p>
+            </div>
+          </div>
         </div>
-        <div class="stack-card">
-          <div class="card-title">Review Gauntlet</div>
-          <p>Multi-persona code review system. Security, architecture, testing, performance reviewers. Runs on commits, categorizes by severity, files GitHub issues.</p>
+
+        <!-- Gauntlet -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><path d="M24 6 L42 16 L42 32 L24 42 L6 32 L6 16 Z" stroke="#f85149" stroke-width="2" fill="none"/><path d="M24 14 L34 20 L34 28 L24 34 L14 28 L14 20 Z" stroke="#f85149" stroke-width="1.5" fill="none" opacity="0.4"/><circle cx="24" cy="24" r="3" fill="#f85149"/></svg>
+              </div>
+              <div class="card-title">Review Gauntlet</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Review Gauntlet</div>
+              <p>Multi-persona code review. Security, architecture, testing, performance. Runs on commits, categorizes by severity, files GitHub issues. Configurable stop conditions.</p>
+            </div>
+          </div>
         </div>
-        <div class="stack-card">
-          <div class="card-title">Experiment Framework</div>
-          <p>Start/stop sessions. Log mistakes with typed error classes. Compute Repeated Mistake Rate across sessions. Statistical measurement, not anecdotes.</p>
+
+        <!-- Experiments -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><path d="M18 6 L18 18 L8 38 Q6 42 10 42 L38 42 Q42 42 40 38 L30 18 L30 6" stroke="#d29922" stroke-width="2" fill="none"/><line x1="14" y1="6" x2="34" y2="6" stroke="#d29922" stroke-width="2"/><ellipse cx="24" cy="34" rx="10" ry="4" fill="rgba(210,153,34,0.2)" stroke="#d29922" stroke-width="1"/><circle cx="20" cy="32" r="2" fill="#d29922" opacity="0.6"/><circle cx="28" cy="33" r="1.5" fill="#d29922" opacity="0.6"/></svg>
+              </div>
+              <div class="card-title">Experiments</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Experiment Framework</div>
+              <p>Start/stop sessions. Log mistakes with typed error classes. Compute Repeated Mistake Rate across sessions. Statistical evidence, not vibes.</p>
+            </div>
+          </div>
         </div>
-        <div class="stack-card">
-          <div class="card-title">Multi-Agent Render</div>
-          <p>Same knowledge base renders to Claude Code, Cursor, GitHub Copilot, Windsurf, Continue.dev, and VS Code. Switch agents without losing what you learned.</p>
+
+        <!-- Multi-Agent -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="18" width="14" height="14" rx="3" stroke="#58a6ff" stroke-width="1.5"/><rect x="17" y="6" width="14" height="14" rx="3" stroke="#3fb950" stroke-width="1.5"/><rect x="30" y="18" width="14" height="14" rx="3" stroke="#bc8cff" stroke-width="1.5"/><rect x="10" y="34" width="14" height="10" rx="3" stroke="#d29922" stroke-width="1.5"/><rect x="26" y="34" width="14" height="10" rx="3" stroke="#f85149" stroke-width="1.5"/><line x1="24" y1="20" x2="18" y2="24" stroke="#30363d" stroke-width="1"/><line x1="24" y1="20" x2="30" y2="24" stroke="#30363d" stroke-width="1"/><line x1="17" y1="30" x2="17" y2="34" stroke="#30363d" stroke-width="1"/><line x1="33" y1="32" x2="33" y2="34" stroke="#30363d" stroke-width="1"/></svg>
+              </div>
+              <div class="card-title">Multi-Agent</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Multi-Agent Render</div>
+              <p>Same knowledge base renders to Claude Code, Cursor, Copilot, Windsurf, Continue.dev, VS Code. Switch agents, keep what you learned.</p>
+            </div>
+          </div>
         </div>
-        <div class="stack-card">
-          <div class="card-title">Global SQLite</div>
-          <p>Single database at ~/.buildlog/buildlog.db. WAL mode for concurrent access. Project isolation via SHA-256 hashed IDs. Legacy JSONL fallback for older installs.</p>
+
+        <!-- SQLite -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="12" rx="16" ry="6" stroke="#58a6ff" stroke-width="2" fill="none"/><path d="M8 12 L8 36" stroke="#58a6ff" stroke-width="2"/><path d="M40 12 L40 36" stroke="#58a6ff" stroke-width="2"/><ellipse cx="24" cy="36" rx="16" ry="6" stroke="#58a6ff" stroke-width="2" fill="none"/><ellipse cx="24" cy="24" rx="16" ry="6" stroke="#30363d" stroke-width="1.5" fill="none"/></svg>
+              </div>
+              <div class="card-title">Global SQLite</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Global SQLite</div>
+              <p>Single database at ~/.buildlog/buildlog.db. WAL mode. Project isolation via SHA-256 hashed IDs. Legacy JSONL fallback for older installs.</p>
+            </div>
+          </div>
         </div>
-        <div class="stack-card">
-          <div class="card-title">Pluggable Backends</div>
-          <p>Builtin bandit or qortex for cross-consumer credit propagation and knowledge graph integration. LearningBackend protocol with two shipped adapters.</p>
+
+        <!-- Pluggable Backends -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="14" width="12" height="20" rx="2" stroke="#3fb950" stroke-width="2"/><rect x="28" y="14" width="12" height="20" rx="2" stroke="#bc8cff" stroke-width="2"/><line x1="20" y1="20" x2="28" y2="20" stroke="#30363d" stroke-width="2"/><line x1="20" y1="28" x2="28" y2="28" stroke="#30363d" stroke-width="2"/><circle cx="14" cy="20" r="2" fill="#3fb950"/><circle cx="14" cy="28" r="2" fill="#3fb950"/><circle cx="34" cy="20" r="2" fill="#bc8cff"/><circle cx="34" cy="28" r="2" fill="#bc8cff"/></svg>
+              </div>
+              <div class="card-title">Pluggable Backends</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Pluggable Backends</div>
+              <p>Builtin bandit or qortex for cross-consumer credit propagation. LearningBackend protocol with two shipped adapters. Swap without data loss.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -398,7 +681,7 @@
   <section>
     <div class="container">
       <h2>Agent targets</h2>
-      <p>One knowledge base. Every agent format. <code>buildlog promote --target &lt;agent&gt;</code> writes learned rules to the file your agent reads.</p>
+      <p>One knowledge base. Every agent format. <code style="background:var(--surface);padding:2px 6px;border-radius:3px;font-size:0.85rem;">buildlog promote --target &lt;agent&gt;</code> writes learned rules to the file your agent reads.</p>
       <div class="agent-row">
         <div class="agent-tag">Claude Code <span class="file">CLAUDE.md</span></div>
         <div class="agent-tag">Cursor <span class="file">.cursorrules</span></div>
@@ -410,50 +693,30 @@
     </div>
   </section>
 
-  <!-- Install -->
-  <section>
-    <div class="container">
-      <h2>Get started</h2>
-
-      <h3>Global mode (recommended)</h3>
-      <p>One install, works in every project. Claude Code gets all 34 buildlog tools in every session.</p>
-      <div class="code-block">
-        <span class="prompt">$ </span>uv tool install buildlog      <span class="comment"># or: pipx install buildlog</span><br>
-        <span class="prompt">$ </span>buildlog init-mcp --global -y
-      </div>
-
-      <h3>Per-project</h3>
-      <div class="code-block">
-        <span class="prompt">$ </span>uv pip install buildlog<br>
-        <span class="prompt">$ </span>buildlog init --defaults
-      </div>
-
-      <h3>With extras</h3>
-      <div class="code-block">
-        <span class="prompt">$ </span>uv pip install "buildlog[all]"<br>
-        <span class="comment"># or pick: [embeddings] [openai] [anthropic] [ollama] [qortex]</span>
-      </div>
-
-      <h3>Verify</h3>
-      <div class="code-block">
-        <span class="prompt">$ </span>buildlog mcp-test     <span class="comment"># 34 tools registered</span><br>
-        <span class="prompt">$ </span>buildlog overview      <span class="comment"># project state</span>
-      </div>
-
-      <p style="margin-top:20px;">Python 3.10+. The qortex backend requires 3.11+.</p>
-    </div>
-  </section>
-
   <!-- Current limits -->
   <section>
     <div class="container">
       <h2>Current limits</h2>
-      <p>v0.15 ships the full capture-extract-select-render-measure loop. These are the open problems:</p>
-      <p><strong>Extraction quality is uneven.</strong> Regex extractors miss nuance. LLM extractors are accurate but expensive. The middle ground is still being found.</p>
-      <p><strong>Feedback signals are coarse.</strong> Repeated Mistake Rate works but requires manual tagging. Richer automatic signals (test outcomes, review results, revision distance) are on the roadmap.</p>
-      <p><strong>Credit assignment is limited.</strong> When multiple rules are active, the system does not yet isolate which one was responsible for an outcome.</p>
-      <p><strong>Single-agent only.</strong> Shared learning across multiple agents in the same session is designed but not implemented.</p>
-      <p>See the <a href="https://peleke.github.io/buildlog-template/roadmap/" style="color:var(--accent);">roadmap</a> for what's next: embedding persistence via sqlite-vec, cross-project convergence, and emergent rule graphs.</p>
+      <p>v0.15. The full loop works. These are the open problems.</p>
+      <div class="limits-grid">
+        <div class="limit-item">
+          <div class="limit-label">Extraction quality</div>
+          <p>Regex misses nuance. LLM extractors cost money. The middle ground is still being found.</p>
+        </div>
+        <div class="limit-item">
+          <div class="limit-label">Feedback signals</div>
+          <p>RMR works but needs manual tagging. Automatic signals (test results, revision distance) are on the roadmap.</p>
+        </div>
+        <div class="limit-item">
+          <div class="limit-label">Credit assignment</div>
+          <p>Multiple active rules, one outcome. The system doesn't yet isolate which rule was responsible.</p>
+        </div>
+        <div class="limit-item">
+          <div class="limit-label">Single-agent</div>
+          <p>Shared learning across agents in a session is designed but not shipped. Rendering to multiple agents works.</p>
+        </div>
+      </div>
+      <p>See the <a href="https://peleke.github.io/buildlog-template/roadmap/" style="color:var(--accent);">roadmap</a>: embedding persistence (sqlite-vec), cross-project convergence, emergent rule graphs.</p>
     </div>
   </section>
 
@@ -464,27 +727,32 @@
 
       <details>
         <summary>How is this different from editing CLAUDE.md by hand?</summary>
-        <div><p>Manual editing is the starting point. buildlog adds the rest: extracting patterns from real work instead of guessing, selecting which rules to include based on observed outcomes instead of intuition, measuring whether they reduce mistakes, and demoting rules that don't. Manual curation does not self-correct.</p></div>
+        <div><p>Manual editing is step 1. buildlog is steps 2 through 5: extracting patterns from real work instead of guessing, selecting which rules to include based on outcomes instead of intuition, measuring whether they reduce mistakes, and demoting the ones that don't. You can edit CLAUDE.md forever and never know what's working.</p></div>
       </details>
 
       <details>
-        <summary>Does this require an API key?</summary>
-        <div><p>No. The base install uses regex extraction and local computation. LLM-backed extraction (OpenAI, Anthropic, Ollama) is available via optional extras for richer patterns, but the core loop runs without any external calls.</p></div>
+        <summary>Does this need an API key?</summary>
+        <div><p>No. The base install uses regex extraction and local computation. LLM-backed extraction (OpenAI, Anthropic, Ollama) is available via extras for richer patterns. The core loop runs without external calls.</p></div>
       </details>
 
       <details>
-        <summary>How many observations before the bandit is useful?</summary>
-        <div><p>Seed rules start with boosted priors of Beta(3,1), reflecting the expectation that curated rules are more likely to be effective. With ~20 observations per context, you get meaningful differentiation. The system is deliberately conservative with limited data.</p></div>
+        <summary>How many observations before the bandit differentiates?</summary>
+        <div><p>Seeds start at Beta(3,1). With ~20 observations per context, the posteriors separate. The system is deliberately conservative with limited data to avoid killing rules prematurely.</p></div>
       </details>
 
       <details>
         <summary>What data leaves my machine?</summary>
-        <div><p>Nothing, by default. Everything is in <code>~/.buildlog/buildlog.db</code> (local SQLite). If you enable LLM extraction via an API key, extraction prompts go to the provider you chose. The bandit, experiments, and core loop are entirely local.</p></div>
+        <div><p>Nothing, by default. Everything is in <code>~/.buildlog/buildlog.db</code> (local SQLite). If you enable LLM extraction via API key, prompts go to the provider you chose. Bandit, experiments, and the core loop are entirely local.</p></div>
       </details>
 
       <details>
         <summary>Can I use this without Claude Code?</summary>
         <div><p>Yes. The MCP server is Claude Code-native, but rule rendering works for Cursor, Copilot, Windsurf, Continue.dev, and VS Code. The CLI works standalone: <code>buildlog commit</code>, <code>buildlog experiment start</code>, <code>buildlog promote --target cursor</code>.</p></div>
+      </details>
+
+      <details>
+        <summary>Is this production-ready?</summary>
+        <div><p>Used in production daily across multiple projects. 1,254 tests. Stable API surface. But extraction quality is uneven (see limits above) and credit assignment is an open problem. Use it, measure it, report what breaks.</p></div>
       </details>
     </div>
   </section>
@@ -493,10 +761,7 @@
   <div class="final-cta">
     <div class="container">
       <h2>Open source. MIT licensed. On PyPI.</h2>
-      <div class="code-block" style="margin-bottom:24px;">
-        <span class="prompt">$ </span>uv tool install buildlog<br>
-        <span class="prompt">$ </span>buildlog init-mcp --global -y
-      </div>
+      <p>Two commands and your agent starts learning from its mistakes.</p>
       <div class="cta-group">
         <a href="https://github.com/Peleke/buildlog-template" class="btn btn-primary">GitHub</a>
         <a href="https://peleke.github.io/buildlog-template/" class="btn btn-secondary">Documentation</a>
