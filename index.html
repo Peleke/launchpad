@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>qortex &mdash; Knowledge that learns</title>
+  <meta name="description" content="Graph-enhanced agent memory with Thompson sampling feedback. +22% precision, +26% recall, zero overhead. 33 MCP tools. 7 framework adapters. Open source.">
+  <meta property="og:title" content="qortex &mdash; Knowledge that learns">
+  <meta property="og:description" content="Graph-enhanced agent memory. +22% precision over vanilla vectors. Zero overhead. Works with CrewAI, AutoGen, Agno, LangChain, Mastra, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://launchpad-git-qortex-kwayet-fs-projects.vercel.app">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="qortex &mdash; Knowledge that learns">
+  <meta name="twitter:description" content="Graph-enhanced agent memory. +22% precision over vanilla vectors. Zero overhead. 33 MCP tools. 7 framework adapters.">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+      --green: #3fb950;
+      --green-dim: rgba(63, 185, 80, 0.15);
+      --orange: #d29922;
+      --red: #f85149;
+      --purple: #bc8cff;
+      --cyan: #56d4dd;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 48px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero h1 .accent { color: var(--green); }
+
+    .hero .sub {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+
+    .hero-install {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 24px;
+      margin: 0 auto 24px;
+      max-width: 520px;
+      text-align: left;
+      font-family: 'SF Mono', 'Fira Code', Menlo, Consolas, monospace;
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+
+    .hero-install .p { color: var(--text-muted); user-select: none; }
+    .hero-install .c { color: #6e7681; }
+
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 11px 24px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .btn-primary { background: var(--green); color: #000; }
+    .btn-primary:hover { background: #46d05a; }
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: #1c2129; }
+
+    .stats-row {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+    }
+
+    .stat-num { font-weight: 800; color: var(--text); }
+    .stat-label { color: var(--text-muted); }
+
+    /* Sections */
+    section { padding: 64px 0; border-top: 1px solid var(--border); }
+    section h2 { font-size: 1.65rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.01em; }
+    section h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px; }
+    section p { color: var(--text-muted); margin-bottom: 14px; font-size: 0.98rem; line-height: 1.7; }
+    section p strong { color: var(--text); }
+
+    .code-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 20px;
+      margin: 16px 0;
+      font-family: 'SF Mono', 'Fira Code', Menlo, Consolas, monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      overflow-x: auto;
+    }
+
+    .code-block .p { color: var(--text-muted); user-select: none; }
+    .code-block .c { color: #6e7681; }
+
+    /* SVG diagram */
+    .diagram-wrap {
+      margin: 32px 0;
+      overflow-x: auto;
+      text-align: center;
+    }
+
+    .diagram-wrap svg { max-width: 100%; height: auto; }
+
+    /* Benchmark table */
+    .bench-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.9rem;
+    }
+
+    .bench-table th {
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 2px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .bench-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bench-table tr:hover { background: rgba(88, 166, 255, 0.04); }
+
+    .bench-table .delta { color: var(--green); font-weight: 700; }
+    .bench-table .delta-neg { color: var(--red); font-weight: 700; }
+
+    /* Flip cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 28px 0;
+    }
+
+    .flip-card {
+      perspective: 800px;
+      height: 220px;
+      cursor: pointer;
+    }
+
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-inner { transform: rotateY(180deg); }
+
+    .flip-front, .flip-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 14px;
+      text-align: center;
+    }
+
+    .flip-front { background: var(--surface); }
+
+    .flip-back {
+      background: var(--surface);
+      transform: rotateY(180deg);
+      justify-content: flex-start;
+      padding-top: 24px;
+    }
+
+    .flip-back p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .flip-back .back-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .card-icon svg { width: 48px; height: 48px; }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .card-hint {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Framework row */
+    .fw-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .fw-card {
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: border-color 0.15s;
+    }
+
+    .fw-card:hover { border-color: var(--accent); }
+
+    .fw-card .fw-name {
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 4px;
+    }
+
+    .fw-card .fw-lang {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-family: 'SF Mono', Menlo, monospace;
+      margin-bottom: 6px;
+    }
+
+    .fw-card .fw-tests {
+      font-size: 0.82rem;
+      color: var(--green);
+      font-weight: 600;
+    }
+
+    .fw-card .fw-iface {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Limits */
+    .limits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .limit-item {
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .limit-item .limit-label {
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+      color: var(--orange);
+    }
+
+    .limit-item p { font-size: 0.85rem; margin: 0; line-height: 1.5; }
+
+    /* Comparison grid */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .compare-card {
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .compare-card .cc-name {
+      font-weight: 700;
+      font-size: 0.92rem;
+      margin-bottom: 6px;
+    }
+
+    .compare-card .cc-approach {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+
+    .compare-card .cc-cost {
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .compare-card .cc-cost.cost-high { color: var(--red); }
+    .compare-card .cc-cost.cost-low { color: var(--green); }
+    .compare-card .cc-cost.cost-med { color: var(--orange); }
+
+    /* FAQ */
+    details {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 8px;
+      background: var(--surface);
+    }
+
+    summary {
+      padding: 14px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.93rem;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: "+"; margin-right: 10px; color: var(--accent); font-weight: 700; font-family: 'SF Mono', Menlo, monospace; }
+    details[open] summary::before { content: "\2212"; }
+    details div { padding: 0 20px 14px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+    details div code { background: var(--bg); padding: 2px 6px; border-radius: 3px; font-size: 0.82rem; }
+
+    /* Footer */
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* Final CTA */
+    .final-cta { text-align: center; padding: 60px 0; border-top: 1px solid var(--border); }
+    .final-cta h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+    .final-cta p { color: var(--text-muted); margin-bottom: 24px; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+      .flip-card { height: 200px; }
+      .fw-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2rem; }
+      .hero .sub { font-size: 1rem; }
+      .card-grid { grid-template-columns: 1fr 1fr; }
+      .flip-card { height: 190px; }
+      .limits-grid { grid-template-columns: 1fr; }
+      .compare-grid { grid-template-columns: 1fr; }
+      .fw-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 16px; }
+      .hero-install { font-size: 0.82rem; padding: 12px 16px; }
+      .bench-table { font-size: 0.82rem; }
+      .bench-table th, .bench-table td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <h1>Your agent&rsquo;s memory<br><span class="accent">should learn from every query</span></h1>
+      <p class="sub">qortex adds a knowledge graph with typed relationships, domain rules, and a Thompson sampling feedback loop on top of any vector store. +22% precision, +26% recall, zero overhead. Tested across 7 frameworks.</p>
+      <div class="hero-install">
+        <span class="p">$ </span>claude mcp add qortex -- uvx qortex mcp-serve<br>
+        <span class="c"># That&rsquo;s it. 33 MCP tools, zero config.</span>
+      </div>
+      <div class="cta-group">
+        <a href="https://github.com/Peleke/qortex" class="btn btn-primary">GitHub</a>
+        <a href="https://peleke.github.io/qortex/" class="btn btn-secondary">Documentation</a>
+        <a href="https://pypi.org/project/qortex/" class="btn btn-secondary">PyPI</a>
+      </div>
+      <div class="stats-row">
+        <div><span class="stat-num">33</span> <span class="stat-label">MCP tools</span></div>
+        <div><span class="stat-num">1,960</span> <span class="stat-label">tests</span></div>
+        <div><span class="stat-num">7</span> <span class="stat-label">framework adapters</span></div>
+        <div><span class="stat-num">v0.5.2</span> <span class="stat-label">on PyPI</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Quickstart -->
+  <section>
+    <div class="container">
+      <h2>One command. Every MCP client.</h2>
+      <p>Your agent gets 33 knowledge graph tools immediately. No config files. No API keys for the knowledge layer.</p>
+      <div class="code-block">
+        <span class="c"># Claude Code</span><br>
+        <span class="p">$ </span>claude mcp add qortex -- uvx qortex mcp-serve<br><br>
+        <span class="c"># Cursor / Windsurf</span><br>
+        <span class="p">$ </span>uvx qortex mcp-serve  <span class="c"># add as stdio MCP server</span><br><br>
+        <span class="c"># Any MCP client</span><br>
+        <span class="p">$ </span>pip install qortex[all] &amp;&amp; qortex mcp-serve
+      </div>
+
+      <h3>What happens next</h3>
+      <p>Once installed, your agent automatically <strong>searches</strong> the knowledge graph before answering, <strong>retrieves</strong> concepts + typed relationships + rules (not just similar text), <strong>learns</strong> from your feedback, and <strong>persists</strong> everything to SQLite across restarts.</p>
+
+      <h3>With extras</h3>
+      <div class="code-block">
+        <span class="p">$ </span>pip install "qortex[all]"         <span class="c"># embeddings + production graph + everything</span><br>
+        <span class="c"># or pick: [vec] [vec-sqlite] [memgraph]</span>
+      </div>
+      <p>Python 3.11+. Works on macOS, Linux, and Windows.</p>
+    </div>
+  </section>
+
+  <!-- Benchmarks -->
+  <section>
+    <div class="container">
+      <h2>The numbers are real</h2>
+      <p>20-concept authentication domain. qortex graph-enhanced retrieval vs vanilla cosine similarity. <strong>Every number is reproducible.</strong></p>
+
+      <table class="bench-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>qortex</th>
+            <th>Vanilla</th>
+            <th>Delta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Precision@5</td>
+            <td>0.55</td>
+            <td>0.45</td>
+            <td class="delta">+22%</td>
+          </tr>
+          <tr>
+            <td>Recall@5</td>
+            <td>0.81</td>
+            <td>0.65</td>
+            <td class="delta">+26%</td>
+          </tr>
+          <tr>
+            <td>nDCG@5</td>
+            <td>0.716</td>
+            <td>0.628</td>
+            <td class="delta">+14%</td>
+          </tr>
+          <tr>
+            <td>Batch overhead</td>
+            <td>40.15ms</td>
+            <td>40.34ms</td>
+            <td class="delta">&minus;0.5%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>That last row. The graph layer adds <strong>negative overhead</strong> in batch. The graph traversal itself takes 0.02ms. Feedback recording takes less than 0.01ms. The embedding step (3.97ms) dominates everything.</p>
+
+      <h3>Where the graph dominates</h3>
+      <p>On simple queries (&ldquo;What is OAuth2?&rdquo;), graph and vanilla perform identically. The gap opens on <strong>cross-cutting queries</strong> &mdash; the ones agents actually ask:</p>
+
+      <table class="bench-table">
+        <thead>
+          <tr>
+            <th>Query</th>
+            <th>P@5 &Delta;</th>
+            <th>R@5 &Delta;</th>
+            <th>nDCG &Delta;</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Enterprise SSO for corporate apps</td>
+            <td class="delta">+50%</td>
+            <td class="delta">+49%</td>
+            <td class="delta">+71%</td>
+          </tr>
+          <tr>
+            <td>M2M microservices auth</td>
+            <td class="delta">+50%</td>
+            <td class="delta">+49%</td>
+            <td class="delta">+71%</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Because the graph follows typed edges (SAML &rarr; OpenID Connect &rarr; OAuth2) that cosine similarity cannot see. When an agent asks &ldquo;How do I implement enterprise SSO?&rdquo; &mdash; SAML, OpenID Connect, and OAuth2 are all relevant, but they don&rsquo;t share vocabulary. The graph knows they&rsquo;re connected. Cosine doesn&rsquo;t.</p>
+
+      <div class="code-block">
+        <span class="c"># Reproduce everything</span><br>
+        <span class="p">$ </span>cd qortex &amp;&amp; uv sync<br>
+        <span class="p">$ </span>uv run pytest tests/bench_crewai_vs_vanilla.py -v -s<br>
+        <span class="p">$ </span>uv run pytest tests/bench_autogen_vs_vanilla.py -v -s<br>
+        <span class="p">$ </span>uv run pytest tests/bench_perf.py -v -s
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section>
+    <div class="container">
+      <h2>How it works</h2>
+      <p>Three retrieval signals composed into one query. A feedback loop that makes every signal better over time.</p>
+
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 660 520" xmlns="http://www.w3.org/2000/svg" fill="none" aria-label="qortex retrieval pipeline: embed, explore, project, compose, with Thompson sampling feedback loop">
+          <defs>
+            <linearGradient id="flowDown" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#58a6ff" stop-opacity="0.2"/>
+              <stop offset="50%" stop-color="#58a6ff" stop-opacity="0.7"/>
+              <stop offset="100%" stop-color="#58a6ff" stop-opacity="0.2"/>
+            </linearGradient>
+            <linearGradient id="flowGreen" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3fb950" stop-opacity="0.2"/>
+              <stop offset="50%" stop-color="#3fb950" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#3fb950" stop-opacity="0.2"/>
+            </linearGradient>
+            <marker id="ad" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#58a6ff" opacity="0.7"/></marker>
+            <marker id="ag" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#3fb950" opacity="0.8"/></marker>
+            <marker id="ap" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#bc8cff" opacity="0.7"/></marker>
+            <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+
+          <!-- Background -->
+          <rect width="660" height="520" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+          <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0V20H0" fill="none" stroke="#30363d" stroke-width="0.3" opacity="0.3"/></pattern>
+          <rect width="660" height="520" rx="12" fill="url(#grid)"/>
+
+          <!-- Layer 1: Query -->
+          <g data-layer="query">
+            <rect x="160" y="24" width="280" height="56" rx="8" fill="#0d1117" stroke="#8b949e" stroke-width="1.5"/>
+            <text x="206" y="46" fill="#8b949e" font-family="monospace" font-size="10">QUERY</text>
+            <text x="206" y="64" fill="#e6edf3" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">&ldquo;Enterprise SSO for corporate apps&rdquo;</text>
+          </g>
+
+          <!-- Layer 2: Embed -->
+          <g data-layer="embed">
+            <rect x="160" y="112" width="280" height="56" rx="8" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/>
+            <circle cx="186" cy="140" r="10" stroke="#58a6ff" stroke-width="1.2" fill="none" opacity="0.5"/><circle cx="186" cy="140" r="3" fill="#58a6ff" opacity="0.3"/>
+            <text x="206" y="134" fill="#8b949e" font-family="monospace" font-size="10">01 &middot; EMBED</text>
+            <text x="206" y="152" fill="#e6edf3" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">Vector Similarity</text>
+            <text x="410" y="144" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; seed hits</text>
+          </g>
+
+          <!-- Layer 3: Explore (Graph PPR) -->
+          <g data-layer="explore">
+            <rect x="160" y="200" width="280" height="56" rx="8" fill="#0d1117" stroke="#bc8cff" stroke-width="1.5"/>
+            <!-- graph icon -->
+            <circle cx="180" cy="228" r="4" fill="#bc8cff" opacity="0.5"/><circle cx="192" cy="220" r="4" fill="#bc8cff" opacity="0.5"/><circle cx="192" cy="236" r="4" fill="#bc8cff" opacity="0.5"/>
+            <line x1="183" y1="226" x2="189" y2="222" stroke="#bc8cff" stroke-width="1" opacity="0.4"/><line x1="183" y1="230" x2="189" y2="234" stroke="#bc8cff" stroke-width="1" opacity="0.4"/><line x1="192" y1="224" x2="192" y2="232" stroke="#bc8cff" stroke-width="1" opacity="0.4"/>
+            <text x="206" y="222" fill="#8b949e" font-family="monospace" font-size="10">02 &middot; EXPLORE</text>
+            <text x="206" y="240" fill="#e6edf3" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">Graph PPR</text>
+            <text x="410" y="232" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; structural expansion</text>
+          </g>
+
+          <!-- Layer 4: Project (Rules) -->
+          <g data-layer="project">
+            <rect x="160" y="288" width="280" height="56" rx="8" fill="#0d1117" stroke="#d29922" stroke-width="1.5"/>
+            <path d="M186 302 L176 308 V318 L186 324 L196 318 V308 Z" stroke="#d29922" stroke-width="1.2" fill="none" opacity="0.5"/>
+            <text x="206" y="310" fill="#8b949e" font-family="monospace" font-size="10">03 &middot; PROJECT</text>
+            <text x="206" y="328" fill="#e6edf3" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">Rule Injection</text>
+            <text x="410" y="320" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; domain context</text>
+          </g>
+
+          <!-- Layer 5: Compose (CORE) -->
+          <g data-layer="compose" filter="url(#glow)">
+            <rect x="160" y="376" width="280" height="56" rx="8" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+            <rect x="156" y="372" width="288" height="64" rx="12" fill="none" stroke="#3fb950" stroke-width="1" opacity="0.2">
+              <animate attributeName="opacity" values="0.3;0.08;0.3" dur="3s" repeatCount="indefinite"/>
+            </rect>
+            <path d="M174 404 Q180 390 186 398 Q192 406 198 392" stroke="#3fb950" stroke-width="1.5" fill="none" opacity="0.6"/>
+            <text x="206" y="398" fill="#8b949e" font-family="monospace" font-size="10">04 &middot; COMPOSE</text>
+            <text x="206" y="416" fill="#3fb950" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">Ranked Results</text>
+            <text x="410" y="408" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; concepts + rules</text>
+            <text x="456" y="410" fill="#3fb950" font-family="monospace" font-size="10" opacity="0.6">&larr; output</text>
+          </g>
+
+          <!-- Layer 6: Learn -->
+          <g data-layer="learn">
+            <rect x="160" y="464" width="280" height="44" rx="8" fill="#0d1117" stroke="#56d4dd" stroke-width="1.5"/>
+            <text x="206" y="490" fill="#56d4dd" font-family="-apple-system, sans-serif" font-size="13" font-weight="600">Thompson Sampling Feedback</text>
+            <text x="410" y="490" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; edge weights</text>
+          </g>
+
+          <!-- Flow lines -->
+          <line x1="300" y1="80" x2="300" y2="112" stroke="url(#flowDown)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ad)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <line x1="300" y1="168" x2="300" y2="200" stroke="url(#flowDown)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ad)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <line x1="300" y1="256" x2="300" y2="288" stroke="url(#flowDown)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ap)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <line x1="300" y1="344" x2="300" y2="376" stroke="url(#flowGreen)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ag)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <line x1="300" y1="432" x2="300" y2="464" stroke="url(#flowDown)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ad)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+
+          <!-- Feedback loop (left side, upward) -->
+          <path d="M 160 486 L 80 486 L 80 228 L 160 228" stroke="#3fb950" stroke-width="2" stroke-dasharray="4 3" fill="none" marker-end="url(#ag)">
+            <animate attributeName="stroke-dashoffset" values="0;14" dur="3s" repeatCount="indefinite"/>
+          </path>
+          <text x="72" y="360" fill="#3fb950" font-family="monospace" font-size="10" text-anchor="middle" transform="rotate(-90, 72, 360)" opacity="0.7">feedback &rarr; edge weights</text>
+
+          <!-- Overhead annotations (right) -->
+          <text x="524" y="144" fill="#8b949e" font-family="monospace" font-size="9" opacity="0.6">3.97ms</text>
+          <text x="524" y="232" fill="#8b949e" font-family="monospace" font-size="9" opacity="0.6">0.02ms</text>
+          <text x="524" y="320" fill="#8b949e" font-family="monospace" font-size="9" opacity="0.6">included</text>
+          <text x="524" y="490" fill="#8b949e" font-family="monospace" font-size="9" opacity="0.6">&lt;0.01ms</text>
+        </svg>
+      </div>
+
+      <p>Every layer is independently useful. You can use vector search without the graph, the graph without rules, or rules without feedback. But the full pipeline is where <strong>compound improvement</strong> happens &mdash; retrieval gets better the more your agents use it.</p>
+    </div>
+  </section>
+
+  <!-- The Stack -->
+  <section>
+    <div class="container">
+      <h2>The qortex stack</h2>
+      <p>Hover to flip. Eight components, each independently useful.</p>
+
+      <div class="card-grid">
+        <!-- MCP Server -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="4" stroke="#58a6ff" stroke-width="2"/><line x1="6" y1="18" x2="42" y2="18" stroke="#58a6ff" stroke-width="2"/><circle cx="14" cy="13" r="2" fill="#f85149"/><circle cx="22" cy="13" r="2" fill="#d29922"/><circle cx="30" cy="13" r="2" fill="#3fb950"/><line x1="14" y1="26" x2="34" y2="26" stroke="#30363d" stroke-width="2"/><line x1="14" y1="32" x2="28" y2="32" stroke="#30363d" stroke-width="2"/></svg>
+              </div>
+              <div class="card-title">MCP Server</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">MCP Server</div>
+              <p>33 tools via Model Context Protocol. Query, ingest, feedback, vector ops, learning, source connectors. Works with any MCP client.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thompson Sampling -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><path d="M8 40 Q14 10 24 25 Q34 40 40 12" stroke="#3fb950" stroke-width="2.5" fill="none"/><path d="M8 38 Q18 20 24 30 Q30 40 40 18" stroke="#58a6ff" stroke-width="2" fill="none" opacity="0.5"/><circle cx="24" cy="25" r="3" fill="#3fb950"/><line x1="8" y1="42" x2="40" y2="42" stroke="#30363d" stroke-width="1.5"/><line x1="8" y1="8" x2="8" y2="42" stroke="#30363d" stroke-width="1.5"/></svg>
+              </div>
+              <div class="card-title">Thompson Sampling</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Thompson Sampling</div>
+              <p>Beta-Bernoulli on every edge. Accept a result &rarr; edge gets stronger. Reject &rarr; weaker. Natural exploration/exploitation balance. The graph learns which paths matter.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Graph Engine -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><circle cx="16" cy="16" r="6" stroke="#bc8cff" stroke-width="2"/><circle cx="36" cy="16" r="6" stroke="#bc8cff" stroke-width="2"/><circle cx="24" cy="36" r="6" stroke="#bc8cff" stroke-width="2"/><line x1="21" y1="18" x2="31" y2="14" stroke="#bc8cff" stroke-width="1.5" opacity="0.5"/><line x1="18" y1="21" x2="22" y2="31" stroke="#bc8cff" stroke-width="1.5" opacity="0.5"/><line x1="34" y1="21" x2="26" y2="31" stroke="#bc8cff" stroke-width="1.5" opacity="0.5"/></svg>
+              </div>
+              <div class="card-title">Graph Engine</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Graph Engine</div>
+              <p>InMemory for dev, Memgraph for prod. Typed edges (REQUIRES, REFINES, USES, SIMILAR_TO). Personalized PageRank for structural retrieval.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vector Index -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="12" rx="16" ry="6" stroke="#58a6ff" stroke-width="2" fill="none"/><path d="M8 12 L8 36" stroke="#58a6ff" stroke-width="2"/><path d="M40 12 L40 36" stroke="#58a6ff" stroke-width="2"/><ellipse cx="24" cy="36" rx="16" ry="6" stroke="#58a6ff" stroke-width="2" fill="none"/><ellipse cx="24" cy="24" rx="16" ry="6" stroke="#30363d" stroke-width="1.5" fill="none"/></svg>
+              </div>
+              <div class="card-title">Vector Index</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Vector Index</div>
+              <p>SQLite-vec for persistence or NumPy in-memory. Consumers provide embeddings or use built-in sentence-transformers. 384d default.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rule Projection -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><path d="M24 6 L42 16 L42 32 L24 42 L6 32 L6 16 Z" stroke="#d29922" stroke-width="2" fill="none"/><path d="M24 14 L34 20 L34 28 L24 34 L14 28 L14 20 Z" stroke="#d29922" stroke-width="1.5" fill="none" opacity="0.4"/><circle cx="24" cy="24" r="3" fill="#d29922"/></svg>
+              </div>
+              <div class="card-title">Rule Projection</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Rule Projection</div>
+              <p>Explicit domain rules fire when linked concepts activate. &ldquo;Always use PKCE for public clients&rdquo; surfaces automatically for OAuth2 queries. 30 edge rule templates built in.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Framework Adapters -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="18" width="14" height="14" rx="3" stroke="#58a6ff" stroke-width="1.5"/><rect x="17" y="6" width="14" height="14" rx="3" stroke="#3fb950" stroke-width="1.5"/><rect x="30" y="18" width="14" height="14" rx="3" stroke="#bc8cff" stroke-width="1.5"/><rect x="10" y="34" width="14" height="10" rx="3" stroke="#d29922" stroke-width="1.5"/><rect x="26" y="34" width="14" height="10" rx="3" stroke="#f85149" stroke-width="1.5"/><line x1="24" y1="20" x2="18" y2="24" stroke="#30363d" stroke-width="1"/><line x1="24" y1="20" x2="30" y2="24" stroke="#30363d" stroke-width="1"/></svg>
+              </div>
+              <div class="card-title">7 Adapters</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Framework Adapters</div>
+              <p>CrewAI KnowledgeStorage, Agno KnowledgeProtocol, AutoGen Memory, LangChain VectorStore, Mastra MastraVector, OpenClaw Learning. 8,700+ lines of tested code.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Observability -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="20" height="28" rx="2" stroke="#56d4dd" stroke-width="2"/><line x1="12" y1="14" x2="24" y2="14" stroke="#30363d" stroke-width="2"/><line x1="12" y1="20" x2="22" y2="20" stroke="#30363d" stroke-width="2"/><line x1="12" y1="26" x2="20" y2="26" stroke="#30363d" stroke-width="2"/><path d="M30 22 L40 18 L40 34 L30 30 Z" stroke="#56d4dd" stroke-width="2" fill="none"/><circle cx="40" cy="26" r="6" stroke="#d29922" stroke-width="2" fill="none"/></svg>
+              </div>
+              <div class="card-title">Observability</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Observability</div>
+              <p>Every MCP tool call traced with OpenTelemetry. Structured logging, distributed trace propagation, query/feedback counters. qortex-observe package on PyPI.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Auto-Ingest -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="14" width="12" height="20" rx="2" stroke="#3fb950" stroke-width="2"/><rect x="28" y="14" width="12" height="20" rx="2" stroke="#bc8cff" stroke-width="2"/><line x1="20" y1="20" x2="28" y2="20" stroke="#30363d" stroke-width="2"/><line x1="20" y1="28" x2="28" y2="28" stroke="#30363d" stroke-width="2"/><circle cx="14" cy="20" r="2" fill="#3fb950"/><circle cx="14" cy="28" r="2" fill="#3fb950"/><circle cx="34" cy="20" r="2" fill="#bc8cff"/><circle cx="34" cy="28" r="2" fill="#bc8cff"/></svg>
+              </div>
+              <div class="card-title">Auto-Ingest</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Auto-Ingest</div>
+              <p>Feed docs, specs, or code. LLM extraction builds concepts, typed edges, and rules. Manifest save on failure. Reload without re-extraction. Billing gate for cost control.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 Frameworks -->
+  <section>
+    <div class="container">
+      <h2>7 frameworks, one engine</h2>
+      <p>Same retrieval engine. Each adapter implements the framework&rsquo;s native interface. We conform to them, not the other way around. <strong>8,700+ lines of tested integration code.</strong></p>
+
+      <div class="fw-grid">
+        <div class="fw-card">
+          <div class="fw-name">CrewAI</div>
+          <div class="fw-lang">Python &middot; KnowledgeStorage</div>
+          <div class="fw-tests">46/49 pass</div>
+          <div class="fw-iface">109 lines &middot; drop-in replacement</div>
+        </div>
+        <div class="fw-card">
+          <div class="fw-name">Agno</div>
+          <div class="fw-lang">Python &middot; KnowledgeProtocol</div>
+          <div class="fw-tests">12/12 pass</div>
+          <div class="fw-iface">375 lines &middot; built-in adapter</div>
+        </div>
+        <div class="fw-card">
+          <div class="fw-name">AutoGen</div>
+          <div class="fw-lang">Python &middot; Memory (5 async methods)</div>
+          <div class="fw-tests">26/26 pass</div>
+          <div class="fw-iface">240 lines &middot; drop-in replacement</div>
+        </div>
+        <div class="fw-card">
+          <div class="fw-name">LangChain</div>
+          <div class="fw-lang">Python &middot; VectorStore ABC</div>
+          <div class="fw-tests">47 pass</div>
+          <div class="fw-iface">langchain-qortex on PyPI</div>
+        </div>
+        <div class="fw-card">
+          <div class="fw-name">LangChain.js</div>
+          <div class="fw-lang">TypeScript &middot; VectorStore (MCP)</div>
+          <div class="fw-tests">~40 pass</div>
+          <div class="fw-iface">cross-language via MCP stdio</div>
+        </div>
+        <div class="fw-card">
+          <div class="fw-name">Mastra</div>
+          <div class="fw-lang">TypeScript &middot; MastraVector (9 methods)</div>
+          <div class="fw-tests">31/31 pass</div>
+          <div class="fw-iface">29 MCP calls in 3.9s</div>
+        </div>
+      </div>
+
+      <div class="code-block">
+        <span class="c"># One import swap. Same interface. Better retrieval.</span><br><br>
+        <span class="c"># Before (ChromaDB)</span><br>
+        from crewai.knowledge.storage.chroma import ChromaKnowledgeStorage<br>
+        storage = ChromaKnowledgeStorage()<br><br>
+        <span class="c"># After (qortex)</span><br>
+        from qortex.adapters.crewai import QortexKnowledgeStorage<br>
+        storage = QortexKnowledgeStorage(client=client, domains=["auth"])
+      </div>
+
+      <p>TypeScript adapters (Mastra, LangChain.js, OpenClaw) talk to the same Python engine over MCP stdio. No FFI, no WASM, no rewrite. Server spawn is ~400ms one-time. For agent workflows where each LLM call takes 500ms&ndash;5s, transport overhead is invisible.</p>
+    </div>
+  </section>
+
+  <!-- The Integration Story -->
+  <section>
+    <div class="container">
+      <h2>The integration story</h2>
+      <p>qortex isn&rsquo;t a prototype. It&rsquo;s a tested, benchmarked piece of infrastructure that plugs into the ecosystem you already use.</p>
+
+      <h3>Three layers of agent memory</h3>
+      <p>The market is splitting into three different problems:</p>
+
+      <div class="compare-grid">
+        <div class="compare-card">
+          <div class="cc-name">What users said</div>
+          <div class="cc-approach">Conversational memory. Entity extraction from chat history. User preferences, cross-session continuity.</div>
+          <div class="cc-cost cost-med">mem0&rsquo;s territory</div>
+        </div>
+        <div class="compare-card">
+          <div class="cc-name">What agents think</div>
+          <div class="cc-approach">Self-managed agent state. LLM calls to edit memory blocks. ~16,900 tokens per memory management cycle.</div>
+          <div class="cc-cost cost-high">MemGPT/Letta &middot; expensive</div>
+        </div>
+        <div class="compare-card">
+          <div class="cc-name">What the system knows</div>
+          <div class="cc-approach">Structured concepts, typed relationships, explicit rules, and a feedback loop that learns which paths matter.</div>
+          <div class="cc-cost cost-low">qortex &middot; 0.02ms &middot; 0 LLM calls</div>
+        </div>
+        <div class="compare-card">
+          <div class="cc-name">Static vector search</div>
+          <div class="cc-approach">Embed, cosine, return top-k. Flat. Static. No structure. No learning. Day one = day one thousand.</div>
+          <div class="cc-cost cost-med">ChromaDB / Pinecone / Qdrant</div>
+        </div>
+      </div>
+
+      <p>An agent can use all three simultaneously: mem0 to remember the user prefers Python examples, MemGPT to maintain a coherent persona, and qortex to know that mTLS is the right choice for service mesh authentication. <strong>These aren&rsquo;t competing approaches. They&rsquo;re different layers.</strong></p>
+
+      <h3>The feedback loop nobody else has</h3>
+      <p>Every query generates a <code style="background:var(--surface);padding:2px 6px;border-radius:3px;font-size:0.85rem;">query_id</code>. After the agent uses the results, you report feedback: which concepts were accepted, rejected, or ignored.</p>
+      <p>This feedback adjusts edge weights using Thompson sampling. Accepted results strengthen the connecting edges. Rejected results weaken them. Next time a similar query runs, retrieval automatically favors paths that worked.</p>
+      <p><strong>After 50 queries with consistent feedback</strong>: strong edges converge to Beta(45,6). Weak paths suppress to Beta(3,42). The graph becomes tuned to your domain&rsquo;s actual retrieval patterns. Static vector stores stay static forever.</p>
+
+      <h3>The overhead question</h3>
+      <table class="bench-table">
+        <thead>
+          <tr>
+            <th>Component</th>
+            <th>Median</th>
+            <th>P95</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Embedding only</td>
+            <td>3.97ms</td>
+            <td>5.77ms</td>
+          </tr>
+          <tr>
+            <td>Graph explore (depth=2)</td>
+            <td>0.02ms</td>
+            <td>0.03ms</td>
+          </tr>
+          <tr>
+            <td>Feedback recording</td>
+            <td>&lt;0.01ms</td>
+            <td>0.01ms</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>The embedding step is 99.5% of the cost. We added a knowledge graph, typed relationships, domain rules, AND a feedback loop &mdash; and it costs less than nothing.</p>
+    </div>
+  </section>
+
+  <!-- Current limits -->
+  <section>
+    <div class="container">
+      <h2>Current limits</h2>
+      <p>v0.5.2. The full pipeline works. These are the open problems.</p>
+      <div class="limits-grid">
+        <div class="limit-item">
+          <div class="limit-label">Causal DAG</div>
+          <p>The knowledge graph captures correlations via edge types. Causal discovery (which edges are causes vs associations) is the next phase.</p>
+        </div>
+        <div class="limit-item">
+          <div class="limit-label">Credit assignment</div>
+          <p>Multiple active concepts contribute to a result. Isolating which edge was responsible for a good outcome requires causal inference. Coming.</p>
+        </div>
+        <div class="limit-item">
+          <div class="limit-label">PPR at scale</div>
+          <p>Personalized PageRank is the one bottleneck. Proven sublinear path exists but not yet implemented for graphs over 100K nodes.</p>
+        </div>
+        <div class="limit-item">
+          <div class="limit-label">Multi-tenant</div>
+          <p>Per-user context partitioning for learning is designed (issue #76) but not shipped. Currently single-tenant.</p>
+        </div>
+      </div>
+      <p>See the <a href="https://github.com/Peleke/qortex/issues" style="color:var(--accent);">GitHub issues</a> for the full roadmap. Causal DAG is issue #97. Production deployment (triple interface: GraphQL + REST + MCP) is issue #63.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="container">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>How is this different from ChromaDB / Pinecone / Qdrant?</summary>
+        <div><p>Those are vector databases. qortex is a knowledge graph that sits on top of vector search. We use vectors for initial retrieval, then add structural expansion via typed edges and domain rule projection. The graph layer adds +22% precision at zero overhead. You can use qortex on top of any vector store you already have.</p></div>
+      </details>
+
+      <details>
+        <summary>Does this need an API key?</summary>
+        <div><p>No. The knowledge layer, graph traversal, feedback loop, and MCP server all work without external API calls. If you want LLM-powered ingestion (extracting concepts from docs automatically), you need an Anthropic key. But the core retrieval engine is entirely local.</p></div>
+      </details>
+
+      <details>
+        <summary>What about mem0 or MemGPT?</summary>
+        <div><p>Different layers. mem0 does conversational memory (what users said). MemGPT does agent state management (what agents think). qortex does domain knowledge (what the system knows). An agent can use all three simultaneously. They compose, not compete.</p></div>
+      </details>
+
+      <details>
+        <summary>How does the TypeScript/cross-language story work?</summary>
+        <div><p>TypeScript adapters (Mastra, LangChain.js, OpenClaw) talk to the Python engine over MCP stdio. 29 MCP tool calls complete in 3.94 seconds. Server spawn is ~400ms one-time. For agent workflows where each LLM call takes 500ms&ndash;5s, transport overhead is invisible. No WASM, no FFI, no rewrite.</p></div>
+      </details>
+
+      <details>
+        <summary>How many feedback signals before the graph learns?</summary>
+        <div><p>Edges start at Beta(1,1) &mdash; uniform prior. The first 10 signals make the biggest difference (uncertainty to reasonable confidence). By 50, the graph has a strong model. By 200, it&rsquo;s highly tuned to your domain. The system is most useful where it&rsquo;s deployed longest.</p></div>
+      </details>
+
+      <details>
+        <summary>Is this production-ready?</summary>
+        <div><p>Used in production via OpenClaw on every agent turn. 1,960 tests. v0.5.2 on PyPI. 7 framework adapters passing their own test suites. Full OpenTelemetry instrumentation. But causal DAG and multi-tenant partitioning are still open &mdash; see the limits above.</p></div>
+      </details>
+
+      <details>
+        <summary>What data leaves my machine?</summary>
+        <div><p>Nothing, by default. The knowledge graph, vector index, learning state, and feedback history all live in local SQLite at <code>~/.qortex/</code>. LLM-powered ingestion sends prompts to Anthropic if you opt in. The core retrieval loop is entirely local.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <div class="final-cta">
+    <div class="container">
+      <h2>Open source. MIT licensed. On PyPI.</h2>
+      <p>One command and your agent gets a memory that learns from every interaction.</p>
+      <div class="hero-install" style="margin: 0 auto 24px; text-align: left;">
+        <span class="p">$ </span>claude mcp add qortex -- uvx qortex mcp-serve
+      </div>
+      <div class="cta-group">
+        <a href="https://github.com/Peleke/qortex" class="btn btn-primary">GitHub</a>
+        <a href="https://peleke.github.io/qortex/" class="btn btn-secondary">Documentation</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>Built by <a href="https://github.com/Peleke">Peleke</a> &middot; <a href="https://github.com/Peleke/qortex">Source</a> &middot; <a href="https://pypi.org/project/qortex/">PyPI</a> &middot; MIT License</p>
+    </div>
+  </footer>
+
+</body>
+</html>
