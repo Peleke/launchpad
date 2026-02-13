@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>buildlog — A measurable learning loop for AI coding agents</title>
+  <meta name="description" content="Capture engineering decisions. Extract patterns. Select rules with Thompson Sampling. Render to any AI agent. Measure what works.">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+      --green: #3fb950;
+      --orange: #d29922;
+      --red: #f85149;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero .sub {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: #000;
+    }
+
+    .btn-primary:hover { background: #46d05a; }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover { background: #1c2129; }
+
+    /* Code blocks */
+    .code-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 24px;
+      margin: 20px auto;
+      max-width: 520px;
+      text-align: left;
+      font-family: 'SF Mono', 'Fira Code', 'Fira Mono', Menlo, Consolas, monospace;
+      font-size: 0.9rem;
+      color: var(--text);
+      overflow-x: auto;
+      line-height: 1.7;
+    }
+
+    .code-block .prompt { color: var(--text-muted); user-select: none; }
+    .code-block .comment { color: #6e7681; }
+
+    /* Sections */
+    section {
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    section h2 {
+      font-size: 1.7rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.01em;
+    }
+
+    section h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      margin-top: 28px;
+    }
+
+    section p {
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    section p strong { color: var(--text); }
+
+    /* Stack cards */
+    .stack-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .stack-card {
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .stack-card .card-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+      color: var(--accent);
+    }
+
+    .stack-card p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* Agent targets */
+    .agent-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .agent-tag {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .agent-tag .file {
+      color: var(--text-muted);
+      font-family: 'SF Mono', 'Fira Code', Menlo, monospace;
+      font-size: 0.75rem;
+      font-weight: 400;
+      margin-left: 6px;
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: flex;
+      gap: 24px;
+      margin: 24px 0 8px;
+      flex-wrap: wrap;
+    }
+
+    .stats-row .stat-item {
+      font-size: 0.95rem;
+    }
+
+    .stats-row .stat-num {
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .stats-row .stat-label {
+      color: var(--text-muted);
+    }
+
+    /* Flow diagram */
+    .flow {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin: 24px 0;
+      font-family: 'SF Mono', 'Fira Code', Menlo, monospace;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      overflow-x: auto;
+    }
+
+    .flow .highlight { color: var(--accent); }
+    .flow .arrow { color: var(--text-muted); }
+
+    /* FAQ */
+    details {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 8px;
+      background: var(--surface);
+    }
+
+    summary {
+      padding: 14px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.95rem;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::before {
+      content: "+";
+      margin-right: 10px;
+      color: var(--accent);
+      font-weight: 700;
+      font-family: 'SF Mono', Menlo, monospace;
+    }
+
+    details[open] summary::before { content: "\2212"; }
+
+    details div {
+      padding: 0 20px 14px;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    details div code {
+      background: var(--bg);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.82rem;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* Final CTA */
+    .final-cta {
+      text-align: center;
+      padding: 60px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .final-cta h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .final-cta p {
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2rem; }
+      .hero .sub { font-size: 1rem; }
+      .stack-grid { grid-template-columns: 1fr; }
+      .stats-row { gap: 16px; }
+      .container { padding: 0 16px; }
+      .code-block { font-size: 0.82rem; padding: 14px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <h1>A measurable learning loop<br>for AI coding agents</h1>
+      <p class="sub">buildlog captures engineering decisions from AI-assisted work, extracts patterns, selects which rules to surface using Thompson Sampling, renders them to any agent format, and measures whether they reduce mistakes. Open source. MIT licensed.</p>
+      <div class="cta-group">
+        <a href="https://github.com/Peleke/buildlog-template" class="btn btn-primary">GitHub</a>
+        <a href="https://peleke.github.io/buildlog-template/" class="btn btn-secondary">Documentation</a>
+        <a href="https://pypi.org/project/buildlog/" class="btn btn-secondary">PyPI</a>
+      </div>
+      <div class="stats-row" style="justify-content:center;margin-top:28px;">
+        <div class="stat-item"><span class="stat-num">34</span> <span class="stat-label">MCP tools</span></div>
+        <div class="stat-item"><span class="stat-num">1,254</span> <span class="stat-label">tests</span></div>
+        <div class="stat-item"><span class="stat-num">6</span> <span class="stat-label">agent targets</span></div>
+        <div class="stat-item"><span class="stat-num">v0.15</span> <span class="stat-label">on PyPI</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- What is buildlog -->
+  <section>
+    <div class="container">
+      <h2>What is buildlog?</h2>
+      <p>Every AI coding session produces decisions, corrections, and outcomes. Almost all of it is discarded. The next session starts from scratch.</p>
+      <p>buildlog sits between you and your AI agent. It captures structured work trajectories, extracts recurring patterns as rules, and uses a contextual bandit to decide which rules to surface in your agent's instruction set. Then it measures whether that selection reduced mistakes.</p>
+      <p>The core loop is: <strong>capture &rarr; extract &rarr; select &rarr; render &rarr; measure &rarr; update.</strong></p>
+
+      <div class="flow">
+        <span class="highlight">journal entries</span> <span class="arrow">&rarr;</span> extraction pipeline <span class="arrow">&rarr;</span> <span class="highlight">candidate rules</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">&darr;</span><br>
+        Thompson Sampling (Beta-Bernoulli bandit, per-context posteriors)<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">&darr;</span><br>
+        <span class="highlight">selected rules</span> <span class="arrow">&rarr;</span> render to CLAUDE.md / .cursorrules / copilot-instructions.md / ...<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="arrow">&darr;</span><br>
+        experiment: log mistakes <span class="arrow">&rarr;</span> compute RMR <span class="arrow">&rarr;</span> <span class="highlight">update posteriors</span> <span class="arrow">&rarr;</span> loop
+      </div>
+    </div>
+  </section>
+
+  <!-- The Stack -->
+  <section>
+    <div class="container">
+      <h2>The buildlog stack</h2>
+      <div class="stack-grid">
+        <div class="stack-card">
+          <div class="card-title">MCP Server</div>
+          <p>34 tools exposed via Model Context Protocol. Your agent calls buildlog during sessions: log commits, run gauntlet reviews, query bandit state, close feedback loops.</p>
+        </div>
+        <div class="stack-card">
+          <div class="card-title">Thompson Sampling</div>
+          <p>Beta-Bernoulli contextual bandit. Error classes partition the state space. Seed rules start at Beta(3,1). Non-seed at Beta(1,1). ~20 observations per context for meaningful differentiation.</p>
+        </div>
+        <div class="stack-card">
+          <div class="card-title">Extraction Pipeline</div>
+          <p>Regex (fast, free), OpenAI, Anthropic, or Ollama extractors. Semantic deduplication via sentence-transformers or OpenAI embeddings. Pluggable at every stage.</p>
+        </div>
+        <div class="stack-card">
+          <div class="card-title">Review Gauntlet</div>
+          <p>Multi-persona code review system. Security, architecture, testing, performance reviewers. Runs on commits, categorizes by severity, files GitHub issues.</p>
+        </div>
+        <div class="stack-card">
+          <div class="card-title">Experiment Framework</div>
+          <p>Start/stop sessions. Log mistakes with typed error classes. Compute Repeated Mistake Rate across sessions. Statistical measurement, not anecdotes.</p>
+        </div>
+        <div class="stack-card">
+          <div class="card-title">Multi-Agent Render</div>
+          <p>Same knowledge base renders to Claude Code, Cursor, GitHub Copilot, Windsurf, Continue.dev, and VS Code. Switch agents without losing what you learned.</p>
+        </div>
+        <div class="stack-card">
+          <div class="card-title">Global SQLite</div>
+          <p>Single database at ~/.buildlog/buildlog.db. WAL mode for concurrent access. Project isolation via SHA-256 hashed IDs. Legacy JSONL fallback for older installs.</p>
+        </div>
+        <div class="stack-card">
+          <div class="card-title">Pluggable Backends</div>
+          <p>Builtin bandit or qortex for cross-consumer credit propagation and knowledge graph integration. LearningBackend protocol with two shipped adapters.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agent targets -->
+  <section>
+    <div class="container">
+      <h2>Agent targets</h2>
+      <p>One knowledge base. Every agent format. <code>buildlog promote --target &lt;agent&gt;</code> writes learned rules to the file your agent reads.</p>
+      <div class="agent-row">
+        <div class="agent-tag">Claude Code <span class="file">CLAUDE.md</span></div>
+        <div class="agent-tag">Cursor <span class="file">.cursorrules</span></div>
+        <div class="agent-tag">GitHub Copilot <span class="file">copilot-instructions.md</span></div>
+        <div class="agent-tag">Windsurf <span class="file">.windsurfrules</span></div>
+        <div class="agent-tag">Continue.dev <span class="file">.continue/rules.md</span></div>
+        <div class="agent-tag">VS Code <span class="file">settings.json</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Install -->
+  <section>
+    <div class="container">
+      <h2>Get started</h2>
+
+      <h3>Global mode (recommended)</h3>
+      <p>One install, works in every project. Claude Code gets all 34 buildlog tools in every session.</p>
+      <div class="code-block">
+        <span class="prompt">$ </span>uv tool install buildlog      <span class="comment"># or: pipx install buildlog</span><br>
+        <span class="prompt">$ </span>buildlog init-mcp --global -y
+      </div>
+
+      <h3>Per-project</h3>
+      <div class="code-block">
+        <span class="prompt">$ </span>uv pip install buildlog<br>
+        <span class="prompt">$ </span>buildlog init --defaults
+      </div>
+
+      <h3>With extras</h3>
+      <div class="code-block">
+        <span class="prompt">$ </span>uv pip install "buildlog[all]"<br>
+        <span class="comment"># or pick: [embeddings] [openai] [anthropic] [ollama] [qortex]</span>
+      </div>
+
+      <h3>Verify</h3>
+      <div class="code-block">
+        <span class="prompt">$ </span>buildlog mcp-test     <span class="comment"># 34 tools registered</span><br>
+        <span class="prompt">$ </span>buildlog overview      <span class="comment"># project state</span>
+      </div>
+
+      <p style="margin-top:20px;">Python 3.10+. The qortex backend requires 3.11+.</p>
+    </div>
+  </section>
+
+  <!-- Current limits -->
+  <section>
+    <div class="container">
+      <h2>Current limits</h2>
+      <p>v0.15 ships the full capture-extract-select-render-measure loop. These are the open problems:</p>
+      <p><strong>Extraction quality is uneven.</strong> Regex extractors miss nuance. LLM extractors are accurate but expensive. The middle ground is still being found.</p>
+      <p><strong>Feedback signals are coarse.</strong> Repeated Mistake Rate works but requires manual tagging. Richer automatic signals (test outcomes, review results, revision distance) are on the roadmap.</p>
+      <p><strong>Credit assignment is limited.</strong> When multiple rules are active, the system does not yet isolate which one was responsible for an outcome.</p>
+      <p><strong>Single-agent only.</strong> Shared learning across multiple agents in the same session is designed but not implemented.</p>
+      <p>See the <a href="https://peleke.github.io/buildlog-template/roadmap/" style="color:var(--accent);">roadmap</a> for what's next: embedding persistence via sqlite-vec, cross-project convergence, and emergent rule graphs.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="container">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>How is this different from editing CLAUDE.md by hand?</summary>
+        <div><p>Manual editing is the starting point. buildlog adds the rest: extracting patterns from real work instead of guessing, selecting which rules to include based on observed outcomes instead of intuition, measuring whether they reduce mistakes, and demoting rules that don't. Manual curation does not self-correct.</p></div>
+      </details>
+
+      <details>
+        <summary>Does this require an API key?</summary>
+        <div><p>No. The base install uses regex extraction and local computation. LLM-backed extraction (OpenAI, Anthropic, Ollama) is available via optional extras for richer patterns, but the core loop runs without any external calls.</p></div>
+      </details>
+
+      <details>
+        <summary>How many observations before the bandit is useful?</summary>
+        <div><p>Seed rules start with boosted priors of Beta(3,1), reflecting the expectation that curated rules are more likely to be effective. With ~20 observations per context, you get meaningful differentiation. The system is deliberately conservative with limited data.</p></div>
+      </details>
+
+      <details>
+        <summary>What data leaves my machine?</summary>
+        <div><p>Nothing, by default. Everything is in <code>~/.buildlog/buildlog.db</code> (local SQLite). If you enable LLM extraction via an API key, extraction prompts go to the provider you chose. The bandit, experiments, and core loop are entirely local.</p></div>
+      </details>
+
+      <details>
+        <summary>Can I use this without Claude Code?</summary>
+        <div><p>Yes. The MCP server is Claude Code-native, but rule rendering works for Cursor, Copilot, Windsurf, Continue.dev, and VS Code. The CLI works standalone: <code>buildlog commit</code>, <code>buildlog experiment start</code>, <code>buildlog promote --target cursor</code>.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <div class="final-cta">
+    <div class="container">
+      <h2>Open source. MIT licensed. On PyPI.</h2>
+      <div class="code-block" style="margin-bottom:24px;">
+        <span class="prompt">$ </span>uv tool install buildlog<br>
+        <span class="prompt">$ </span>buildlog init-mcp --global -y
+      </div>
+      <div class="cta-group">
+        <a href="https://github.com/Peleke/buildlog-template" class="btn btn-primary">GitHub</a>
+        <a href="https://peleke.github.io/buildlog-template/" class="btn btn-secondary">Documentation</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>Built by <a href="https://github.com/Peleke">Peleke</a> &middot; <a href="https://github.com/Peleke/buildlog-template">Source</a> &middot; <a href="https://pypi.org/project/buildlog/">PyPI</a> &middot; MIT License</p>
+    </div>
+  </footer>
+
+</body>
+</html>
