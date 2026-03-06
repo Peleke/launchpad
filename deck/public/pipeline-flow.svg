@@ -1,0 +1,77 @@
+<svg viewBox="0 0 620 370" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px;">
+  <defs>
+    <filter id="roughen-loop" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="22"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <marker id="arr-loop" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="6" markerHeight="5" orient="auto" fill="none" stroke="#4DCFC9" stroke-width="1.2" stroke-linecap="round">
+      <path d="M 1,1 L 8,4 L 1,7"/>
+    </marker>
+    <marker id="arr-loop-g" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="6" markerHeight="5" orient="auto" fill="none" stroke="#4ade80" stroke-width="1.2" stroke-linecap="round">
+      <path d="M 1,1 L 8,4 L 1,7"/>
+    </marker>
+  </defs>
+
+  <!-- Dashed circle track -->
+  <circle cx="310" cy="180" r="142" fill="none" stroke="#4DCFC9" stroke-width="1" stroke-dasharray="6,4" opacity="0.08"/>
+
+  <!-- Node 1: signal-scan (top center) -->
+  <g filter="url(#roughen-loop)">
+    <rect x="266" y="22" width="88" height="32" rx="6" fill="rgba(77,207,201,0.15)" stroke="#4DCFC9" stroke-width="1.5"/>
+    <text x="310" y="43" text-anchor="middle" font-family="'Fira Code',monospace" font-size="11.5" fill="#4DCFC9">signal-scan</text>
+  </g>
+
+  <!-- Arrow 1→2 -->
+  <path d="M 354,43 C 382,48 405,60 415,75" stroke="#4DCFC9" stroke-width="1" fill="none" marker-end="url(#arr-loop)" opacity="0.4"/>
+
+  <!-- Node 2: decision-log (top-right) -->
+  <g filter="url(#roughen-loop)">
+    <rect x="378" y="75" width="92" height="32" rx="6" fill="rgba(77,207,201,0.08)" stroke="#4DCFC9" stroke-width="1" opacity="0.7"/>
+    <text x="424" y="96" text-anchor="middle" font-family="'Fira Code',monospace" font-size="11.5" fill="#8b949e">decision-log</text>
+  </g>
+
+  <!-- Arrow 2→3 -->
+  <path d="M 465,107 C 478,138 480,168 470,195" stroke="#4DCFC9" stroke-width="1" fill="none" marker-end="url(#arr-loop)" opacity="0.4"/>
+
+  <!-- Node 3: persona-extract (right) -->
+  <g filter="url(#roughen-loop)">
+    <rect x="392" y="195" width="112" height="32" rx="6" fill="rgba(77,207,201,0.08)" stroke="#4DCFC9" stroke-width="1" opacity="0.7"/>
+    <text x="448" y="216" text-anchor="middle" font-family="'Fira Code',monospace" font-size="11.5" fill="#8b949e">persona-extract</text>
+  </g>
+
+  <!-- Arrow 3→4 -->
+  <path d="M 448,227 C 435,258 420,280 410,292" stroke="#4DCFC9" stroke-width="1" fill="none" marker-end="url(#arr-loop)" opacity="0.4"/>
+
+  <!-- Node 4: offer-scope (bottom-right) -->
+  <g filter="url(#roughen-loop)">
+    <rect x="325" y="292" width="86" height="32" rx="6" fill="rgba(77,207,201,0.08)" stroke="#4DCFC9" stroke-width="1" opacity="0.7"/>
+    <text x="368" y="313" text-anchor="middle" font-family="'Fira Code',monospace" font-size="11.5" fill="#8b949e">offer-scope</text>
+  </g>
+
+  <!-- Arrow 4→5 -->
+  <path d="M 325,308 C 308,316 292,316 279,308" stroke="#4DCFC9" stroke-width="1" fill="none" marker-end="url(#arr-loop)" opacity="0.4"/>
+
+  <!-- Node 5: pitch (bottom-left) -->
+  <g filter="url(#roughen-loop)">
+    <rect x="231" y="292" width="48" height="32" rx="6" fill="rgba(77,207,201,0.08)" stroke="#4DCFC9" stroke-width="1" opacity="0.7"/>
+    <text x="255" y="313" text-anchor="middle" font-family="'Fira Code',monospace" font-size="11.5" fill="#8b949e">pitch</text>
+  </g>
+
+  <!-- Arrow 5→6 -->
+  <path d="M 231,308 C 218,280 202,255 190,227" stroke="#4DCFC9" stroke-width="1" fill="none" marker-end="url(#arr-loop)" opacity="0.4"/>
+
+  <!-- Node 6: assets (left) -->
+  <g filter="url(#roughen-loop)">
+    <rect x="120" y="195" width="64" height="32" rx="6" fill="rgba(77,207,201,0.08)" stroke="#4DCFC9" stroke-width="1" opacity="0.7"/>
+    <text x="152" y="216" text-anchor="middle" font-family="'Fira Code',monospace" font-size="11.5" fill="#8b949e">assets</text>
+  </g>
+
+  <!-- Arrow 6→7 (green transition) -->
+  <path d="M 148,195 C 142,165 148,138 162,107" stroke="#4ade80" stroke-width="1.2" fill="none" marker-end="url(#arr-loop-g)" opacity="0.5"/>
+
+  <!-- Node 7: assess (top-left, terminal, GREEN) -->
+  <g filter="url(#roughen-loop)">
+    <rect x="128" y="75" width="68" height="32" rx="6" fill="rgba(78,222,128,0.18)" stroke="#4ade80" stroke-width="2"/>
+    <text x="162" y="96" text-anchor="middle" font-family="'Fira Code',monospace" font-size="11.5" fill="#4ade80" font-weight="600">assess</text>
+  </g>
+</svg>

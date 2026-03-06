@@ -20,7 +20,7 @@
     <text x="140" y="70" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#eee0cc" font-weight="700">Gate 1</text>
     <text x="140" y="95" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#8b949e">Week 1</text>
     <text x="140" y="140" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#facc15">&lt;50 LinkedIn</text>
-    <text x="140" y="185" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#facc15">AND &lt;20 HN</text>
+    <text x="140" y="185" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#facc15">AND &lt;20 Reddit</text>
     <text x="140" y="220" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#eee0cc">= reassess format</text>
     <circle cx="140" cy="255" r="16" fill="rgba(250,204,21,0.3)" stroke="#facc15" stroke-width="2"/>
     <text x="140" y="260" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#facc15">YELLOW</text>
@@ -47,8 +47,8 @@
     <text x="610" y="185" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#f87171">conversations</text>
     <text x="610" y="210" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#f87171">in 45 days</text>
     <text x="610" y="240" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#f87171" font-weight="700">= KILL offer</text>
-    <circle class="red-light-2" cx="610" cy="268" r="16" fill="rgba(248,113,113,0.3)" stroke="#f87171" stroke-width="2"/>
-    <text x="610" y="273" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#f87171">RED</text>
+    <circle class="red-light-2" cx="610" cy="258" r="16" fill="rgba(248,113,113,0.3)" stroke="#f87171" stroke-width="2"/>
+    <text x="610" y="263" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#f87171">RED</text>
   </g>
   <!-- Bottom note -->
   <text x="360" y="330" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#8b949e">If a gate fires, stop spending. No sunk cost exceptions.</text>

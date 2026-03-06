@@ -30,14 +30,87 @@ h1 { font-weight: 800; }
   font-family: 'Inter', system-ui, sans-serif;
 }
 
+/* Blockquote readability — aggressive overrides for Slidev default theme */
+.slidev-layout blockquote,
+.slidev-page blockquote,
 blockquote {
-  border-left: 3px solid #4DCFC9;
-  padding: 8px 16px;
-  background: rgba(77,207,201,0.06);
-  border-radius: 0 6px 6px 0;
+  border-left: 3px solid #4DCFC9 !important;
+  padding: 12px 20px !important;
+  margin: 12px 0 !important;
+  background: rgba(13,17,23,0.95) !important;
+  border-radius: 0 6px 6px 0 !important;
+  color: #e6edf3 !important;
 }
-blockquote p { color: #e6edf3; font-style: italic; }
-blockquote cite { color: #8b949e; font-size: 0.8rem; }
+.slidev-layout blockquote p,
+.slidev-page blockquote p,
+blockquote p {
+  color: #e6edf3 !important;
+  font-style: italic;
+  margin: 0 0 4px 0 !important;
+  background: transparent !important;
+}
+.slidev-layout blockquote cite,
+blockquote cite {
+  color: #4DCFC9 !important;
+  font-size: 0.85rem;
+  font-style: normal;
+  display: block;
+  margin-top: 6px;
+}
+blockquote cite a {
+  color: #4DCFC9 !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+blockquote cite a:hover {
+  color: #eee0cc !important;
+}
+
+/* Table styling — header vs rows */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table th {
+  color: #4DCFC9 !important;
+  font-weight: 700;
+  font-size: 1.05em;
+  border-bottom: 2px solid rgba(77,207,201,0.3) !important;
+  padding: 8px 12px !important;
+  text-align: left;
+}
+table td {
+  color: #e6edf3 !important;
+  padding: 6px 12px !important;
+  border-bottom: 1px solid rgba(238,224,204,0.08) !important;
+}
+table a {
+  color: #4DCFC9 !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+table a:hover {
+  color: #eee0cc !important;
+}
+
+/* Inline code in tables and body */
+code {
+  background: rgba(77,207,201,0.10) !important;
+  color: #4DCFC9 !important;
+  padding: 2px 6px !important;
+  border-radius: 3px !important;
+  font-size: 0.85em;
+}
+
+/* SWOT proceed verdict line */
+.proceed-verdict {
+  text-align: center;
+  color: #4ade80 !important;
+  font-weight: 800;
+  font-size: 2.5rem;
+  margin-top: 24px;
+  letter-spacing: 0.06em;
+}
 
 /* v-click animation overrides — slide up + fade instead of just opacity */
 .slidev-vclick-target {
@@ -56,11 +129,13 @@ blockquote cite { color: #8b949e; font-size: 0.8rem; }
 }
 
 /* SVG images fade + scale in */
-.slidev-vclick-target img {
+.slidev-vclick-target img,
+.slidev-vclick-target object {
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
-.slidev-vclick-hidden img {
+.slidev-vclick-hidden img,
+.slidev-vclick-hidden object {
   opacity: 0 !important;
   transform: scale(0.96);
 }

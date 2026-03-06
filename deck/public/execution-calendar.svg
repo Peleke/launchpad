@@ -36,7 +36,7 @@
     <circle cx="230" cy="130" r="18" fill="rgba(77,207,201,0.20)" stroke="#4DCFC9" stroke-width="2.5"/>
     <text x="230" y="134" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#eee0cc">Wk 4</text>
     <text x="230" y="170" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#4DCFC9" font-weight="700">Article 1</text>
-    <text x="230" y="188" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">+ HN + Reddit</text>
+    <text x="230" y="188" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">+ LinkedIn + Reddit</text>
   </g>
   <!-- Milestone 3: Weeks 5-7 -->
   <g filter="url(#roughen-10)">
@@ -64,5 +64,19 @@
     <path d="M 660,95 L 660,107" stroke="#f87171" stroke-width="2" stroke-dasharray="4,3"/>
   </g>
   <!-- Bottom label -->
-  <text x="390" y="270" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc" opacity="0.6">8 weeks: warm-up → publish → pilot → kill-or-scale</text>
+  <!-- Bottom flow summary -->
+  <g opacity="0.7">
+    <text x="100" y="267" text-anchor="middle" font-family="'Inter',sans-serif" font-size="11" fill="#8b949e" font-weight="600">8 weeks</text>
+    <rect x="132" y="254" width="72" height="22" rx="4" fill="rgba(77,207,201,0.08)" stroke="#4DCFC9" stroke-width="0.8"/>
+    <text x="168" y="269" text-anchor="middle" font-family="'Fira Code',monospace" font-size="9" fill="#4DCFC9">warm-up</text>
+    <polygon points="210,262 216,265 210,268" fill="#4DCFC9" opacity="0.5"/>
+    <rect x="224" y="254" width="64" height="22" rx="4" fill="rgba(77,207,201,0.08)" stroke="#4DCFC9" stroke-width="0.8"/>
+    <text x="256" y="269" text-anchor="middle" font-family="'Fira Code',monospace" font-size="9" fill="#4DCFC9">publish</text>
+    <polygon points="294,262 300,265 294,268" fill="#4DCFC9" opacity="0.5"/>
+    <rect x="308" y="254" width="52" height="22" rx="4" fill="rgba(77,207,201,0.08)" stroke="#4DCFC9" stroke-width="0.8"/>
+    <text x="334" y="269" text-anchor="middle" font-family="'Fira Code',monospace" font-size="9" fill="#4DCFC9">pilot</text>
+    <polygon points="366,262 372,265 366,268" fill="#4DCFC9" opacity="0.5"/>
+    <rect x="380" y="254" width="96" height="22" rx="4" fill="rgba(248,113,113,0.08)" stroke="#f87171" stroke-width="0.8"/>
+    <text x="428" y="269" text-anchor="middle" font-family="'Fira Code',monospace" font-size="9" fill="#f87171">kill-or-scale</text>
+  </g>
 </svg>

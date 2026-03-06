@@ -31,7 +31,7 @@
     <text x="540" y="105" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Ambient content</text>
     <text x="540" y="128" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">6.60% carousels</text>
     <text x="540" y="151" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">4.2x revenue/hour</text>
-    <text x="540" y="174" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Open-source ownership</text>
+    <text x="540" y="174" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Open-core ownership</text>
   </g>
   <!-- Bottom-left: ANXIETY -->
   <g filter="url(#roughen-5)" transform="rotate(0.4, 180, 290)">
@@ -51,9 +51,9 @@
     <text x="540" y="328" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#8b949e">Free alternatives exist</text>
   </g>
   <!-- Arrow from ANXIETY to callout -->
-  <path d="M 335,280 C 380,280 420,395 460,395" stroke="#f87171" stroke-width="2" fill="none" stroke-dasharray="6,4" marker-end="url(#arrow-5a)"/>
+  <path d="M 335,280 C 355,285 345,390 365,395" stroke="#f87171" stroke-width="2" fill="none" stroke-dasharray="6,4" marker-end="url(#arrow-5a)"/>
   <g filter="url(#glow-5)">
-    <path d="M 460,380 C 463,377 697,376 700,380 C 703,383 704,413 700,415 C 697,418 463,419 460,415 C 457,412 457,383 460,380 Z" fill="rgba(77,207,201,0.15)" stroke="#4DCFC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="580" y="403" text-anchor="middle" font-family="'Inter', sans-serif" font-size="17" fill="#4DCFC9" font-weight="700">Key unlock: run it on itself</text>
+    <path d="M 365,380 C 368,377 707,376 710,380 C 713,383 714,413 710,415 C 707,418 368,419 365,415 C 362,412 362,383 365,380 Z" fill="rgba(77,207,201,0.15)" stroke="#4DCFC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="537" y="403" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#4DCFC9" font-weight="700">Antidote: every claim backed by receipts</text>
   </g>
 </svg>

@@ -1,0 +1,30 @@
+<svg viewBox="0 0 560 44" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:560px;">
+  <defs>
+    <filter id="roughen-sub" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="42"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <marker id="arr-sub" viewBox="0 0 10 8" refX="9" refY="4" markerWidth="5" markerHeight="4" orient="auto" fill="none" stroke="#4DCFC9" stroke-width="1" stroke-linecap="round">
+      <path d="M 1,1 L 8,4 L 1,7"/>
+    </marker>
+  </defs>
+  <g filter="url(#roughen-sub)" opacity="0.7">
+    <rect x="0" y="8" width="82" height="28" rx="5" fill="rgba(77,207,201,0.12)" stroke="#4DCFC9" stroke-width="1"/>
+    <text x="41" y="27" text-anchor="middle" font-family="'Fira Code',monospace" font-size="9.5" fill="#4DCFC9">signal-scan</text>
+    <line x1="86" y1="22" x2="96" y2="22" stroke="#4DCFC9" stroke-width="0.8" marker-end="url(#arr-sub)" opacity="0.5"/>
+    <rect x="102" y="8" width="82" height="28" rx="5" fill="rgba(77,207,201,0.06)" stroke="#4DCFC9" stroke-width="0.8" opacity="0.6"/>
+    <text x="143" y="27" text-anchor="middle" font-family="'Fira Code',monospace" font-size="9.5" fill="#8b949e">decision-log</text>
+    <line x1="188" y1="22" x2="198" y2="22" stroke="#4DCFC9" stroke-width="0.8" marker-end="url(#arr-sub)" opacity="0.5"/>
+    <rect x="204" y="8" width="100" height="28" rx="5" fill="rgba(77,207,201,0.06)" stroke="#4DCFC9" stroke-width="0.8" opacity="0.6"/>
+    <text x="254" y="27" text-anchor="middle" font-family="'Fira Code',monospace" font-size="9.5" fill="#8b949e">persona-extract</text>
+    <line x1="308" y1="22" x2="318" y2="22" stroke="#4DCFC9" stroke-width="0.8" marker-end="url(#arr-sub)" opacity="0.5"/>
+    <rect x="324" y="8" width="80" height="28" rx="5" fill="rgba(77,207,201,0.06)" stroke="#4DCFC9" stroke-width="0.8" opacity="0.6"/>
+    <text x="364" y="27" text-anchor="middle" font-family="'Fira Code',monospace" font-size="9.5" fill="#8b949e">offer-scope</text>
+    <line x1="408" y1="22" x2="418" y2="22" stroke="#4DCFC9" stroke-width="0.8" marker-end="url(#arr-sub)" opacity="0.5"/>
+    <rect x="424" y="8" width="48" height="28" rx="5" fill="rgba(77,207,201,0.06)" stroke="#4DCFC9" stroke-width="0.8" opacity="0.6"/>
+    <text x="448" y="27" text-anchor="middle" font-family="'Fira Code',monospace" font-size="9.5" fill="#8b949e">pitch</text>
+    <line x1="476" y1="22" x2="486" y2="22" stroke="#4DCFC9" stroke-width="0.8" marker-end="url(#arr-sub)" opacity="0.5"/>
+    <rect x="492" y="8" width="56" height="28" rx="5" fill="rgba(77,207,201,0.12)" stroke="#4DCFC9" stroke-width="1"/>
+    <text x="520" y="27" text-anchor="middle" font-family="'Fira Code',monospace" font-size="9.5" fill="#4DCFC9">assets</text>
+  </g>
+</svg>

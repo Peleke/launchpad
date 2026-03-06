@@ -9,6 +9,10 @@
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
+  <style>
+    .tier-link { cursor: pointer; }
+    .tier-link:hover text { fill: #eee0cc !important; }
+  </style>
   <!-- Tier 1: Article Series -->
   <g filter="url(#roughen-6)">
     <path d="M 15,30 C 18,27 222,26 225,30 C 228,33 229,258 225,260 C 222,263 18,264 15,260 C 12,257 12,33 15,30 Z" fill="rgba(78,222,128,0.06)" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -25,9 +29,11 @@
   <g filter="url(#roughen-6)">
     <path d="M 258,30 C 261,27 472,26 475,30 C 478,33 479,258 475,260 C 472,263 261,264 258,260 C 255,257 255,33 258,30 Z" fill="rgba(77,207,201,0.06)" stroke="#4DCFC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     <text x="366" y="60" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#4DCFC9" font-weight="700">Open-Source</text>
-    <text x="366" y="90" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">LinWheel pipeline</text>
-    <text x="366" y="114" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">buildlog integration</text>
-    <text x="366" y="138" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Skills framework</text>
+    <a class="tier-link" href="https://github.com/Peleke/buildlog-rs" target="_blank">
+      <text x="366" y="90" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#4DCFC9" text-decoration="underline">Buildlog sprint records</text>
+    </a>
+    <text x="366" y="114" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">&#8594; content skills pipeline</text>
+    <text x="366" y="138" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Hunter pipeline skills</text>
     <text x="366" y="162" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Fork and own it</text>
     <line x1="295" y1="190" x2="437" y2="190" stroke="#4DCFC9" stroke-width="1" opacity="0.3"/>
     <text x="366" y="220" text-anchor="middle" font-family="'Inter', sans-serif" font-size="28" fill="#4DCFC9" font-weight="700">FREE</text>
@@ -40,8 +46,10 @@
     </g>
     <text x="615" y="60" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#4DCFC9" font-weight="700">Managed Pilot</text>
     <text x="615" y="90" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Done-for-you setup</text>
-    <text x="615" y="114" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Custom voice training</text>
-    <text x="615" y="138" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">30-day pipeline build</text>
+    <a class="tier-link" href="https://github.com/Peleke/linwheel" target="_blank">
+      <text x="615" y="114" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#4DCFC9" text-decoration="underline">LinWheel + voice training</text>
+    </a>
+    <text x="615" y="138" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Custom pipeline build</text>
     <text x="615" y="162" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Ongoing optimization</text>
     <line x1="542" y1="190" x2="688" y2="190" stroke="#4DCFC9" stroke-width="1" opacity="0.3"/>
     <text x="615" y="218" text-anchor="middle" font-family="'Inter', sans-serif" font-size="24" fill="#4DCFC9" font-weight="700">$3-5K setup</text>

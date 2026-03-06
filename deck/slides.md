@@ -21,10 +21,7 @@ fonts:
 
 <v-click>
 <p class="text-2xl teal">Validation Summary — 2026-03-06</p>
-</v-click>
-
-<v-click>
-<p class="muted text-sm mt-8">Hunter Pipeline: signal-scan → decision-log → persona-extract → offer-scope → pitch → assets</p>
+<img src="/pipeline-subtitle.svg" style="width:100%;max-width:560px;margin:24px auto 0;display:block;opacity:0.7;" />
 </v-click>
 
 <!--
@@ -46,7 +43,7 @@ transition: slide-up
 </v-click>
 
 <!--
-Left side is fragmented point tools. Jasper writes. Taplio schedules. Castmagic repurposes. Skott blasts volume slop for $2K/mo. Not one of them handles the full pipeline: research, write, reshape, publish, measure, iterate. That's the gap. 73% of AI automations fail because they automate a fragment instead of the loop. Source: Salesforce.
+Left side is fragmented point tools. Jasper writes. Taplio schedules. Castmagic repurposes. Skott blasts volume slop for $2K/mo. Not one of them handles the full pipeline: research, write, reshape, publish, measure, iterate. That's the gap. 65% of AI agent tasks fail because they automate a fragment instead of the loop. Source: Salesforce CRMArena-Pro.
 -->
 
 ---
@@ -56,11 +53,11 @@ transition: fade
 ## Evidence Wall
 
 <v-click>
-<img src="/evidence-wall.svg" style="width:100%;max-width:720px;margin:0 auto;display:block;" />
+<object data="/evidence-wall.svg" type="image/svg+xml" style="width:100%;max-width:720px;margin:0 auto;display:block;"></object>
 </v-click>
 
 <!--
-Six stats from the signal scan. 250K+ OpenClaw stars means massive adoption. 1 in 5 skills malicious means trust is broken at scale. 20% auto-activation means skills run without the user knowing. 6.60% carousel engagement rate on LinkedIn is 3x the text-post average — that's the format play. 73% AI automation failure rate is Salesforce's own number. $2K/mo for volume slop from Skott and Artisan proves there's real spend but terrible output.
+Six stats from the signal scan. 250K+ OpenClaw stars means massive adoption. 1 in 5 skills malicious means trust is broken at scale (aikido.dev audit). ~20% auto-activation means skills run without the user knowing (Scott Spence). 6.60% carousel engagement rate on LinkedIn is 3x the text-post average — that's the format play. 65% AI agent task failure rate is from Salesforce's CRMArena-Pro benchmark. $2K/mo for volume slop from Skott and Artisan proves there's real spend but terrible output.
 -->
 
 ---
@@ -71,7 +68,7 @@ Six stats from the signal scan. 250K+ OpenClaw stars means massive adoption. 1 i
 
 > "I only have one computer... it makes me very nervous give AI control of my computer"
 >
-> <cite>— u/Mindless-Fly2086, r/openclaw</cite>
+> <cite>— <a href="https://www.reddit.com/r/openclaw/comments/1r8uebh/" target="_blank">u/Mindless-Fly2086</a>, r/openclaw</cite>
 
 </v-click>
 
@@ -79,7 +76,7 @@ Six stats from the signal scan. 250K+ OpenClaw stars means massive adoption. 1 i
 
 > "The number of people whose answer to 'what are you going to do with your openclaw agent?' is 'I dunno, maybe trading' is genuinely disheartening"
 >
-> <cite>— u/Polite_Jello_377, r/openclaw</cite>
+> <cite>— <a href="https://www.reddit.com/r/openclaw/comments/1r8uebh/" target="_blank">u/Polite_Jello_377</a>, r/openclaw</cite>
 
 </v-click>
 
@@ -87,7 +84,7 @@ Six stats from the signal scan. 250K+ OpenClaw stars means massive adoption. 1 i
 
 > "Basically a coin flip. Claude Code skills just sit there."
 >
-> <cite>— Scott Spence, scottspence.com</cite>
+> <cite>— <a href="https://scottspence.com/posts/claude-code-skills" target="_blank">Scott Spence</a>, scottspence.com</cite>
 
 </v-click>
 
@@ -102,7 +99,7 @@ transition: slide-up
 ## SDP Scoring
 
 <v-click>
-<img src="/sdp-scoring.svg" style="width:100%;max-width:700px;margin:0 auto;display:block;" />
+<object data="/sdp-scoring.svg" type="image/svg+xml" style="width:100%;max-width:700px;margin:0 auto;display:block;"></object>
 </v-click>
 
 <!--
@@ -132,7 +129,7 @@ transition: fade
 </v-click>
 
 <!--
-Push is strong: $2K/mo slop, 20% auto-activation, 1/5 malicious skills, the content treadmill. Pull is strong: ambient content that doesn't feel automated, 6.60% carousel engagement, 4.2x revenue per hour of content work, and you own the pipeline because it's open source. Anxiety is the blocker: burned before, security fears, complexity overwhelm, brand risk from publishing slop. Habit is real: manual works barely, ChatGPT handles 80%, free alternatives exist. Key unlock: run the pipeline on itself so the proof is the product.
+Push is strong: $2K/mo slop, 20% auto-activation, 1/5 malicious skills, the content treadmill. Pull is strong: ambient content that doesn't feel automated, 6.60% carousel engagement, 4.2x revenue per hour of content work, and you own the pipeline because it's open-core. Anxiety is the blocker: burned before, security fears, complexity overwhelm, brand risk from publishing slop. Habit is real: manual works barely, ChatGPT handles 80%, free alternatives exist. Anxiety antidote: every claim backed by receipts — articles are the proof, artifacts are the evidence.
 -->
 
 ---
@@ -142,11 +139,11 @@ transition: slide-up
 ## Three Tiers
 
 <v-click>
-<img src="/three-tiers.svg" style="width:100%;max-width:740px;margin:0 auto;display:block;" />
+<object data="/three-tiers.svg" type="image/svg+xml" style="width:100%;max-width:740px;margin:0 auto;display:block;"></object>
 </v-click>
 
 <!--
-Three tiers, two of them free. The article series is four deep-dives that build credibility. The open-source pipeline (LinWheel + buildlog + skills framework) builds trust — fork it, own it, no lock-in. The managed pilot is the revenue tier: $3-5K setup for a done-for-you pipeline build plus $1K/mo ongoing optimization. Free tiers exist to earn the right to charge for the third.
+Three tiers, two of them free. The article series is four deep-dives that build credibility. The open-source pipeline (hunter skills + buildlog sprint-to-content workflow) builds trust — fork it, own it, no lock-in. The managed pilot is the revenue tier: $3-5K setup for a done-for-you pipeline build including LinWheel content automation and voice training, plus $1K/mo ongoing optimization. Free tiers exist to earn the right to charge for the third.
 -->
 
 ---
@@ -156,9 +153,9 @@ Three tiers, two of them free. The article series is four deep-dives that build 
 <v-click>
 
 | # | Article | What It Proves |
-|---|---|---|
+|:--|:--------|:---------------|
 | 1 | **Architecture Deep-Dive** | How the pipeline actually works, end to end |
-| 2 | **Security & Sandboxing** | Bilrost + STRIDE — why trust is engineered, not claimed |
+| 2 | **Security & Sandboxing** | [Bilrost](https://github.com/Peleke/bilrost) + STRIDE — trust is engineered |
 | 3 | **Recursive Proof** | Pipeline ran on itself to generate this deck |
 | 4 | **Results & Retrospective** | Numbers, failures, what we'd change |
 
@@ -197,7 +194,7 @@ transition: fade
 </v-click>
 
 <!--
-Two axes: price and integration depth. Bottom-left is Jasper at $49-129 (writes only). Taplio at $39-149 (schedules only). Castmagic at $30+ (repurposes only). Top-right expensive quadrant has Skott at $1,999/mo for volume slop and Artisan at $2,000/mo for SDR with zero replies. ACE sits top-left: full integration depth at free to $5K. The positioning is open-source full-loop vs. expensive single-step.
+Two axes: price and integration depth. Bottom-left is Jasper at $49-129 (writes only). Taplio at $39-149 (schedules only). Castmagic at $30+ (repurposes only). Top-right expensive quadrant has Skott at $1,999/mo for volume slop and Artisan at $2,000/mo for SDR with zero replies. ACE sits top-left: full integration depth at free to $5K. The positioning is open-source full-loop vs. expensive single-step. All competitor names are clickable links.
 -->
 
 ---
@@ -209,7 +206,7 @@ Two axes: price and integration depth. Bottom-left is Jasper at $49-129 (writes 
 </v-click>
 
 <!--
-Weeks 1-3: LinkedIn warm-up at 3-5 posts per week. Building engagement baseline before articles drop. Week 4: Article 1 drops with simultaneous HN and Reddit submissions. Weeks 5-7: Articles 2-4 on a weekly cadence. Week 8+: Managed pilot outreach begins, only after the article series proves traction. Month 3: kill decision. Eight weeks from warmup to pipeline or kill.
+Weeks 1-3: LinkedIn warm-up at 3-5 posts per week. Building engagement baseline before articles drop. Week 4: Article 1 drops with LinkedIn article + Reddit cross-posts to r/openclaw, r/ClaudeAI, r/indiehackers. Weeks 5-7: Articles 2-4 on a weekly cadence. Week 8+: Managed pilot outreach begins, only after the article series proves traction. Month 3: kill decision. Eight weeks from warmup to pipeline or kill.
 -->
 
 ---
@@ -223,31 +220,25 @@ transition: slide-up
 </v-click>
 
 <!--
-Three gates with hard thresholds. Gate 1 at week 1: fewer than 50 LinkedIn impressions AND fewer than 20 HN upvotes means the format is wrong — reassess. Gate 2 at month 1: zero inbound inquiries in 14 days after Article 1 means nobody cares — kill the pipeline. Gate 3 at month 3: zero pilot conversations in 45 days means the offer is wrong — kill it entirely. No sunk cost exceptions.
+Three gates with hard thresholds. Gate 1 at week 1: fewer than 50 LinkedIn impressions AND fewer than 20 Reddit upvotes means the format is wrong — reassess. Gate 2 at month 1: zero inbound inquiries in 14 days after Article 1 means nobody cares — kill the pipeline. Gate 3 at month 3: zero pilot conversations in 45 days means the offer is wrong — kill it entirely. No sunk cost exceptions.
 -->
 
 ---
 transition: fade
 ---
 
-## SWOT Verdict: PROCEED WITH MODIFICATIONS
+## SWOT Verdict
 
 <v-click>
-
-1. **Publish articles before building managed service** — credibility is the prerequisite
-2. **Open-source the pipeline** — no lock-in, earn trust through transparency
-3. **Start with LinkedIn carousels** — 6.60% engagement rate is 3x text posts
-4. **Gate the managed pilot on inbound** — no cold outreach until articles prove traction
-5. **Price setup, not SaaS** — $3-5K setup + $1K/mo retainer, not $99/mo commodity
-
+<object data="/swot-verdict.svg" type="image/svg+xml" style="width:100%;max-width:700px;margin:0 auto;display:block;"></object>
 </v-click>
 
 <v-click>
-<p class="muted text-sm mt-4">Proceed = the evidence supports this, with guardrails.</p>
+<p class="proceed-verdict">PROCEED</p>
 </v-click>
 
 <!--
-Five modifications that turn a 54/60 score into an executable plan. The common thread: earn the right to charge by publishing first. Open-source the pipeline so there's no "trust me" in the pitch. Use LinkedIn carousels because the data says they work at 3x text posts. Gate the pilot on inbound so you don't waste time cold-selling before the articles land. Price as setup plus retainer, not SaaS — this is a done-for-you service, not a product.
+Five modifications that turn a 54/60 score into an executable plan. Hover each card for details. The common thread: earn the right to charge by publishing first. Open-source the pipeline so there's no "trust me." Use carousels because the data says 3x text posts. Gate the pilot on inbound. Price as setup plus retainer, not SaaS.
 -->
 
 ---
@@ -259,7 +250,7 @@ Five modifications that turn a 54/60 score into an executable plan. The common t
 </v-click>
 
 <!--
-Four bias checks. Excitement: flagged. Builder building tools for builders is a self-referential trap — watch it. Confirmation: low, because the pain signals come from 5+ independent sources (Reddit, Scott Spence, Salesforce, OpenClaw audits, LinkedIn benchmarks). Availability: moderate, because OpenClaw data is recent and heavily weighted. Anchoring: pass, because the SDP re-scoring held across sessions. The pipeline ran on itself — that's the bias check.
+Four bias checks. Excitement: flagged — builder building tools for builders is a self-referential trap. Confirmation: low — pain signals from 5+ independent sources (Reddit, Scott Spence, Salesforce, OpenClaw audits, LinkedIn benchmarks). Availability: moderate — OpenClaw data is recent and heavily weighted. Anchoring: pass — SDP re-scoring held across sessions.
 -->
 
 ---
@@ -272,16 +263,16 @@ transition: slide-up
 <v-click>
 
 | Milestone | Deadline | Kill Condition |
-|---|---|---|
+|:----------|:---------|:---------------|
 | LinkedIn warm-up (3-5 posts/wk) | Week 3 | &lt;50 impressions |
-| Article 1 + HN + Reddit | Week 4 | Zero inbound in 14 days |
+| Article 1 + LinkedIn + Reddit | Week 4 | Zero inbound in 14 days |
 | Articles 2-4 weekly | Week 7 | Zero engagement growth |
 | First managed pilot signed | Month 3 | Zero pilot conversations in 45 days |
 
 </v-click>
 
 <!--
-Four milestones, four deadlines, four kill conditions. The LinkedIn warm-up is the prerequisite for everything. Article 1 is the real test — if nobody cares after HN and Reddit, the format is wrong. Articles 2-4 need to show engagement growth, not just maintenance. The pilot is the revenue gate: if you can't sign one pilot in 45 days after the articles land, the offer is wrong.
+Four milestones, four deadlines, four kill conditions. The LinkedIn warm-up is the prerequisite for everything. Article 1 is the real test — if nobody cares on LinkedIn and Reddit, the format is wrong. Articles 2-4 need to show engagement growth, not just maintenance. The pilot is the revenue gate: if you can't sign one pilot in 45 days after the articles land, the offer is wrong.
 -->
 
 ---
@@ -291,19 +282,17 @@ transition: fade
 ## Appendix — Asset Map
 
 | Artifact | Location |
-|---|---|
-| Signal Scan | `Signal-Scans/ambient-content-engine.md` |
-| Decision Log | `Decisions/ambient-content-engine.md` |
-| Persona Extract | `Personas/ambient-content-engine.md` |
-| Offer Scope | `Offers/ambient-content-engine.md` |
-| Pitch | `Pitches/ambient-content-engine.md` |
-| Content Seeds | `Content-Briefs/*.md` |
-| LinWheel Pipeline | `github.com/Peleke/linwheel` |
-| buildlog | `github.com/Peleke/buildlog-rs` |
+|:---------|:---------|
+| Signal Scan | `Signal-Scans/` |
+| Decision Log | `Decisions/` |
+| Persona Extract | `Personas/` |
+| Offer Scope | `Offers/` |
+| Pitch | `Pitches/` |
+| Content Seeds | `Content-Briefs/` |
+| [LinWheel](https://github.com/Peleke/linwheel) | github.com/Peleke/linwheel |
+| [buildlog](https://github.com/Peleke/buildlog-rs) | github.com/Peleke/buildlog-rs |
 | This Deck | `launchpad/deck/slides.md` |
-| Kanban | Obsidian vault — Product-Discovery board |
-
-<p class="muted text-sm mt-4">All artifacts generated by the hunter pipeline: signal-scan → decision-log → persona-extract → offer-scope → pitch → assets</p>
+| Kanban | Obsidian vault |
 
 <!--
 Ten artifacts, all traceable. The signal scan fed the decision log, which fed persona extraction, which fed offer scoping, which fed the pitch, which generated this deck and the content seeds. Every artifact is in the Obsidian vault or the launchpad repo. The pipeline is the product.
@@ -314,11 +303,13 @@ layout: center
 transition: fade
 ---
 
-<p class="text-2xl" style="color:#eee0cc;">Built with the Hunter Pipeline.</p>
+<p class="text-2xl" style="color:#eee0cc;font-weight:800;">Built with the Hunter Pipeline.</p>
 
-<p class="teal mt-2 text-lg">Validated by running the pipeline on itself.</p>
+<v-click>
+<img src="/pipeline-flow.svg" style="width:100%;max-width:620px;margin:24px auto;display:block;" />
+</v-click>
 
-<p class="muted text-sm mt-8">2026-03-06</p>
+<p class="muted text-sm mt-6">2026-03-06</p>
 
 <!--
 The pipeline that generated this deck is the same pipeline being sold. The Ambient Content Engine wrote the articles, reshaped the carousels, measured the engagement, and produced the validation summary you just watched. If someone asks "does this work," point at this deck.

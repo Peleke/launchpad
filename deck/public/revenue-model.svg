@@ -9,8 +9,8 @@
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <!-- Timeline axis -->
-  <line x1="60" y1="200" x2="680" y2="200" stroke="#eee0cc" stroke-width="1.5" opacity="0.3"/>
+  <!-- Timeline axis — below bars -->
+  <line x1="60" y1="218" x2="680" y2="218" stroke="#eee0cc" stroke-width="1.5" opacity="0.3"/>
   <!-- Months 1-2: $0 -->
   <g filter="url(#roughen-8)">
     <path d="M 80,190 C 83,187 197,186 200,190 C 203,193 204,208 200,210 C 197,213 83,214 80,210 C 77,207 77,193 80,190 Z" fill="rgba(136,136,136,0.08)" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

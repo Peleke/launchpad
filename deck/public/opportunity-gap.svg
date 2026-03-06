@@ -39,7 +39,7 @@
     <rect x="260" y="110" width="220" height="55" rx="8" fill="#0d1117" stroke="none"/>
     <rect x="260" y="110" width="220" height="55" rx="8" fill="rgba(77,207,201,0.12)" stroke="none"/>
     <text x="370" y="135" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" fill="#4DCFC9" font-weight="700">Nobody does the loop</text>
-    <text x="370" y="157" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">73% of AI automations fail — Salesforce</text>
+    <text x="370" y="157" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">65% of AI agent tasks fail — Salesforce CRMArena</text>
   </g>
   <!-- Downward arrow into gap -->
   <path d="M 370,75 C 370,80 368,95 370,105" stroke="#4DCFC9" stroke-width="2" fill="none" marker-end="url(#arrow-gap)"/>

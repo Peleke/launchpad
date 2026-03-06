@@ -1,0 +1,65 @@
+<svg viewBox="0 -40 700 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;">
+  <defs>
+    <filter id="roughen-swot" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="14"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <style>
+    .mod-card { cursor: pointer; }
+    .mod-card .tooltip-box { opacity: 0; transition: opacity 0.2s ease; pointer-events: none; }
+    .mod-card:hover .tooltip-box { opacity: 1; }
+    .mod-card:hover .mod-bg { fill-opacity: 0.22; }
+    .mod-bg { transition: fill-opacity 0.15s ease; }
+  </style>
+  <!-- Card 1: Publish articles first -->
+  <g class="mod-card" filter="url(#roughen-swot)" transform="rotate(-1.2, 350, 30)">
+    <path class="mod-bg" d="M 40,10 C 43,7 657,8 660,10 C 663,13 664,48 660,50 C 657,53 43,52 40,50 C 37,47 37,13 40,10 Z" fill="rgba(77,207,201,0.08)" stroke="#4DCFC9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="60" y="37" font-family="'Inter', sans-serif" font-size="18" fill="#4DCFC9" font-weight="800">1</text>
+    <text x="90" y="37" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc" font-weight="600">Publish articles before building managed service</text>
+    <g class="tooltip-box">
+      <rect x="90" y="-28" width="420" height="28" rx="6" fill="#161b22" stroke="#4DCFC9" stroke-width="1" opacity="0.95"/>
+      <text x="102" y="-9" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">Credibility is the prerequisite &#8212; prove the pipeline works first</text>
+    </g>
+  </g>
+  <!-- Card 2: Open-source -->
+  <g class="mod-card" filter="url(#roughen-swot)" transform="rotate(0.8, 350, 86)">
+    <path class="mod-bg" d="M 40,66 C 43,63 657,64 660,66 C 663,69 664,104 660,106 C 657,109 43,108 40,106 C 37,103 37,69 40,66 Z" fill="rgba(78,222,128,0.06)" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="60" y="93" font-family="'Inter', sans-serif" font-size="18" fill="#4ade80" font-weight="800">2</text>
+    <text x="90" y="93" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc" font-weight="600">Open-source the pipeline</text>
+    <g class="tooltip-box">
+      <rect x="90" y="38" width="380" height="28" rx="6" fill="#161b22" stroke="#4ade80" stroke-width="1" opacity="0.95"/>
+      <text x="102" y="57" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">No lock-in &#8212; earn trust through transparency, fork it and own it</text>
+    </g>
+  </g>
+  <!-- Card 3: LinkedIn carousels -->
+  <g class="mod-card" filter="url(#roughen-swot)" transform="rotate(-0.6, 350, 142)">
+    <path class="mod-bg" d="M 40,122 C 43,119 657,120 660,122 C 663,125 664,160 660,162 C 657,165 43,164 40,162 C 37,159 37,125 40,122 Z" fill="rgba(77,207,201,0.06)" stroke="#4DCFC9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="60" y="149" font-family="'Inter', sans-serif" font-size="18" fill="#4DCFC9" font-weight="800">3</text>
+    <text x="90" y="149" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc" font-weight="600">Start with LinkedIn carousels</text>
+    <g class="tooltip-box">
+      <rect x="90" y="94" width="450" height="28" rx="6" fill="#161b22" stroke="#4DCFC9" stroke-width="1" opacity="0.95"/>
+      <text x="102" y="113" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">6.60% engagement rate is 3x text posts &#8212; lead with the best format</text>
+    </g>
+  </g>
+  <!-- Card 4: Gate on inbound -->
+  <g class="mod-card" filter="url(#roughen-swot)" transform="rotate(1.1, 350, 198)">
+    <path class="mod-bg" d="M 40,178 C 43,175 657,176 660,178 C 663,181 664,216 660,218 C 657,221 43,220 40,218 C 37,215 37,181 40,178 Z" fill="rgba(250,204,21,0.05)" stroke="#facc15" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="60" y="205" font-family="'Inter', sans-serif" font-size="18" fill="#facc15" font-weight="800">4</text>
+    <text x="90" y="205" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc" font-weight="600">Gate the managed pilot on inbound</text>
+    <g class="tooltip-box">
+      <rect x="90" y="150" width="440" height="28" rx="6" fill="#161b22" stroke="#facc15" stroke-width="1" opacity="0.95"/>
+      <text x="102" y="169" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">No cold outreach until articles prove traction &#8212; let the content sell</text>
+    </g>
+  </g>
+  <!-- Card 5: Price setup + SaaS -->
+  <g class="mod-card" filter="url(#roughen-swot)" transform="rotate(-0.9, 350, 254)">
+    <path class="mod-bg" d="M 40,234 C 43,231 657,232 660,234 C 663,237 664,272 660,274 C 657,277 43,276 40,274 C 37,271 37,237 40,234 Z" fill="rgba(78,222,128,0.06)" stroke="#4ade80" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="60" y="261" font-family="'Inter', sans-serif" font-size="18" fill="#4ade80" font-weight="800">5</text>
+    <text x="90" y="261" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc" font-weight="600">Price setup + SaaS</text>
+    <g class="tooltip-box">
+      <rect x="90" y="206" width="460" height="28" rx="6" fill="#161b22" stroke="#4ade80" stroke-width="1" opacity="0.95"/>
+      <text x="102" y="225" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">$3-5K setup + $1K/mo retainer &#8212; done-for-you service with recurring revenue</text>
+    </g>
+  </g>
+</svg>
