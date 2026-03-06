@@ -172,70 +172,47 @@ transition: fade
 </v-click>
 
 ---
+transition: slide-up
+---
 
-## What We Have (Receipts)
-
-<div class="grid grid-cols-2 gap-8 mt-4">
-<div>
-
-<v-click>
-
-### <span class="green">Verified</span>
-
-- Princeton CS, edX Principal ($60MM+ ARR), AWS SA
-- qortex, bilrost, Vindler, qortex-observe, cadence
-- STRIDE threat model + 5 PoC exploits
-- 20+ Agent Skills (buildlog extraction)
-- This entire validation pipeline
-
-</v-click>
-
-</div>
-<div>
+## Revenue Breakdown
 
 <v-click>
 
-### <span class="red">Still Needed</span>
-
-- Published articles (15 drafts in queue)
-- Published STRIDE findings
-- 30 days learning-loop data
-- Course-specific audience (0 today)
-- Testimonials (pre-launch = zero)
+| Stream | Unit Economics | Annual Estimate |
+|---|---|---|
+| **Cohort** (4 runs × 25 seats × $997) | $997/seat | ~$100K |
+| **Enterprise licenses** | team pricing | $30–50K |
+| **STRIDE workshops** (4 × $7.5K) | $497/seat or $7.5K private | ~$30K |
+| **Security audits** (6–8 × $10K) | $5K–15K/engagement | $60–80K |
+| | **Combined** | **$220–260K** |
 
 </v-click>
 
-</div>
-</div>
+<v-click>
+<p class="muted text-sm mt-4">Assumes 4 cohort runs/year with 60% fill rate after founding cohort.</p>
+</v-click>
 
 ---
 layout: center
 transition: slide-up
 ---
 
-## The Ask
-
-<v-click>
-<p class="stat-big">3 articles by April 1.</p>
-</v-click>
-
-<v-click>
-<p class="stat-big" style="font-size:2.2rem;">Workshop by April 15.</p>
-</v-click>
-
-<v-click>
-<p class="stat-big" style="font-size:2.2rem;">15 presale students or kill.</p>
-</v-click>
+## Next Steps
 
 <v-click>
 
-<p class="text-lg mt-8">Review the landing page on Vercel preview</p>
-<p class="text-lg">Review the full pitch deck in the Obsidian vault</p>
+| Milestone | Deadline | Kill Condition |
+|---|---|---|
+| 3 articles published | April 1 | Reassess timeline |
+| Free workshop shipped | April 15 | Kill if no traction |
+| 15 presale students at $749 | April 14 | Kill cohort |
+| $15K combined revenue | July 15 | Kill business line |
 
 </v-click>
 
 <v-click>
-<p class="muted text-sm mt-8">Every number in this deck traces back to a signal scan, decision log, or persona extract.</p>
+<p class="muted text-sm mt-6">Every threshold has a date and a consequence. Not "reassess if things don't go well."</p>
 </v-click>
 
 ---

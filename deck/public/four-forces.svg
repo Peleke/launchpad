@@ -2,7 +2,7 @@
   <defs>
     <filter id="roughen-5" x="-2%" y="-2%" width="104%" height="104%">
       <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="5"/>
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.4" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
     <filter id="glow-5">
       <feGaussianBlur stdDeviation="3" result="blur"/>
@@ -21,39 +21,39 @@
   <!-- Top-left: PUSH -->
   <g filter="url(#roughen-5)" transform="rotate(-0.3, 180, 110)">
     <path d="M 40,50 C 43,47 317,46 320,50 C 323,53 324,168 320,170 C 317,173 43,174 40,170 C 37,167 37,53 40,50 Z" fill="rgba(78,222,128,0.06)" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="180" y="78" text-anchor="middle" font-family="'Caveat', cursive" font-size="22" fill="#4ade80" font-weight="700">PUSH</text>
-    <text x="180" y="105" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#eee0cc">Production incidents</text>
-    <text x="180" y="128" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#eee0cc">Mandated adoption</text>
-    <text x="180" y="151" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#eee0cc">Career risk</text>
+    <text x="180" y="78" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" fill="#4ade80" font-weight="700">PUSH</text>
+    <text x="180" y="105" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#eee0cc">Production incidents</text>
+    <text x="180" y="128" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#eee0cc">Mandated adoption</text>
+    <text x="180" y="151" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#eee0cc">Career risk</text>
   </g>
   <!-- Top-right: PULL -->
   <g filter="url(#roughen-5)" transform="rotate(0.5, 540, 110)">
     <path d="M 400,50 C 403,47 677,46 680,50 C 683,53 684,168 680,170 C 677,173 403,174 400,170 C 397,167 397,53 400,50 Z" fill="rgba(78,222,128,0.06)" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="540" y="78" text-anchor="middle" font-family="'Caveat', cursive" font-size="22" fill="#4ade80" font-weight="700">PULL</text>
-    <text x="540" y="105" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#eee0cc">Sleep through the night</text>
-    <text x="540" y="128" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#eee0cc">Diagnostic capability</text>
-    <text x="540" y="151" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#eee0cc">Data-driven decisions</text>
+    <text x="540" y="78" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" fill="#4ade80" font-weight="700">PULL</text>
+    <text x="540" y="105" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#eee0cc">Sleep through the night</text>
+    <text x="540" y="128" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#eee0cc">Diagnostic capability</text>
+    <text x="540" y="151" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#eee0cc">Data-driven decisions</text>
   </g>
   <!-- Bottom-left: ANXIETY (larger) -->
   <g filter="url(#roughen-5)" transform="rotate(0.4, 180, 290)">
     <path d="M 25,210 C 28,207 332,206 335,210 C 338,213 339,348 335,350 C 332,353 28,354 25,350 C 22,347 22,213 25,210 Z" fill="rgba(248,113,113,0.08)" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="180" y="242" text-anchor="middle" font-family="'Caveat', cursive" font-size="24" fill="#f87171" font-weight="700">ANXIETY</text>
-    <text x="180" y="272" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#eee0cc">Trust crisis ("another grifter")</text>
-    <text x="180" y="298" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#eee0cc">"Will it be outdated in 3 mo?"</text>
-    <text x="180" y="324" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#eee0cc">"Show me YOUR production"</text>
+    <text x="180" y="242" text-anchor="middle" font-family="'Inter', sans-serif" font-size="24" fill="#f87171" font-weight="700">ANXIETY</text>
+    <text x="180" y="272" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">Trust crisis ("another grifter")</text>
+    <text x="180" y="298" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">"Will it be outdated in 3 mo?"</text>
+    <text x="180" y="324" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">"Show me YOUR production"</text>
   </g>
   <!-- Bottom-right: HABIT -->
   <g filter="url(#roughen-5)" transform="rotate(-0.6, 540, 280)">
     <path d="M 400,215 C 403,212 677,211 680,215 C 683,218 684,338 680,340 C 677,343 403,344 400,340 C 397,337 397,218 400,215 Z" fill="rgba(136,136,136,0.05)" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="540" y="245" text-anchor="middle" font-family="'Caveat', cursive" font-size="22" fill="#888888" font-weight="700">HABIT</text>
-    <text x="540" y="278" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#8b949e">"I'll figure it from docs"</text>
-    <text x="540" y="305" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#8b949e">Status quo is comfortable</text>
-    <text x="540" y="328" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#8b949e">No budget approval needed</text>
+    <text x="540" y="245" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" fill="#888888" font-weight="700">HABIT</text>
+    <text x="540" y="278" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#8b949e">"I'll figure it from docs"</text>
+    <text x="540" y="305" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#8b949e">Status quo is comfortable</text>
+    <text x="540" y="328" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#8b949e">No budget approval needed</text>
   </g>
   <!-- Arrow from ANXIETY to callout -->
   <path d="M 335,280 C 380,280 420,395 460,395" stroke="#f87171" stroke-width="2" fill="none" stroke-dasharray="6,4" marker-end="url(#arrow-5a)"/>
   <g filter="url(#glow-5)">
     <path d="M 460,380 C 463,377 697,376 700,380 C 703,383 704,413 700,415 C 697,418 463,419 460,415 C 457,412 457,383 460,380 Z" fill="rgba(232,128,114,0.15)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="580" y="403" text-anchor="middle" font-family="'Caveat', cursive" font-size="17" fill="#e88072" font-weight="700">Key unlock: published receipts</text>
+    <text x="580" y="403" text-anchor="middle" font-family="'Inter', sans-serif" font-size="17" fill="#e88072" font-weight="700">Key unlock: published receipts</text>
   </g>
 </svg>

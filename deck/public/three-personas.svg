@@ -2,49 +2,49 @@
   <defs>
     <filter id="roughen-4" x="-2%" y="-2%" width="104%" height="104%">
       <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="4"/>
-      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.4" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
   </defs>
   <!-- Card 1: Midnight Firefighter -->
   <g filter="url(#roughen-4)" transform="rotate(-0.8, 130, 170)">
     <path d="M 15,25 C 18,22 232,21 235,25 C 238,28 239,308 235,310 C 232,313 18,314 15,310 C 12,307 12,28 15,25 Z" fill="rgba(232,128,114,0.06)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     <circle cx="125" cy="75" r="30" fill="#e88072" opacity="0.9"/>
-    <text x="125" y="82" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="white" font-weight="700">3-8 YOE</text>
-    <text x="125" y="130" text-anchor="middle" font-family="'Caveat', cursive" font-size="19" fill="#eee0cc" font-weight="700">The Midnight</text>
-    <text x="125" y="155" text-anchor="middle" font-family="'Caveat', cursive" font-size="19" fill="#eee0cc" font-weight="700">Firefighter</text>
+    <text x="125" y="82" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="white" font-weight="700">3-8 YOE</text>
+    <text x="125" y="130" text-anchor="middle" font-family="'Inter', sans-serif" font-size="19" fill="#eee0cc" font-weight="700">The Midnight</text>
+    <text x="125" y="155" text-anchor="middle" font-family="'Inter', sans-serif" font-size="19" fill="#eee0cc" font-weight="700">Firefighter</text>
     <line x1="50" y1="170" x2="200" y2="170" stroke="#e88072" stroke-width="1" opacity="0.3"/>
-    <text x="125" y="200" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#8b949e">"2 AM debugging</text>
-    <text x="125" y="220" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#8b949e">a black box"</text>
+    <text x="125" y="200" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#8b949e">"2 AM debugging</text>
+    <text x="125" y="220" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#8b949e">a black box"</text>
     <line x1="50" y1="245" x2="200" y2="245" stroke="#e88072" stroke-width="1" opacity="0.3"/>
-    <text x="125" y="270" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#4ade80">WTP: $500–1K</text>
-    <text x="125" y="295" text-anchor="middle" font-family="'Caveat', cursive" font-size="13" fill="#8b949e">Maven cohort</text>
+    <text x="125" y="270" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#4ade80">WTP: $500–1K</text>
+    <text x="125" y="295" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">Maven cohort</text>
   </g>
   <!-- Card 2: Reluctant Architect -->
   <g filter="url(#roughen-4)" transform="rotate(0.5, 380, 170)">
     <path d="M 265,25 C 268,22 492,21 495,25 C 498,28 499,308 495,310 C 492,313 268,314 265,310 C 262,307 262,28 265,25 Z" fill="rgba(232,128,114,0.06)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     <circle cx="380" cy="75" r="30" fill="#e88072" opacity="0.9"/>
-    <text x="380" y="82" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="white" font-weight="700">5-15 YOE</text>
-    <text x="380" y="130" text-anchor="middle" font-family="'Caveat', cursive" font-size="19" fill="#eee0cc" font-weight="700">The Reluctant</text>
-    <text x="380" y="155" text-anchor="middle" font-family="'Caveat', cursive" font-size="19" fill="#eee0cc" font-weight="700">Architect</text>
+    <text x="380" y="82" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="white" font-weight="700">5-15 YOE</text>
+    <text x="380" y="130" text-anchor="middle" font-family="'Inter', sans-serif" font-size="19" fill="#eee0cc" font-weight="700">The Reluctant</text>
+    <text x="380" y="155" text-anchor="middle" font-family="'Inter', sans-serif" font-size="19" fill="#eee0cc" font-weight="700">Architect</text>
     <line x1="300" y1="170" x2="460" y2="170" stroke="#e88072" stroke-width="1" opacity="0.3"/>
-    <text x="380" y="200" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#8b949e">"Staff said go agentic,</text>
-    <text x="380" y="220" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#8b949e">I said prove it"</text>
+    <text x="380" y="200" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#8b949e">"Staff said go agentic,</text>
+    <text x="380" y="220" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#8b949e">I said prove it"</text>
     <line x1="300" y1="245" x2="460" y2="245" stroke="#e88072" stroke-width="1" opacity="0.3"/>
-    <text x="380" y="270" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#4ade80">WTP: $750–1.5K</text>
-    <text x="380" y="295" text-anchor="middle" font-family="'Caveat', cursive" font-size="13" fill="#8b949e">Maven cohort</text>
+    <text x="380" y="270" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#4ade80">WTP: $750–1.5K</text>
+    <text x="380" y="295" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">Maven cohort</text>
   </g>
   <!-- Card 3: Security-Conscious Lead -->
   <g filter="url(#roughen-4)" transform="rotate(-0.3, 625, 170)">
     <path d="M 510,25 C 513,22 737,21 740,25 C 743,28 744,308 740,310 C 737,313 513,314 510,310 C 507,307 507,28 510,25 Z" fill="rgba(232,128,114,0.06)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     <circle cx="625" cy="75" r="30" fill="#e88072" opacity="0.9"/>
-    <text x="625" y="82" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="white" font-weight="700">5-12 YOE</text>
-    <text x="625" y="130" text-anchor="middle" font-family="'Caveat', cursive" font-size="19" fill="#eee0cc" font-weight="700">The Security-</text>
-    <text x="625" y="155" text-anchor="middle" font-family="'Caveat', cursive" font-size="19" fill="#eee0cc" font-weight="700">Conscious Lead</text>
+    <text x="625" y="82" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="white" font-weight="700">5-12 YOE</text>
+    <text x="625" y="130" text-anchor="middle" font-family="'Inter', sans-serif" font-size="19" fill="#eee0cc" font-weight="700">The Security-</text>
+    <text x="625" y="155" text-anchor="middle" font-family="'Inter', sans-serif" font-size="19" fill="#eee0cc" font-weight="700">Conscious Lead</text>
     <line x1="545" y1="170" x2="705" y2="170" stroke="#e88072" stroke-width="1" opacity="0.3"/>
-    <text x="625" y="200" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#8b949e">"Who threat-modeled</text>
-    <text x="625" y="220" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#8b949e">this?"</text>
+    <text x="625" y="200" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#8b949e">"Who threat-modeled</text>
+    <text x="625" y="220" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#8b949e">this?"</text>
     <line x1="545" y1="245" x2="705" y2="245" stroke="#e88072" stroke-width="1" opacity="0.3"/>
-    <text x="625" y="270" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#4ade80">WTP: $5K–15K</text>
-    <text x="625" y="295" text-anchor="middle" font-family="'Caveat', cursive" font-size="13" fill="#8b949e">consulting / audit</text>
+    <text x="625" y="270" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#4ade80">WTP: $5K–15K</text>
+    <text x="625" y="295" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">consulting / audit</text>
   </g>
 </svg>
