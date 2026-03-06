@@ -1,0 +1,56 @@
+<svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;">
+  <defs>
+    <filter id="roughen-1" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="1"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="glow-1">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow-gap" viewBox="0 0 12 10" refX="10" refY="5" markerWidth="8" markerHeight="6" orient="auto-start-reverse" fill="none" stroke="#f87171" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 1,1 L 10,5 L 1,9"/>
+    </marker>
+  </defs>
+  <!-- Left cluster: Courses -->
+  <g filter="url(#roughen-1)" transform="rotate(-0.5, 130, 140)">
+    <path d="M 30,60 C 32,58 148,57 150,60 C 152,62 153,108 150,110 C 148,112 32,113 30,110 C 28,108 28,62 30,60 Z" fill="none" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="90" y="90" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#888888">Andrew Ng</text>
+  </g>
+  <g filter="url(#roughen-1)" transform="rotate(0.8, 130, 140)">
+    <path d="M 30,120 C 33,118 147,117 150,120 C 152,122 153,168 150,170 C 147,172 33,173 30,170 C 28,168 28,122 30,120 Z" fill="none" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="90" y="150" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#888888">Udemy / Coursera</text>
+  </g>
+  <g filter="url(#roughen-1)" transform="rotate(-0.3, 130, 200)">
+    <path d="M 30,180 C 32,178 148,177 150,180 C 152,182 153,228 150,230 C 148,232 32,233 30,230 C 28,228 28,182 30,180 Z" fill="none" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="90" y="210" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#888888">Anthropic Academy</text>
+  </g>
+  <g filter="url(#roughen-1)" transform="rotate(0.5, 130, 260)">
+    <path d="M 30,240 C 33,238 147,237 150,240 C 152,242 153,278 150,280 C 148,282 32,283 30,280 C 28,278 28,242 30,240 Z" fill="none" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="90" y="264" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#888888">Skool / Agency</text>
+  </g>
+  <text x="90" y="35" text-anchor="middle" font-family="'Caveat', cursive" font-size="20" fill="#888888" font-weight="700">COURSES</text>
+  <!-- Right side: Production -->
+  <g filter="url(#roughen-1)" transform="rotate(-0.4, 590, 160)">
+    <path d="M 530,80 C 533,77 647,76 650,80 C 653,83 654,238 650,240 C 647,243 533,244 530,240 C 527,237 527,83 530,80 Z" fill="none" stroke="#e88072" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="590" y="150" text-anchor="middle" font-family="'Caveat', cursive" font-size="22" fill="#e88072" font-weight="700">PRODUCTION</text>
+    <!-- Alarm indicators -->
+    <circle cx="555" cy="200" r="8" fill="#f87171" opacity="0.8"/>
+    <circle cx="590" cy="200" r="8" fill="#f87171" opacity="0.6"/>
+    <circle cx="625" cy="200" r="8" fill="#f87171" opacity="0.9"/>
+    <text x="590" y="230" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="#f87171">alerts firing</text>
+  </g>
+  <text x="590" y="55" text-anchor="middle" font-family="'Caveat', cursive" font-size="20" fill="#e88072" font-weight="700">PRODUCTION</text>
+  <!-- The Gap -->
+  <line x1="170" y1="160" x2="510" y2="160" stroke="#eee0cc" stroke-width="2" stroke-dasharray="12,8" opacity="0.5"/>
+  <line x1="170" y1="140" x2="170" y2="180" stroke="#eee0cc" stroke-width="2" opacity="0.4"/>
+  <line x1="510" y1="140" x2="510" y2="180" stroke="#eee0cc" stroke-width="2" opacity="0.4"/>
+  <g filter="url(#glow-1)">
+    <rect x="250" y="120" width="200" height="50" rx="8" fill="rgba(248,113,113,0.12)" stroke="none"/>
+    <text x="350" y="142" text-anchor="middle" font-family="'Caveat', cursive" font-size="22" fill="#f87171" font-weight="700">80–90% die here</text>
+    <text x="350" y="162" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="#8b949e">(RAND Corporation)</text>
+  </g>
+  <!-- Downward arrow into gap -->
+  <path d="M 350,85 C 350,90 348,105 350,115" stroke="#f87171" stroke-width="2" fill="none" marker-end="url(#arrow-gap)"/>
+  <text x="350" y="300" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#eee0cc" opacity="0.7">THE GAP</text>
+</svg>

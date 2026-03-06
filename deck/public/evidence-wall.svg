@@ -1,0 +1,48 @@
+<svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:720px;">
+  <defs>
+    <filter id="roughen-2" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="2"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <!-- Sticky note 1 -->
+  <g filter="url(#roughen-2)" transform="rotate(-2.5, 110, 110)">
+    <path d="M 20,30 C 23,27 197,26 200,30 C 203,33 204,188 200,190 C 197,193 23,194 20,190 C 17,187 17,33 20,30 Z" fill="rgba(232,128,114,0.08)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="110" y="85" text-anchor="middle" font-family="'Caveat', cursive" font-size="42" fill="#e88072" font-weight="700">94%</text>
+    <text x="110" y="120" text-anchor="middle" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc">skills gap</text>
+    <text x="110" y="165" text-anchor="middle" font-family="'Caveat', cursive" font-size="13" fill="#8b949e">GlobeNewsWire</text>
+    <text x="110" y="182" text-anchor="middle" font-family="'Caveat', cursive" font-size="13" fill="#8b949e">2024 Survey</text>
+  </g>
+  <!-- Sticky note 2 -->
+  <g filter="url(#roughen-2)" transform="rotate(1.5, 350, 100)">
+    <path d="M 260,20 C 263,17 437,18 440,20 C 443,23 444,178 440,180 C 437,183 263,182 260,180 C 257,177 257,23 260,20 Z" fill="rgba(78,222,128,0.06)" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="350" y="75" text-anchor="middle" font-family="'Caveat', cursive" font-size="42" fill="#4ade80" font-weight="700">70%</text>
+    <text x="350" y="110" text-anchor="middle" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc">wrong answers</text>
+    <text x="350" y="148" text-anchor="middle" font-family="'Caveat', cursive" font-size="13" fill="#8b949e">Carnegie Mellon</text>
+    <text x="350" y="168" text-anchor="middle" font-family="'Caveat', cursive" font-size="13" fill="#8b949e">tool-use study</text>
+  </g>
+  <!-- Sticky note 3 -->
+  <g filter="url(#roughen-2)" transform="rotate(-1.0, 590, 110)">
+    <path d="M 500,30 C 503,27 677,28 680,30 C 683,33 684,188 680,190 C 677,193 503,192 500,190 C 497,187 497,33 500,30 Z" fill="rgba(248,113,113,0.08)" stroke="#f87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="590" y="85" text-anchor="middle" font-family="'Caveat', cursive" font-size="42" fill="#f87171" font-weight="700">95%</text>
+    <text x="590" y="120" text-anchor="middle" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc">zero value</text>
+    <text x="590" y="160" text-anchor="middle" font-family="'Caveat', cursive" font-size="13" fill="#8b949e">MIT Sloan</text>
+    <text x="590" y="178" text-anchor="middle" font-family="'Caveat', cursive" font-size="13" fill="#8b949e">enterprise AI ROI</text>
+  </g>
+  <!-- Sticky note 4 -->
+  <g filter="url(#roughen-2)" transform="rotate(2.0, 180, 310)">
+    <path d="M 70,220 C 73,217 287,218 290,220 C 293,223 294,378 290,380 C 287,383 73,382 70,380 C 67,377 67,223 70,220 Z" fill="rgba(232,128,114,0.06)" stroke="#eee0cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+    <text x="180" y="278" text-anchor="middle" font-family="'Caveat', cursive" font-size="32" fill="#e88072" font-weight="700">40% → 29%</text>
+    <text x="180" y="312" text-anchor="middle" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc">trust collapse</text>
+    <text x="180" y="350" text-anchor="middle" font-family="'Caveat', cursive" font-size="13" fill="#8b949e">Stack Overflow</text>
+    <text x="180" y="368" text-anchor="middle" font-family="'Caveat', cursive" font-size="13" fill="#8b949e">Dev Survey 2024</text>
+  </g>
+  <!-- Sticky note 5 -->
+  <g filter="url(#roughen-2)" transform="rotate(-1.8, 500, 310)">
+    <path d="M 380,225 C 383,222 617,221 620,225 C 623,228 624,383 620,385 C 617,388 383,389 380,385 C 377,382 377,228 380,225 Z" fill="rgba(248,113,113,0.06)" stroke="#f87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+    <text x="500" y="280" text-anchor="middle" font-family="'Caveat', cursive" font-size="28" fill="#f87171" font-weight="700">674 pts</text>
+    <text x="500" y="318" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#eee0cc">"reinvented programming,</text>
+    <text x="500" y="340" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#eee0cc">badly"</text>
+    <text x="500" y="373" text-anchor="middle" font-family="'Caveat', cursive" font-size="13" fill="#8b949e">r/ExperiencedDevs</text>
+  </g>
+</svg>

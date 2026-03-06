@@ -1,0 +1,41 @@
+<svg viewBox="0 0 740 360" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:740px;">
+  <defs>
+    <filter id="roughen-6" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="6"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <!-- Card A: Cohort -->
+  <g filter="url(#roughen-6)" transform="rotate(-0.5, 185, 190)">
+    <path d="M 15,30 C 18,27 352,26 355,30 C 358,33 359,328 355,330 C 352,333 18,334 15,330 C 12,327 12,33 15,30 Z" fill="rgba(232,128,114,0.06)" stroke="#e88072" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="185" y="65" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="#8b949e" font-weight="700">OFFER A</text>
+    <text x="185" y="95" text-anchor="middle" font-family="'Caveat', cursive" font-size="24" fill="#eee0cc" font-weight="700">Cohort</text>
+    <line x1="60" y1="110" x2="310" y2="110" stroke="#e88072" stroke-width="1" opacity="0.3"/>
+    <text x="185" y="140" text-anchor="middle" font-family="'Caveat', cursive" font-size="32" fill="#e88072" font-weight="700">$749</text>
+    <text x="185" y="162" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="#8b949e">founding price ($997 full)</text>
+    <line x1="60" y1="178" x2="310" y2="178" stroke="#e88072" stroke-width="1" opacity="0.2"/>
+    <text x="185" y="202" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#eee0cc">4 weeks, live on Maven</text>
+    <text x="185" y="226" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#eee0cc">15–25 seats per cohort</text>
+    <text x="185" y="250" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#eee0cc">OTel + evals + STRIDE</text>
+    <line x1="60" y1="270" x2="310" y2="270" stroke="#e88072" stroke-width="1" opacity="0.2"/>
+    <text x="185" y="295" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#4ade80">Target: Firefighter + Architect</text>
+  </g>
+  <!-- Card B: Security -->
+  <g filter="url(#roughen-6)" transform="rotate(0.4, 555, 190)">
+    <path d="M 385,30 C 388,27 722,26 725,30 C 728,33 729,328 725,330 C 722,333 388,334 385,330 C 382,327 382,33 385,30 Z" fill="rgba(232,128,114,0.06)" stroke="#e88072" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="555" y="65" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="#8b949e" font-weight="700">OFFER B</text>
+    <text x="555" y="95" text-anchor="middle" font-family="'Caveat', cursive" font-size="24" fill="#eee0cc" font-weight="700">Security Workshop</text>
+    <line x1="430" y1="110" x2="680" y2="110" stroke="#e88072" stroke-width="1" opacity="0.3"/>
+    <text x="555" y="140" text-anchor="middle" font-family="'Caveat', cursive" font-size="28" fill="#e88072" font-weight="700">$497 + $5K–15K</text>
+    <text x="555" y="162" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="#8b949e">workshop + audit retainer</text>
+    <line x1="430" y1="178" x2="680" y2="178" stroke="#e88072" stroke-width="1" opacity="0.2"/>
+    <text x="555" y="202" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#eee0cc">3-hour deep dive</text>
+    <text x="555" y="226" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#eee0cc">Warm lead: Trilogy cyber</text>
+    <text x="555" y="250" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#eee0cc">STRIDE + 5 PoC exploits</text>
+    <line x1="430" y1="270" x2="680" y2="270" stroke="#e88072" stroke-width="1" opacity="0.2"/>
+    <text x="555" y="295" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#4ade80">Target: Security-Conscious Lead</text>
+  </g>
+  <!-- Connecting dashed line -->
+  <path d="M 355,180 C 365,180 375,180 385,180" stroke="#eee0cc" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+  <text x="370" y="350" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="#8b949e">shared infrastructure: articles, audience, credibility</text>
+</svg>

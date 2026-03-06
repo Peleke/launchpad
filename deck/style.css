@@ -1,0 +1,75 @@
+:root {
+  --slidev-theme-primary: #e88072;
+  --slidev-theme-default: #e6edf3;
+}
+
+.slidev-layout {
+  background: #0d1117 !important;
+  color: #e6edf3;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+h1, h2, h3 {
+  color: #eee0cc;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-weight: 800; }
+
+.coral { color: #e88072; }
+.green { color: #4ade80; }
+.red { color: #f87171; }
+.muted { color: #8b949e; }
+.stat-big {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #e88072;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+blockquote {
+  border-left: 3px solid #e88072;
+  padding: 8px 16px;
+  background: rgba(232,128,114,0.06);
+  border-radius: 0 6px 6px 0;
+}
+blockquote p { color: #e6edf3; font-style: italic; }
+blockquote cite { color: #8b949e; font-size: 0.8rem; }
+
+/* v-click animation overrides — slide up + fade instead of just opacity */
+.slidev-vclick-target {
+  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.slidev-vclick-hidden {
+  opacity: 0 !important;
+  transform: translateY(12px);
+}
+
+.slidev-vclick-current,
+.slidev-vclick-prior {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* SVG images fade + scale in */
+.slidev-vclick-target img {
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.slidev-vclick-hidden img {
+  opacity: 0 !important;
+  transform: scale(0.96);
+}
+
+/* stat-big: slight scale punch on reveal */
+.slidev-vclick-target .stat-big {
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+
+.slidev-vclick-hidden .stat-big {
+  opacity: 0 !important;
+  transform: scale(0.9);
+}

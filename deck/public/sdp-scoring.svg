@@ -1,0 +1,45 @@
+<svg viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;">
+  <defs>
+    <filter id="roughen-3" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="3"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="glow-3">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <text x="350" y="30" text-anchor="middle" font-family="'Caveat', cursive" font-size="20" fill="#eee0cc" font-weight="700">Opportunity Ranking (Score / 60)</text>
+  <!-- Bar 1: Production Cohort — highlighted -->
+  <g filter="url(#roughen-3)">
+    <text x="195" y="78" text-anchor="end" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc">Production Cohort</text>
+    <g filter="url(#glow-3)">
+      <path d="M 210,58 C 213,55 617,54 620,58 C 623,61 624,88 620,90 C 617,93 213,94 210,90 C 207,87 207,61 210,58 Z" fill="rgba(232,128,114,0.25)" stroke="#e88072" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="635" y="80" font-family="'Caveat', cursive" font-size="20" fill="#e88072" font-weight="700">50/60</text>
+  </g>
+  <!-- Bar 2: Security Workshop -->
+  <g filter="url(#roughen-3)">
+    <text x="195" y="138" text-anchor="end" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc">Security Workshop</text>
+    <path d="M 210,118 C 213,115 557,114 560,118 C 563,121 564,148 560,150 C 557,153 213,154 210,150 C 207,147 207,121 210,118 Z" fill="rgba(232,128,114,0.15)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="575" y="140" font-family="'Caveat', cursive" font-size="18" fill="#e88072">45/60</text>
+  </g>
+  <!-- Bar 3: Context Engineering -->
+  <g filter="url(#roughen-3)">
+    <text x="195" y="198" text-anchor="end" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc">Context Engineering</text>
+    <path d="M 210,178 C 213,175 467,174 470,178 C 473,181 474,208 470,210 C 467,213 213,214 210,210 C 207,207 207,181 210,178 Z" fill="rgba(232,128,114,0.10)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="485" y="200" font-family="'Caveat', cursive" font-size="18" fill="#e88072">38/60</text>
+  </g>
+  <!-- Bar 4: Observability Toolkit -->
+  <g filter="url(#roughen-3)">
+    <text x="195" y="258" text-anchor="end" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc">Observability Toolkit</text>
+    <path d="M 210,238 C 213,235 447,234 450,238 C 453,241 454,268 450,270 C 447,273 213,274 210,270 C 207,267 207,241 210,238 Z" fill="rgba(232,128,114,0.08)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="465" y="260" font-family="'Caveat', cursive" font-size="18" fill="#e88072">36/60</text>
+  </g>
+  <!-- Bar 5: Do Nothing -->
+  <g filter="url(#roughen-3)">
+    <text x="195" y="318" text-anchor="end" font-family="'Caveat', cursive" font-size="18" fill="#888888">Do Nothing</text>
+    <path d="M 210,298 C 213,295 347,294 350,298 C 353,301 354,328 350,330 C 347,333 213,334 210,330 C 207,327 207,301 210,298 Z" fill="rgba(136,136,136,0.08)" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="365" y="320" font-family="'Caveat', cursive" font-size="18" fill="#888888">20/60</text>
+  </g>
+</svg>

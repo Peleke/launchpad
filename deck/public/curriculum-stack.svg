@@ -1,0 +1,59 @@
+<svg viewBox="0 0 650 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:650px;">
+  <defs>
+    <filter id="roughen-7" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="7"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.2" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <marker id="arrow-7" viewBox="0 0 12 10" refX="10" refY="5" markerWidth="8" markerHeight="6" orient="auto-start-reverse" fill="none" stroke="#eee0cc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M 1,1 L 10,5 L 1,9"/>
+    </marker>
+  </defs>
+  <!-- Layer 0: Pre-work (bottom) -->
+  <g filter="url(#roughen-7)" transform="rotate(0.3, 360, 370)">
+    <path d="M 120,350 C 123,347 597,346 600,350 C 603,353 604,393 600,395 C 597,398 123,399 120,395 C 117,392 117,353 120,350 Z" fill="rgba(136,136,136,0.08)" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="145" cy="372" r="14" fill="#888888"/>
+    <text x="145" y="378" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="white" font-weight="700">0</text>
+    <text x="370" y="378" text-anchor="middle" font-family="'Caveat', cursive" font-size="18" fill="#888888">Pre-work: Agent Anatomy</text>
+  </g>
+  <!-- Layer 1: Observability -->
+  <g filter="url(#roughen-7)" transform="rotate(-0.5, 360, 295)">
+    <path d="M 120,270 C 123,267 597,266 600,270 C 603,273 604,313 600,315 C 597,318 123,319 120,315 C 117,312 117,273 120,270 Z" fill="rgba(232,128,114,0.10)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="145" cy="292" r="14" fill="#e88072"/>
+    <text x="145" y="298" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="white" font-weight="700">1</text>
+    <!-- Eye icon -->
+    <ellipse cx="175" cy="292" rx="10" ry="6" fill="none" stroke="#eee0cc" stroke-width="1.5"/>
+    <circle cx="175" cy="292" r="3" fill="#eee0cc"/>
+    <text x="370" y="298" text-anchor="middle" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc">Observability — OpenTelemetry</text>
+  </g>
+  <!-- Layer 2: Testing -->
+  <g filter="url(#roughen-7)" transform="rotate(0.4, 360, 215)">
+    <path d="M 120,190 C 123,187 597,186 600,190 C 603,193 604,233 600,235 C 597,238 123,239 120,235 C 117,232 117,193 120,190 Z" fill="rgba(232,128,114,0.10)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="145" cy="212" r="14" fill="#e88072"/>
+    <text x="145" y="218" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="white" font-weight="700">2</text>
+    <!-- Checkmark icon -->
+    <path d="M 170,215 L 175,220 L 185,207" fill="none" stroke="#eee0cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="370" y="218" text-anchor="middle" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc">Testing — Statistical Evals</text>
+  </g>
+  <!-- Layer 3: Security -->
+  <g filter="url(#roughen-7)" transform="rotate(-0.3, 360, 135)">
+    <path d="M 120,110 C 123,107 597,106 600,110 C 603,113 604,153 600,155 C 597,158 123,159 120,155 C 117,152 117,113 120,110 Z" fill="rgba(232,128,114,0.10)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="145" cy="132" r="14" fill="#e88072"/>
+    <text x="145" y="138" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="white" font-weight="700">3</text>
+    <!-- Shield icon -->
+    <path d="M 175,122 L 182,126 L 182,136 C 182,142 175,146 175,146 C 175,146 168,142 168,136 L 168,126 Z" fill="none" stroke="#eee0cc" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="370" y="138" text-anchor="middle" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc">Security — STRIDE Threat Model</text>
+  </g>
+  <!-- Layer 4: Prove Value / Kill -->
+  <g filter="url(#roughen-7)" transform="rotate(0.2, 360, 55)">
+    <path d="M 120,30 C 123,27 597,26 600,30 C 603,33 604,73 600,75 C 597,78 123,79 120,75 C 117,72 117,33 120,30 Z" fill="rgba(232,128,114,0.15)" stroke="#e88072" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="145" cy="52" r="14" fill="#e88072"/>
+    <text x="145" y="58" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="white" font-weight="700">4</text>
+    <!-- Gauge icon -->
+    <circle cx="175" cy="52" r="8" fill="none" stroke="#eee0cc" stroke-width="1.5"/>
+    <path d="M 175,52 L 180,46" stroke="#e88072" stroke-width="2" stroke-linecap="round"/>
+    <text x="370" y="58" text-anchor="middle" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc">Prove Value or Kill — Ship the Dashboard</text>
+  </g>
+  <!-- Left arrow: "Build UP" -->
+  <path d="M 80,380 C 78,340 78,120 80,50" stroke="#eee0cc" stroke-width="2" fill="none" marker-end="url(#arrow-7)" opacity="0.6"/>
+  <text x="60" y="220" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#eee0cc" transform="rotate(-90, 60, 220)" opacity="0.6">Build UP from foundation</text>
+</svg>
