@@ -137,7 +137,15 @@ code {
 .slidev-vclick-hidden img,
 .slidev-vclick-hidden object {
   opacity: 0 !important;
-  transform: scale(0.96);
+  transform: scale(0.94);
+  filter: blur(8px);
+}
+
+.slidev-vclick-current img,
+.slidev-vclick-prior img,
+.slidev-vclick-current object,
+.slidev-vclick-prior object {
+  filter: blur(0);
 }
 
 /* stat-big: slight scale punch on reveal */
@@ -148,4 +156,50 @@ code {
 .slidev-vclick-hidden .stat-big {
   opacity: 0 !important;
   transform: scale(0.9);
+}
+
+/* ──────────────────────────────────────────────
+   Design Pass: Typography (1B split-color, 1C animated underline)
+   ────────────────────────────────────────────── */
+
+h2 {
+  position: relative;
+  display: inline-block;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #4DCFC9, transparent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.slidev-page h2::after {
+  transform: scaleX(1);
+}
+
+/* ──────────────────────────────────────────────
+   Design Pass: Animations (4A stagger, 4E blockquote slide-in)
+   ────────────────────────────────────────────── */
+
+.slidev-vclick-target:nth-child(2) { transition-delay: 0.08s !important; }
+.slidev-vclick-target:nth-child(3) { transition-delay: 0.14s !important; }
+.slidev-vclick-target:nth-child(4) { transition-delay: 0.2s !important; }
+
+.slidev-vclick-hidden blockquote {
+  opacity: 0 !important;
+  transform: translateX(-28px) !important;
+}
+
+.slidev-vclick-current blockquote,
+.slidev-vclick-prior blockquote {
+  opacity: 1;
+  transform: translateX(0) !important;
+  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="slide-footer">
     <span class="footer-confidential">CONFIDENTIAL</span>
-    <span class="footer-logo">endstation</span>
+    <img src="/endstation-logo.png" class="footer-logo" alt="endstation" />
   </div>
 </template>
 
@@ -27,10 +27,9 @@
   font-weight: 500;
 }
 .footer-logo {
-  font-family: 'Fira Code', monospace;
-  font-size: 10px;
-  color: rgba(77,207,201,0.18);
-  letter-spacing: 0.08em;
-  font-weight: 400;
+  height: 18px;
+  width: auto;
+  opacity: 0.18;
+  filter: brightness(1.2);
 }
 </style>

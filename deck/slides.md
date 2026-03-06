@@ -17,11 +17,12 @@ fonts:
   provider: google
 ---
 
-# Ambient Content Engine
+# <span class="teal">Ambient</span> Content Engine
 
 <v-click>
-<p class="text-2xl teal">Validation Summary — 2026-03-06</p>
-<img src="/pipeline-subtitle.svg" style="width:100%;max-width:560px;margin:24px auto 0;display:block;opacity:0.7;" />
+<p class="text-2xl teal" style="margin-bottom:0;">Validation Summary</p>
+<img src="/pipeline-subtitle.svg" style="width:100%;max-width:560px;margin:20px auto 0;display:block;opacity:0.7;" />
+<p class="muted text-xs mt-4" style="font-family:'Fira Code',monospace;letter-spacing:0.06em;">2026-03-06</p>
 </v-click>
 
 <!--
@@ -32,7 +33,7 @@ This deck is the output of running the hunter pipeline on the Ambient Content En
 transition: slide-up
 ---
 
-## The Opportunity
+## The <span class="teal">Opportunity</span>
 
 <v-click>
 <img src="/opportunity-gap.svg" style="width:100%;max-width:700px;margin:0 auto;display:block;" />
@@ -50,7 +51,7 @@ Left side is fragmented point tools. Jasper writes. Taplio schedules. Castmagic 
 transition: fade
 ---
 
-## Evidence Wall
+## <span class="teal">Evidence</span> Wall
 
 <v-click>
 <object data="/evidence-wall.svg" type="image/svg+xml" style="width:100%;max-width:720px;margin:0 auto;display:block;"></object>
@@ -62,7 +63,7 @@ Six stats from the signal scan. 250K+ OpenClaw stars means massive adoption. 1 i
 
 ---
 
-## Reddit Voices
+## <span class="teal">Reddit</span> Voices
 
 <v-click>
 
@@ -96,7 +97,7 @@ Three direct quotes, three angles. First is the security fear — one machine, n
 transition: slide-up
 ---
 
-## SDP Scoring
+## <span class="teal">SDP</span> Scoring
 
 <v-click>
 <object data="/sdp-scoring.svg" type="image/svg+xml" style="width:100%;max-width:700px;margin:0 auto;display:block;"></object>
@@ -108,7 +109,7 @@ Six weighted dimensions. Pain intensity at 3x, spend evidence at 3x, competitive
 
 ---
 
-## Four Personas
+## Four <span class="teal">Personas</span>
 
 <v-click>
 <img src="/four-personas.svg" style="width:100%;max-width:750px;margin:0 auto;display:block;" />
@@ -122,7 +123,7 @@ Four personas, each with willingness-to-pay ranges. The Nervous Tinkerer is on t
 transition: fade
 ---
 
-## Four Forces of Switching
+## Four <span class="teal">Forces</span> of Switching
 
 <v-click>
 <img src="/four-forces.svg" style="width:100%;max-width:720px;margin:0 auto;display:block;" />
@@ -136,7 +137,7 @@ Push is strong: $2K/mo slop, 20% auto-activation, 1/5 malicious skills, the cont
 transition: slide-up
 ---
 
-## Three Tiers
+## Three <span class="teal">Tiers</span>
 
 <v-click>
 <object data="/three-tiers.svg" type="image/svg+xml" style="width:100%;max-width:740px;margin:0 auto;display:block;"></object>
@@ -148,7 +149,7 @@ Three tiers, two of them free. The article series is four deep-dives that build 
 
 ---
 
-## Article Series
+## <span class="teal">Article</span> Series
 
 <v-click>
 
@@ -173,7 +174,7 @@ Four articles in order. The architecture piece shows the full loop. The security
 transition: slide-up
 ---
 
-## Revenue Model
+## <span class="teal">Revenue</span> Model
 
 <v-click>
 <img src="/revenue-model.svg" style="width:100%;max-width:720px;margin:0 auto;display:block;" />
@@ -187,7 +188,7 @@ Months 1-2 are $0. Pure audience building with articles and LinkedIn. That's the
 transition: fade
 ---
 
-## Competitive Map
+## <span class="teal">Competitive</span> Map
 
 <v-click>
 <object data="/competitive-map.svg" type="image/svg+xml" style="width:100%;max-width:720px;margin:0 auto;display:block;"></object>
@@ -199,7 +200,7 @@ Two axes: price and integration depth. Bottom-left is Jasper at $49-129 (writes 
 
 ---
 
-## Execution Calendar
+## <span class="teal">Execution</span> Calendar
 
 <v-click>
 <img src="/execution-calendar.svg" style="width:100%;max-width:740px;margin:0 auto;display:block;" />
@@ -213,7 +214,7 @@ Weeks 1-3: LinkedIn warm-up at 3-5 posts per week. Building engagement baseline 
 transition: slide-up
 ---
 
-## Kill Criteria
+## <span class="teal">Kill</span> Criteria
 
 <v-click>
 <img src="/kill-criteria.svg" style="width:100%;max-width:720px;margin:0 auto;display:block;" />
@@ -227,7 +228,7 @@ Three gates with hard thresholds. Gate 1 at week 1: fewer than 50 LinkedIn impre
 transition: fade
 ---
 
-## SWOT Verdict
+## <span class="teal">SWOT</span> Verdict
 
 <v-click>
 <object data="/swot-verdict.svg" type="image/svg+xml" style="width:100%;max-width:700px;margin:0 auto;display:block;"></object>
@@ -243,7 +244,7 @@ Five modifications that turn a 54/60 score into an executable plan. Hover each c
 
 ---
 
-## Bias Check
+## <span class="teal">Bias</span> Check
 
 <v-click>
 <img src="/bias-check.svg" style="width:100%;max-width:700px;margin:0 auto;display:block;" />
@@ -258,7 +259,7 @@ layout: center
 transition: slide-up
 ---
 
-## Next Steps
+## <span class="teal">Next</span> Steps
 
 <v-click>
 
@@ -279,7 +280,7 @@ Four milestones, four deadlines, four kill conditions. The LinkedIn warm-up is t
 transition: fade
 ---
 
-## Appendix — Asset Map
+## <span class="teal">Appendix</span> — Asset Map
 
 | Artifact | Location |
 |:---------|:---------|
