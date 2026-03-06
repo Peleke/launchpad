@@ -13,7 +13,7 @@
     <text x="140" y="70" text-anchor="middle" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc" font-weight="700">Gate 1</text>
     <text x="140" y="95" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="#8b949e">Week 1</text>
     <!-- Threshold -->
-    <text x="140" y="140" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#e88072">< 5 enrollments</text>
+    <text x="140" y="140" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#e88072">&lt; 5 enrollments</text>
     <text x="140" y="200" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#eee0cc">→ contingency</text>
     <!-- Status light -->
     <circle cx="140" cy="245" r="16" fill="rgba(232,128,114,0.3)" stroke="#e88072" stroke-width="2"/>
@@ -25,7 +25,7 @@
     <path d="M 300,160 L 460,160" stroke="#f87171" stroke-width="3" stroke-linecap="round" stroke-dasharray="8,4" opacity="0.8"/>
     <text x="380" y="70" text-anchor="middle" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc" font-weight="700">Gate 2</text>
     <text x="380" y="95" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="#8b949e">Month 1</text>
-    <text x="380" y="140" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#f87171">< 15 enrollments</text>
+    <text x="380" y="140" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#f87171">&lt; 15 enrollments</text>
     <text x="380" y="200" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#f87171" font-weight="700">→ KILL cohort</text>
     <circle cx="380" cy="245" r="16" fill="rgba(248,113,113,0.3)" stroke="#f87171" stroke-width="2"/>
     <text x="380" y="250" text-anchor="middle" font-family="'Caveat', cursive" font-size="11" fill="#f87171">RED</text>
@@ -36,7 +36,7 @@
     <path d="M 530,160 L 690,160" stroke="#f87171" stroke-width="3" stroke-linecap="round" stroke-dasharray="8,4" opacity="0.8"/>
     <text x="610" y="70" text-anchor="middle" font-family="'Caveat', cursive" font-size="18" fill="#eee0cc" font-weight="700">Gate 3</text>
     <text x="610" y="95" text-anchor="middle" font-family="'Caveat', cursive" font-size="14" fill="#8b949e">Month 3</text>
-    <text x="610" y="140" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#f87171">< $15K revenue</text>
+    <text x="610" y="140" text-anchor="middle" font-family="'Caveat', cursive" font-size="16" fill="#f87171">&lt; $15K revenue</text>
     <text x="610" y="200" text-anchor="middle" font-family="'Caveat', cursive" font-size="15" fill="#f87171" font-weight="700">→ KILL business line</text>
     <circle cx="610" cy="245" r="16" fill="rgba(248,113,113,0.3)" stroke="#f87171" stroke-width="2"/>
     <text x="610" y="250" text-anchor="middle" font-family="'Caveat', cursive" font-size="11" fill="#f87171">RED</text>
