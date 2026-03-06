@@ -1,4 +1,4 @@
-<svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;">
+<svg viewBox="0 0 740 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:740px;">
   <defs>
     <filter id="roughen-1" x="-2%" y="-2%" width="104%" height="104%">
       <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="1"/>
@@ -12,45 +12,58 @@
       <path d="M 1,1 L 10,5 L 1,9"/>
     </marker>
   </defs>
+  <style>
+    @keyframes alertBlink {
+      0%, 100% { opacity: 0.9; r: 8; }
+      50% { opacity: 0.3; r: 6; }
+    }
+    .alert-dot { animation: alertBlink 1.5s ease-in-out infinite; }
+    .alert-dot:nth-child(2) { animation-delay: 0.3s; }
+    .alert-dot:nth-child(3) { animation-delay: 0.6s; }
+  </style>
   <!-- Left cluster: Courses -->
-  <g filter="url(#roughen-1)" transform="rotate(-0.5, 130, 140)">
-    <path d="M 30,60 C 32,58 148,57 150,60 C 152,62 153,108 150,110 C 148,112 32,113 30,110 C 28,108 28,62 30,60 Z" fill="none" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="90" y="90" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#888888">Andrew Ng</text>
+  <text x="110" y="35" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888" font-weight="600" letter-spacing="0.08em">COURSES</text>
+  <g filter="url(#roughen-1)">
+    <path d="M 20,50 C 22,48 198,47 200,50 C 202,52 203,92 200,94 C 198,96 22,97 20,94 C 18,92 18,52 20,50 Z" fill="none" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="110" y="77" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888">Andrew Ng</text>
   </g>
-  <g filter="url(#roughen-1)" transform="rotate(0.8, 130, 140)">
-    <path d="M 30,120 C 33,118 147,117 150,120 C 152,122 153,168 150,170 C 147,172 33,173 30,170 C 28,168 28,122 30,120 Z" fill="none" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="90" y="150" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#888888">Udemy / Coursera</text>
+  <g filter="url(#roughen-1)">
+    <path d="M 20,104 C 22,102 198,101 200,104 C 202,106 203,146 200,148 C 198,150 22,151 20,148 C 18,146 18,106 20,104 Z" fill="none" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="110" y="131" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888">Udemy / Coursera</text>
   </g>
-  <g filter="url(#roughen-1)" transform="rotate(-0.3, 130, 200)">
-    <path d="M 30,180 C 32,178 148,177 150,180 C 152,182 153,228 150,230 C 148,232 32,233 30,230 C 28,228 28,182 30,180 Z" fill="none" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="90" y="210" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#888888">Anthropic Academy</text>
+  <g filter="url(#roughen-1)">
+    <path d="M 20,158 C 22,156 198,155 200,158 C 202,160 203,200 200,202 C 198,204 22,205 20,202 C 18,200 18,160 20,158 Z" fill="none" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="110" y="185" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888">Anthropic Academy</text>
   </g>
-  <g filter="url(#roughen-1)" transform="rotate(0.5, 130, 260)">
-    <path d="M 30,240 C 33,238 147,237 150,240 C 152,242 153,278 150,280 C 148,282 32,283 30,280 C 28,278 28,242 30,240 Z" fill="none" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="90" y="264" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#888888">Skool / Agency</text>
+  <g filter="url(#roughen-1)">
+    <path d="M 20,212 C 22,210 198,209 200,212 C 202,214 203,254 200,256 C 198,258 22,259 20,256 C 18,254 18,214 20,212 Z" fill="none" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="110" y="239" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888">Skool / Agency</text>
   </g>
-  <text x="90" y="35" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" fill="#888888" font-weight="700">COURSES</text>
-  <!-- Right side: Production -->
-  <g filter="url(#roughen-1)" transform="rotate(-0.4, 590, 160)">
-    <path d="M 530,80 C 533,77 647,76 650,80 C 653,83 654,238 650,240 C 647,243 533,244 530,240 C 527,237 527,83 530,80 Z" fill="none" stroke="#e88072" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="590" y="150" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" fill="#e88072" font-weight="700">PRODUCTION</text>
-    <!-- Alarm indicators -->
-    <circle cx="555" cy="200" r="8" fill="#f87171" opacity="0.8"/>
-    <circle cx="590" cy="200" r="8" fill="#f87171" opacity="0.6"/>
-    <circle cx="625" cy="200" r="8" fill="#f87171" opacity="0.9"/>
-    <text x="590" y="230" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#f87171">alerts firing</text>
-  </g>
-  <text x="590" y="55" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" fill="#e88072" font-weight="700">PRODUCTION</text>
-  <!-- The Gap -->
-  <line x1="170" y1="160" x2="510" y2="160" stroke="#eee0cc" stroke-width="2" stroke-dasharray="12,8" opacity="0.5"/>
-  <line x1="170" y1="140" x2="170" y2="180" stroke="#eee0cc" stroke-width="2" opacity="0.4"/>
-  <line x1="510" y1="140" x2="510" y2="180" stroke="#eee0cc" stroke-width="2" opacity="0.4"/>
+  <!-- Connector bar -->
+  <line x1="210" y1="130" x2="210" y2="180" stroke="#eee0cc" stroke-width="1.5" opacity="0.3"/>
+  <!-- The Gap — dashed line BEHIND the label box -->
+  <line x1="220" y1="155" x2="520" y2="155" stroke="#eee0cc" stroke-width="2" stroke-dasharray="12,8" opacity="0.4"/>
+  <!-- Label box ON TOP of the dashed line -->
   <g filter="url(#glow-1)">
-    <rect x="250" y="120" width="200" height="50" rx="8" fill="rgba(248,113,113,0.12)" stroke="none"/>
-    <text x="350" y="142" text-anchor="middle" font-family="'Inter', sans-serif" font-size="22" fill="#f87171" font-weight="700">80–90% die here</text>
-    <text x="350" y="162" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#8b949e">(RAND Corporation)</text>
+    <rect x="270" y="110" width="200" height="55" rx="8" fill="#0d1117" stroke="none"/>
+    <rect x="270" y="110" width="200" height="55" rx="8" fill="rgba(248,113,113,0.12)" stroke="none"/>
+    <text x="370" y="135" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" fill="#f87171" font-weight="700">80-90% die here</text>
+    <text x="370" y="157" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">RAND Corporation</text>
   </g>
   <!-- Downward arrow into gap -->
-  <path d="M 350,85 C 350,90 348,105 350,115" stroke="#f87171" stroke-width="2" fill="none" marker-end="url(#arrow-gap)"/>
-  <text x="350" y="300" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc" opacity="0.7">THE GAP</text>
+  <path d="M 370,75 C 370,80 368,95 370,105" stroke="#f87171" stroke-width="2" fill="none" marker-end="url(#arrow-gap)"/>
+  <!-- Right side: Production -->
+  <text x="610" y="55" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#e88072" font-weight="600" letter-spacing="0.08em">PRODUCTION</text>
+  <g filter="url(#roughen-1)">
+    <path d="M 540,70 C 543,67 677,66 680,70 C 683,73 684,238 680,240 C 677,243 543,244 540,240 C 537,237 537,73 540,70 Z" fill="none" stroke="#e88072" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="610" y="148" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#e88072" font-weight="700">PRODUCTION</text>
+    <!-- Animated alert indicators -->
+    <circle class="alert-dot" cx="580" cy="190" r="8" fill="#f87171"/>
+    <circle class="alert-dot" cx="610" cy="190" r="8" fill="#f87171"/>
+    <circle class="alert-dot" cx="640" cy="190" r="8" fill="#f87171"/>
+    <text x="610" y="218" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#f87171">alerts firing</text>
+  </g>
+  <!-- Connector bar right -->
+  <line x1="530" y1="130" x2="530" y2="180" stroke="#eee0cc" stroke-width="1.5" opacity="0.3"/>
+  <text x="370" y="300" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#eee0cc" opacity="0.5" letter-spacing="0.12em">THE GAP</text>
 </svg>

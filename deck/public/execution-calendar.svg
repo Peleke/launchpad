@@ -9,6 +9,18 @@
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
+  <style>
+    @keyframes killPulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+    @keyframes killGlow {
+      0%, 100% { r: 22; }
+      50% { r: 26; }
+    }
+    .kill-text { animation: killPulse 2s ease-in-out infinite; }
+    .kill-circle { animation: killGlow 2s ease-in-out infinite; }
+  </style>
   <!-- Main timeline -->
   <path d="M 40,130 C 60,131 680,129 720,130" stroke="#eee0cc" stroke-width="2" stroke-dasharray="8,5" opacity="0.4" fill="none" stroke-linecap="round"/>
   <!-- Milestone 1: Mar 8 -->
@@ -46,14 +58,14 @@
     <text x="460" y="170" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#4ade80" font-weight="700">Presale</text>
     <text x="460" y="188" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#4ade80" font-weight="700">open</text>
   </g>
-  <!-- Milestone 6: Apr 14 — RED KILL DECISION -->
+  <!-- Milestone 6: Apr 14 — RED KILL DECISION (animated) -->
   <g filter="url(#roughen-10)">
     <g filter="url(#glow-10)">
-      <circle cx="560" cy="130" r="22" fill="rgba(248,113,113,0.20)" stroke="#f87171" stroke-width="3"/>
+      <circle class="kill-circle" cx="560" cy="130" r="22" fill="rgba(248,113,113,0.20)" stroke="#f87171" stroke-width="3"/>
     </g>
     <text x="560" y="128" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#f87171" font-weight="700">Apr 14</text>
     <text x="560" y="143" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#f87171">KILL?</text>
-    <text x="560" y="80" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#f87171" font-weight="700">KILL DECISION</text>
+    <text class="kill-text" x="560" y="80" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#f87171" font-weight="700">KILL DECISION</text>
     <path d="M 560,95 L 560,107" stroke="#f87171" stroke-width="2" stroke-dasharray="4,3"/>
   </g>
   <!-- Milestone 7: Apr 21–May 18 — green bar -->
