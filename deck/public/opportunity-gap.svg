@@ -1,4 +1,4 @@
-<svg viewBox="0 0 740 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:740px;">
+<svg viewBox="0 0 740 340" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:740px;">
   <defs>
     <filter id="roughen-1" x="-2%" y="-2%" width="104%" height="104%">
       <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="1"/>
@@ -8,62 +8,54 @@
       <feGaussianBlur stdDeviation="3" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <marker id="arrow-gap" viewBox="0 0 12 10" refX="10" refY="5" markerWidth="8" markerHeight="6" orient="auto-start-reverse" fill="none" stroke="#f87171" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <marker id="arrow-gap" viewBox="0 0 12 10" refX="10" refY="5" markerWidth="8" markerHeight="6" orient="auto-start-reverse" fill="none" stroke="#4DCFC9" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
       <path d="M 1,1 L 10,5 L 1,9"/>
     </marker>
   </defs>
-  <style>
-    @keyframes alertBlink {
-      0%, 100% { opacity: 0.9; r: 8; }
-      50% { opacity: 0.3; r: 6; }
-    }
-    .alert-dot { animation: alertBlink 1.5s ease-in-out infinite; }
-    .alert-dot:nth-child(2) { animation-delay: 0.3s; }
-    .alert-dot:nth-child(3) { animation-delay: 0.6s; }
-  </style>
-  <!-- Left cluster: Courses -->
-  <text x="110" y="35" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888" font-weight="600" letter-spacing="0.08em">COURSES</text>
+  <!-- Left cluster: Disconnected Tools -->
+  <text x="110" y="35" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888" font-weight="600" letter-spacing="0.08em">POINT TOOLS</text>
   <g filter="url(#roughen-1)">
     <path d="M 20,50 C 22,48 198,47 200,50 C 202,52 203,92 200,94 C 198,96 22,97 20,94 C 18,92 18,52 20,50 Z" fill="none" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="110" y="77" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888">Andrew Ng</text>
+    <text x="110" y="77" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888">Jasper — writes only</text>
   </g>
   <g filter="url(#roughen-1)">
     <path d="M 20,104 C 22,102 198,101 200,104 C 202,106 203,146 200,148 C 198,150 22,151 20,148 C 18,146 18,106 20,104 Z" fill="none" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="110" y="131" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888">Udemy / Coursera</text>
+    <text x="110" y="131" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888">Taplio — schedules only</text>
   </g>
   <g filter="url(#roughen-1)">
     <path d="M 20,158 C 22,156 198,155 200,158 C 202,160 203,200 200,202 C 198,204 22,205 20,202 C 18,200 18,160 20,158 Z" fill="none" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="110" y="185" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888">Anthropic Academy</text>
+    <text x="110" y="185" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888">Castmagic — repurposes</text>
   </g>
   <g filter="url(#roughen-1)">
     <path d="M 20,212 C 22,210 198,209 200,212 C 202,214 203,254 200,256 C 198,258 22,259 20,256 C 18,254 18,214 20,212 Z" fill="none" stroke="#888888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="110" y="239" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888">Skool / Agency</text>
+    <text x="110" y="239" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#888888">Skott — volume slop</text>
   </g>
   <!-- Connector bar -->
   <line x1="210" y1="130" x2="210" y2="180" stroke="#eee0cc" stroke-width="1.5" opacity="0.3"/>
-  <!-- The Gap — dashed line BEHIND the label box -->
+  <!-- The Gap — dashed line -->
   <line x1="220" y1="155" x2="520" y2="155" stroke="#eee0cc" stroke-width="2" stroke-dasharray="12,8" opacity="0.4"/>
-  <!-- Label box ON TOP of the dashed line -->
+  <!-- Label box on top -->
   <g filter="url(#glow-1)">
-    <rect x="270" y="110" width="200" height="55" rx="8" fill="#0d1117" stroke="none"/>
-    <rect x="270" y="110" width="200" height="55" rx="8" fill="rgba(248,113,113,0.12)" stroke="none"/>
-    <text x="370" y="135" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" fill="#f87171" font-weight="700">80-90% die here</text>
-    <text x="370" y="157" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">RAND Corporation</text>
+    <rect x="260" y="110" width="220" height="55" rx="8" fill="#0d1117" stroke="none"/>
+    <rect x="260" y="110" width="220" height="55" rx="8" fill="rgba(77,207,201,0.12)" stroke="none"/>
+    <text x="370" y="135" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" fill="#4DCFC9" font-weight="700">Nobody does the loop</text>
+    <text x="370" y="157" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">73% of AI automations fail — Salesforce</text>
   </g>
   <!-- Downward arrow into gap -->
-  <path d="M 370,75 C 370,80 368,95 370,105" stroke="#f87171" stroke-width="2" fill="none" marker-end="url(#arrow-gap)"/>
-  <!-- Right side: Production -->
-  <text x="610" y="55" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#e88072" font-weight="600" letter-spacing="0.08em">PRODUCTION</text>
+  <path d="M 370,75 C 370,80 368,95 370,105" stroke="#4DCFC9" stroke-width="2" fill="none" marker-end="url(#arrow-gap)"/>
+  <!-- Right side: The Full Loop -->
+  <text x="610" y="55" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#4DCFC9" font-weight="600" letter-spacing="0.08em">FULL LOOP</text>
   <g filter="url(#roughen-1)">
-    <path d="M 540,70 C 543,67 677,66 680,70 C 683,73 684,238 680,240 C 677,243 543,244 540,240 C 537,237 537,73 540,70 Z" fill="none" stroke="#e88072" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="610" y="148" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#e88072" font-weight="700">PRODUCTION</text>
-    <!-- Animated alert indicators -->
-    <circle class="alert-dot" cx="580" cy="190" r="8" fill="#f87171"/>
-    <circle class="alert-dot" cx="610" cy="190" r="8" fill="#f87171"/>
-    <circle class="alert-dot" cx="640" cy="190" r="8" fill="#f87171"/>
-    <text x="610" y="218" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#f87171">alerts firing</text>
+    <path d="M 540,70 C 543,67 677,66 680,70 C 683,73 684,238 680,240 C 677,243 543,244 540,240 C 537,237 537,73 540,70 Z" fill="none" stroke="#4DCFC9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="610" y="105" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">Research</text>
+    <text x="610" y="130" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">Write</text>
+    <text x="610" y="155" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#4DCFC9" font-weight="700">ACE</text>
+    <text x="610" y="180" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">Reshape</text>
+    <text x="610" y="205" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">Publish</text>
+    <text x="610" y="230" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">Measure</text>
   </g>
   <!-- Connector bar right -->
   <line x1="530" y1="130" x2="530" y2="180" stroke="#eee0cc" stroke-width="1.5" opacity="0.3"/>
-  <text x="370" y="300" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#eee0cc" opacity="0.5" letter-spacing="0.12em">THE GAP</text>
+  <text x="370" y="310" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#eee0cc" opacity="0.5" letter-spacing="0.12em">THE GAP</text>
+  <text x="370" y="332" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">Everyone handles one step. Nobody does the full loop.</text>
 </svg>

@@ -1,0 +1,52 @@
+<svg viewBox="0 0 740 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:740px;">
+  <defs>
+    <filter id="roughen-4" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="4"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+  <!-- Persona 1: The Nervous Tinkerer -->
+  <g filter="url(#roughen-4)" transform="rotate(-1.5, 175, 110)">
+    <path d="M 10,20 C 13,17 337,16 340,20 C 343,23 344,198 340,200 C 337,203 13,204 10,200 C 7,197 7,23 10,20 Z" fill="rgba(250,204,21,0.06)" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="175" y="52" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#facc15" font-weight="700">The Nervous Tinkerer</text>
+    <text x="175" y="82" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">"I only have one computer..."</text>
+    <text x="175" y="102" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">Wants to try agents safely</text>
+    <text x="175" y="128" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">Builds on weekends, scared of damage</text>
+    <line x1="50" y1="148" x2="300" y2="148" stroke="#facc15" stroke-width="1" opacity="0.3"/>
+    <text x="175" y="170" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#facc15" font-weight="700">$0-49/mo</text>
+    <text x="175" y="192" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">+ $2.5K-5K consulting</text>
+  </g>
+  <!-- Persona 2: The Content Grinder -->
+  <g filter="url(#roughen-4)" transform="rotate(1.0, 555, 110)">
+    <path d="M 400,20 C 403,17 727,16 730,20 C 733,23 734,198 730,200 C 727,203 403,204 400,200 C 397,197 397,23 400,20 Z" fill="rgba(77,207,201,0.06)" stroke="#4DCFC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="565" y="52" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#4DCFC9" font-weight="700">The Content Grinder</text>
+    <text x="565" y="82" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">3-5 posts/week or bust</text>
+    <text x="565" y="102" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">Drowning in manual reshaping</text>
+    <text x="565" y="128" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">Solopreneur / small team</text>
+    <line x1="440" y1="148" x2="690" y2="148" stroke="#4DCFC9" stroke-width="1" opacity="0.3"/>
+    <text x="565" y="170" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#4DCFC9" font-weight="700">$99-500/mo managed</text>
+    <text x="565" y="192" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">or $5K-10K setup</text>
+  </g>
+  <!-- Persona 3: The Skeptical Staff Engineer -->
+  <g filter="url(#roughen-4)" transform="rotate(0.8, 175, 325)">
+    <path d="M 10,228 C 13,225 337,224 340,228 C 343,231 344,408 340,410 C 337,413 13,414 10,410 C 7,407 7,231 10,228 Z" fill="rgba(248,113,113,0.06)" stroke="#f87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="175" y="262" text-anchor="middle" font-family="'Inter', sans-serif" font-size="17" fill="#f87171" font-weight="700">The Skeptical Staff Eng</text>
+    <text x="175" y="292" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">"Show me YOUR production"</text>
+    <text x="175" y="312" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">Evaluates tools with contempt</text>
+    <text x="175" y="338" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">Highest trust bar, longest sales cycle</text>
+    <line x1="50" y1="358" x2="300" y2="358" stroke="#f87171" stroke-width="1" opacity="0.3"/>
+    <text x="175" y="380" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#f87171" font-weight="700">$5K-15K consulting</text>
+    <text x="175" y="402" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">highest margin, hardest close</text>
+  </g>
+  <!-- Persona 4: The Overwhelmed Operator -->
+  <g filter="url(#roughen-4)" transform="rotate(-0.8, 555, 325)">
+    <path d="M 400,228 C 403,225 727,224 730,228 C 733,231 734,408 730,410 C 727,413 403,414 400,410 C 397,407 397,231 400,228 Z" fill="rgba(78,222,128,0.06)" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="565" y="262" text-anchor="middle" font-family="'Inter', sans-serif" font-size="17" fill="#4ade80" font-weight="700">The Overwhelmed Operator</text>
+    <text x="565" y="292" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">Running 3 tools, none talk to each other</text>
+    <text x="565" y="312" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc">Paying $200+/mo for fragments</text>
+    <text x="565" y="338" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">Wants one pipeline, not five dashboards</text>
+    <line x1="440" y1="358" x2="690" y2="358" stroke="#4ade80" stroke-width="1" opacity="0.3"/>
+    <text x="565" y="380" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#4ade80" font-weight="700">$49-199/mo</text>
+    <text x="565" y="402" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">or $1K-3K setup</text>
+  </g>
+</svg>

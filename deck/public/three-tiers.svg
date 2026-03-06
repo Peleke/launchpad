@@ -1,0 +1,50 @@
+<svg viewBox="0 0 740 280" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:740px;">
+  <defs>
+    <filter id="roughen-6" x="-2%" y="-2%" width="104%" height="104%">
+      <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="6"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="glow-6">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Tier 1: Article Series -->
+  <g filter="url(#roughen-6)">
+    <path d="M 15,30 C 18,27 222,26 225,30 C 228,33 229,258 225,260 C 222,263 18,264 15,260 C 12,257 12,33 15,30 Z" fill="rgba(78,222,128,0.06)" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="120" y="60" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#4ade80" font-weight="700">Article Series</text>
+    <text x="120" y="90" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">4 deep-dive articles</text>
+    <text x="120" y="114" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Architecture + Security</text>
+    <text x="120" y="138" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">+ Recursive Proof</text>
+    <text x="120" y="162" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">+ Retrospective</text>
+    <line x1="50" y1="190" x2="190" y2="190" stroke="#4ade80" stroke-width="1" opacity="0.3"/>
+    <text x="120" y="220" text-anchor="middle" font-family="'Inter', sans-serif" font-size="28" fill="#4ade80" font-weight="700">FREE</text>
+    <text x="120" y="248" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">credibility builder</text>
+  </g>
+  <!-- Tier 2: Open-Source Pipeline -->
+  <g filter="url(#roughen-6)">
+    <path d="M 258,30 C 261,27 472,26 475,30 C 478,33 479,258 475,260 C 472,263 261,264 258,260 C 255,257 255,33 258,30 Z" fill="rgba(77,207,201,0.06)" stroke="#4DCFC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="366" y="60" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#4DCFC9" font-weight="700">Open-Source</text>
+    <text x="366" y="90" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">LinWheel pipeline</text>
+    <text x="366" y="114" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">buildlog integration</text>
+    <text x="366" y="138" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Skills framework</text>
+    <text x="366" y="162" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Fork and own it</text>
+    <line x1="295" y1="190" x2="437" y2="190" stroke="#4DCFC9" stroke-width="1" opacity="0.3"/>
+    <text x="366" y="220" text-anchor="middle" font-family="'Inter', sans-serif" font-size="28" fill="#4DCFC9" font-weight="700">FREE</text>
+    <text x="366" y="248" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">trust builder</text>
+  </g>
+  <!-- Tier 3: Managed Pilot -->
+  <g filter="url(#roughen-6)">
+    <g filter="url(#glow-6)">
+      <path d="M 505,30 C 508,27 722,26 725,30 C 728,33 729,258 725,260 C 722,263 508,264 505,260 C 502,257 502,33 505,30 Z" fill="rgba(77,207,201,0.12)" stroke="#4DCFC9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+    <text x="615" y="60" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#4DCFC9" font-weight="700">Managed Pilot</text>
+    <text x="615" y="90" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Done-for-you setup</text>
+    <text x="615" y="114" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Custom voice training</text>
+    <text x="615" y="138" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">30-day pipeline build</text>
+    <text x="615" y="162" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Ongoing optimization</text>
+    <line x1="542" y1="190" x2="688" y2="190" stroke="#4DCFC9" stroke-width="1" opacity="0.3"/>
+    <text x="615" y="218" text-anchor="middle" font-family="'Inter', sans-serif" font-size="24" fill="#4DCFC9" font-weight="700">$3-5K setup</text>
+    <text x="615" y="248" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">+ $1K/mo managed</text>
+  </g>
+</svg>

@@ -1,51 +1,43 @@
-<svg viewBox="0 0 720 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:720px;">
+<svg viewBox="0 0 720 320" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:720px;">
   <defs>
     <filter id="roughen-8" x="-2%" y="-2%" width="104%" height="104%">
       <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="8"/>
       <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.4" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
     <filter id="glow-8">
-      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feGaussianBlur stdDeviation="4" result="blur"/>
       <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <text x="360" y="30" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" fill="#eee0cc" font-weight="700">Annual Revenue Potential</text>
-  <!-- Baseline -->
-  <line x1="50" y1="320" x2="700" y2="320" stroke="#eee0cc" stroke-width="1" opacity="0.2"/>
-  <!-- Bar 1: Cohort $100K -->
-  <g filter="url(#roughen-8)" transform="rotate(-0.3, 120, 200)">
-    <path d="M 70,100 C 73,97 167,96 170,100 C 173,103 174,318 170,320 C 167,323 73,324 70,320 C 67,317 67,103 70,100 Z" fill="rgba(78,222,128,0.15)" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="120" y="85" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#4ade80" font-weight="700">~$100K</text>
-    <text x="120" y="350" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Cohort</text>
-    <text x="120" y="368" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">4x25x$997</text>
+  <!-- Timeline axis -->
+  <line x1="60" y1="200" x2="680" y2="200" stroke="#eee0cc" stroke-width="1.5" opacity="0.3"/>
+  <!-- Months 1-2: $0 -->
+  <g filter="url(#roughen-8)">
+    <path d="M 80,190 C 83,187 197,186 200,190 C 203,193 204,208 200,210 C 197,213 83,214 80,210 C 77,207 77,193 80,190 Z" fill="rgba(136,136,136,0.08)" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="140" y="165" text-anchor="middle" font-family="'Inter', sans-serif" font-size="28" fill="#888888" font-weight="700">$0</text>
+    <text x="140" y="245" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Months 1-2</text>
+    <text x="140" y="268" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">audience building</text>
+    <text x="140" y="288" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">articles + LinkedIn</text>
   </g>
-  <!-- Bar 2: Enterprise $40K -->
-  <g filter="url(#roughen-8)" transform="rotate(0.4, 250, 240)">
-    <path d="M 200,190 C 203,187 297,186 300,190 C 303,193 304,318 300,320 C 297,323 203,324 200,320 C 197,317 197,193 200,190 Z" fill="rgba(78,222,128,0.12)" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="250" y="175" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#4ade80" font-weight="700">$30–50K</text>
-    <text x="250" y="350" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Enterprise</text>
-    <text x="250" y="368" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">team licenses</text>
+  <!-- Month 3: $3-8K -->
+  <g filter="url(#roughen-8)">
+    <path d="M 280,130 C 283,127 427,126 430,130 C 433,133 434,208 430,210 C 427,213 283,214 280,210 C 277,207 277,133 280,130 Z" fill="rgba(77,207,201,0.12)" stroke="#4DCFC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="355" y="108" text-anchor="middle" font-family="'Inter', sans-serif" font-size="28" fill="#4DCFC9" font-weight="700">$3-8K</text>
+    <text x="355" y="170" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">first pilot</text>
+    <text x="355" y="245" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Month 3</text>
+    <text x="355" y="268" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">managed pilot</text>
+    <text x="355" y="288" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">setup + retainer</text>
   </g>
-  <!-- Bar 3: Workshops $30K -->
-  <g filter="url(#roughen-8)" transform="rotate(-0.5, 380, 255)">
-    <path d="M 330,210 C 333,207 427,206 430,210 C 433,213 434,318 430,320 C 427,323 333,324 330,320 C 327,317 327,213 330,210 Z" fill="rgba(78,222,128,0.10)" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="380" y="195" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#4ade80" font-weight="700">~$30K</text>
-    <text x="380" y="350" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Workshops</text>
-    <text x="380" y="368" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">4x$7.5K</text>
-  </g>
-  <!-- Bar 4: Audits $70K -->
-  <g filter="url(#roughen-8)" transform="rotate(0.3, 510, 220)">
-    <path d="M 460,155 C 463,152 557,151 560,155 C 563,158 564,318 560,320 C 557,323 463,324 460,320 C 457,317 457,158 460,155 Z" fill="rgba(78,222,128,0.12)" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="510" y="140" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#4ade80" font-weight="700">$60–80K</text>
-    <text x="510" y="350" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Audits</text>
-    <text x="510" y="368" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">6-8x$10K</text>
-  </g>
-  <!-- Total bar: highlighted -->
+  <!-- Month 6: $6-16K cumulative -->
   <g filter="url(#roughen-8)">
     <g filter="url(#glow-8)">
-      <path d="M 610,65 C 613,62 697,61 700,65 C 703,68 704,318 700,320 C 697,323 613,324 610,320 C 607,317 607,68 610,65 Z" fill="rgba(232,128,114,0.18)" stroke="#e88072" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 500,70 C 503,67 667,66 670,70 C 673,73 674,208 670,210 C 667,213 503,214 500,210 C 497,207 497,73 500,70 Z" fill="rgba(77,207,201,0.18)" stroke="#4DCFC9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     </g>
-    <text x="655" y="52" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" fill="#e88072" font-weight="700">$220–260K</text>
-    <text x="655" y="350" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#e88072" font-weight="700">TOTAL</text>
+    <text x="585" y="56" text-anchor="middle" font-family="'Inter', sans-serif" font-size="28" fill="#4DCFC9" font-weight="700">$6-16K</text>
+    <text x="585" y="130" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">cumulative</text>
+    <text x="585" y="155" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">2-3 pilots</text>
+    <text x="585" y="245" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#eee0cc">Month 6</text>
+    <text x="585" y="268" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">recurring retainers</text>
+    <text x="585" y="288" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">+ new setups</text>
   </g>
 </svg>

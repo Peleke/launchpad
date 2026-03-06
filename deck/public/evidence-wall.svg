@@ -1,48 +1,53 @@
-<svg viewBox="0 0 720 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:720px;">
+<svg viewBox="0 0 720 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:720px;">
   <defs>
     <filter id="roughen-2" x="-2%" y="-2%" width="104%" height="104%">
       <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="2"/>
       <feDisplacementMap in="SourceGraphic" in2="noise" scale="0.4" xChannelSelector="R" yChannelSelector="G"/>
     </filter>
   </defs>
-  <!-- Sticky note 1 -->
+  <!-- Sticky note 1: OpenClaw Stars -->
   <g filter="url(#roughen-2)" transform="rotate(-2.5, 110, 110)">
-    <path d="M 20,30 C 23,27 197,26 200,30 C 203,33 204,188 200,190 C 197,193 23,194 20,190 C 17,187 17,33 20,30 Z" fill="rgba(232,128,114,0.08)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="110" y="85" text-anchor="middle" font-family="'Inter', sans-serif" font-size="42" fill="#e88072" font-weight="700">94%</text>
-    <text x="110" y="120" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#eee0cc">skills gap</text>
-    <text x="110" y="165" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">GlobeNewsWire</text>
-    <text x="110" y="182" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">2024 Survey</text>
+    <path d="M 20,30 C 23,27 227,26 230,30 C 233,33 234,168 230,170 C 227,173 23,174 20,170 C 17,167 17,33 20,30 Z" fill="rgba(77,207,201,0.08)" stroke="#4DCFC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="125" y="80" text-anchor="middle" font-family="'Inter', sans-serif" font-size="40" fill="#4DCFC9" font-weight="700">250K+</text>
+    <text x="125" y="115" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">OpenClaw stars</text>
+    <text x="125" y="155" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">GitHub 2026</text>
   </g>
-  <!-- Sticky note 2 -->
-  <g filter="url(#roughen-2)" transform="rotate(1.5, 350, 100)">
-    <path d="M 260,20 C 263,17 437,18 440,20 C 443,23 444,178 440,180 C 437,183 263,182 260,180 C 257,177 257,23 260,20 Z" fill="rgba(78,222,128,0.06)" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="350" y="75" text-anchor="middle" font-family="'Inter', sans-serif" font-size="42" fill="#4ade80" font-weight="700">70%</text>
-    <text x="350" y="110" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#eee0cc">wrong answers</text>
-    <text x="350" y="148" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">Carnegie Mellon</text>
-    <text x="350" y="168" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">tool-use study</text>
+  <!-- Sticky note 2: 1 in 5 Malicious -->
+  <g filter="url(#roughen-2)" transform="rotate(1.5, 370, 100)">
+    <path d="M 260,20 C 263,17 467,18 470,20 C 473,23 474,168 470,170 C 467,173 263,172 260,170 C 257,167 257,23 260,20 Z" fill="rgba(248,113,113,0.08)" stroke="#f87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="365" y="70" text-anchor="middle" font-family="'Inter', sans-serif" font-size="40" fill="#f87171" font-weight="700">1 in 5</text>
+    <text x="365" y="105" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">skills malicious</text>
+    <text x="365" y="145" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">OpenClaw audit</text>
   </g>
-  <!-- Sticky note 3 -->
-  <g filter="url(#roughen-2)" transform="rotate(-1.0, 590, 110)">
-    <path d="M 500,30 C 503,27 677,28 680,30 C 683,33 684,188 680,190 C 677,193 503,192 500,190 C 497,187 497,33 500,30 Z" fill="rgba(248,113,113,0.08)" stroke="#f87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="590" y="85" text-anchor="middle" font-family="'Inter', sans-serif" font-size="42" fill="#f87171" font-weight="700">95%</text>
-    <text x="590" y="120" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#eee0cc">zero value</text>
-    <text x="590" y="160" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">MIT Sloan</text>
-    <text x="590" y="178" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">enterprise AI ROI</text>
+  <!-- Sticky note 3: ~20% Auto-Activation -->
+  <g filter="url(#roughen-2)" transform="rotate(-1.0, 600, 110)">
+    <path d="M 500,30 C 503,27 697,28 700,30 C 703,33 704,168 700,170 C 697,173 503,172 500,170 C 497,167 497,33 500,30 Z" fill="rgba(248,113,113,0.08)" stroke="#f87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="600" y="80" text-anchor="middle" font-family="'Inter', sans-serif" font-size="40" fill="#f87171" font-weight="700">~20%</text>
+    <text x="600" y="115" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">auto-activation</text>
+    <text x="600" y="155" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">skills run unseen</text>
   </g>
-  <!-- Sticky note 4 -->
-  <g filter="url(#roughen-2)" transform="rotate(2.0, 180, 310)">
-    <path d="M 70,220 C 73,217 287,218 290,220 C 293,223 294,378 290,380 C 287,383 73,382 70,380 C 67,377 67,223 70,220 Z" fill="rgba(232,128,114,0.06)" stroke="#eee0cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
-    <text x="180" y="278" text-anchor="middle" font-family="'Inter', sans-serif" font-size="32" fill="#e88072" font-weight="700">40% → 29%</text>
-    <text x="180" y="312" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#eee0cc">trust collapse</text>
-    <text x="180" y="350" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">Stack Overflow</text>
-    <text x="180" y="368" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">Dev Survey 2024</text>
+  <!-- Sticky note 4: 6.60% Carousel Engagement -->
+  <g filter="url(#roughen-2)" transform="rotate(2.0, 160, 320)">
+    <path d="M 20,230 C 23,227 237,228 240,230 C 243,233 244,398 240,400 C 237,403 23,402 20,400 C 17,397 17,233 20,230 Z" fill="rgba(78,222,128,0.06)" stroke="#4ade80" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="130" y="288" text-anchor="middle" font-family="'Inter', sans-serif" font-size="38" fill="#4ade80" font-weight="700">6.60%</text>
+    <text x="130" y="322" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">carousel engage</text>
+    <text x="130" y="360" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">LinkedIn benchmark</text>
+    <text x="130" y="378" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">vs 2.2% text posts</text>
   </g>
-  <!-- Sticky note 5 -->
-  <g filter="url(#roughen-2)" transform="rotate(-1.8, 500, 310)">
-    <path d="M 380,225 C 383,222 617,221 620,225 C 623,228 624,383 620,385 C 617,388 383,389 380,385 C 377,382 377,228 380,225 Z" fill="rgba(248,113,113,0.06)" stroke="#f87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
-    <text x="500" y="280" text-anchor="middle" font-family="'Inter', sans-serif" font-size="28" fill="#f87171" font-weight="700">674 pts</text>
-    <text x="500" y="318" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">"reinvented programming,</text>
-    <text x="500" y="340" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">badly"</text>
-    <text x="500" y="373" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#8b949e">r/ExperiencedDevs</text>
+  <!-- Sticky note 5: 73% AI Automation Failure -->
+  <g filter="url(#roughen-2)" transform="rotate(-1.8, 480, 320)">
+    <path d="M 270,235 C 273,232 487,231 490,235 C 493,238 494,398 490,400 C 487,403 273,404 270,400 C 267,397 267,238 270,235 Z" fill="rgba(248,113,113,0.06)" stroke="#f87171" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+    <text x="380" y="290" text-anchor="middle" font-family="'Inter', sans-serif" font-size="38" fill="#f87171" font-weight="700">73%</text>
+    <text x="380" y="328" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">AI automation</text>
+    <text x="380" y="350" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">failure rate</text>
+    <text x="380" y="388" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">Salesforce 2025</text>
+  </g>
+  <!-- Sticky note 6: $2K/mo for Slop -->
+  <g filter="url(#roughen-2)" transform="rotate(1.2, 620, 310)">
+    <path d="M 520,230 C 523,227 697,228 700,230 C 703,233 704,398 700,400 C 697,403 523,404 520,400 C 517,397 517,233 520,230 Z" fill="rgba(250,204,21,0.06)" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="610" y="290" text-anchor="middle" font-family="'Inter', sans-serif" font-size="34" fill="#facc15" font-weight="700">$2K/mo</text>
+    <text x="610" y="325" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">competitor pricing</text>
+    <text x="610" y="350" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">for volume slop</text>
+    <text x="610" y="388" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#8b949e">Skott / Artisan</text>
   </g>
 </svg>

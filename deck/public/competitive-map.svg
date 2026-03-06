@@ -24,62 +24,53 @@
   <line x1="120" y1="410" x2="120" y2="30" stroke="#eee0cc" stroke-width="1" opacity="0.25"/>
   <!-- Axis labels -->
   <text x="420" y="448" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc" font-weight="600" letter-spacing="0.06em" opacity="0.6">PRICE</text>
-  <text x="50" y="220" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc" font-weight="600" letter-spacing="0.06em" opacity="0.6" transform="rotate(-90, 50, 220)">DEPTH</text>
+  <text x="50" y="220" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#eee0cc" font-weight="600" letter-spacing="0.06em" opacity="0.6" transform="rotate(-90, 50, 220)">INTEGRATION DEPTH</text>
   <text x="140" y="432" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">Free</text>
   <text x="665" y="432" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">$2K+</text>
-  <text x="130" y="400" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">Intro</text>
-  <text x="130" y="50" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">Prod</text>
-  <!-- Ng -->
+  <text x="128" y="400" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">Single</text>
+  <text x="128" y="50" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">Full loop</text>
+  <!-- Jasper -->
   <g class="competitor" filter="url(#roughen-9)">
-    <circle cx="175" cy="365" r="18" fill="rgba(136,136,136,0.12)" stroke="#888888" stroke-width="1.5"/>
-    <text x="175" y="370" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#888888">Ng</text>
-    <text x="175" y="395" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">$49</text>
+    <circle cx="240" cy="340" r="18" fill="rgba(136,136,136,0.12)" stroke="#888888" stroke-width="1.5"/>
+    <text x="240" y="337" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#888888">Jasper</text>
+    <text x="240" y="350" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#888888">writes</text>
+    <text x="240" y="370" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">$49-129</text>
   </g>
-  <!-- Anthropic Academy -->
+  <!-- Taplio -->
   <g class="competitor" filter="url(#roughen-9)">
-    <circle cx="155" cy="310" r="16" fill="rgba(136,136,136,0.10)" stroke="#888888" stroke-width="1.5"/>
-    <text x="155" y="315" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#888888">Anth</text>
-    <text x="155" y="335" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">FREE</text>
+    <circle cx="230" cy="280" r="16" fill="rgba(136,136,136,0.10)" stroke="#888888" stroke-width="1.5"/>
+    <text x="230" y="277" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#888888">Taplio</text>
+    <text x="230" y="289" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#888888">schedules</text>
+    <text x="230" y="305" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">$39-149</text>
   </g>
-  <!-- Udemy -->
+  <!-- Castmagic -->
   <g class="competitor" filter="url(#roughen-9)">
-    <circle cx="240" cy="380" r="12" fill="rgba(136,136,136,0.08)" stroke="#888888" stroke-width="1.5"/>
-    <text x="240" y="384" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#888888">$14</text>
-    <text x="240" y="402" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">Udemy</text>
+    <circle cx="200" cy="220" r="16" fill="rgba(136,136,136,0.10)" stroke="#888888" stroke-width="1.5"/>
+    <text x="200" y="217" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#888888">Cast-</text>
+    <text x="200" y="228" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#888888">magic</text>
+    <text x="200" y="248" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">$30+</text>
   </g>
-  <!-- Skool -->
+  <!-- Skott -->
   <g class="competitor" filter="url(#roughen-9)">
-    <circle cx="330" cy="330" r="18" fill="rgba(136,136,136,0.12)" stroke="#888888" stroke-width="1.5"/>
-    <text x="330" y="335" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#888888">Skool</text>
-    <text x="330" y="358" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">agency bros</text>
+    <circle cx="600" cy="300" r="20" fill="rgba(248,113,113,0.12)" stroke="#f87171" stroke-width="1.5"/>
+    <text x="600" y="297" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#f87171">Skott</text>
+    <text x="600" y="309" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#f87171">slop</text>
+    <text x="600" y="330" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">$1,999</text>
   </g>
-  <!-- IndyDevDan -->
+  <!-- Artisan -->
   <g class="competitor" filter="url(#roughen-9)">
-    <circle cx="380" cy="230" r="18" fill="rgba(136,136,136,0.15)" stroke="#888888" stroke-width="1.5"/>
-    <text x="380" y="235" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#888888">Indy</text>
-    <text x="380" y="258" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">$599</text>
+    <circle cx="630" cy="350" r="18" fill="rgba(248,113,113,0.12)" stroke="#f87171" stroke-width="1.5"/>
+    <text x="630" y="347" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#f87171">Artisan</text>
+    <text x="630" y="359" text-anchor="middle" font-family="'Inter', sans-serif" font-size="9" fill="#f87171">0 replies</text>
+    <text x="630" y="378" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">$2,000</text>
   </g>
-  <!-- AI Makerspace -->
-  <g class="competitor" filter="url(#roughen-9)">
-    <circle cx="530" cy="200" r="20" fill="rgba(136,136,136,0.15)" stroke="#888888" stroke-width="1.5"/>
-    <text x="530" y="196" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#888888">AI</text>
-    <text x="530" y="208" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#888888">Maker</text>
-    <text x="530" y="230" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">$1.5-2K</text>
-  </g>
-  <!-- Hamel Husain -->
-  <g class="competitor" filter="url(#roughen-9)">
-    <circle cx="440" cy="120" r="18" fill="rgba(136,136,136,0.15)" stroke="#888888" stroke-width="1.5"/>
-    <text x="440" y="118" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#888888">Hamel</text>
-    <text x="440" y="130" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#888888">Husain</text>
-    <text x="440" y="150" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#8b949e">owns evals</text>
-  </g>
-  <!-- US — animated pulse -->
+  <!-- ACE — animated pulse -->
   <g filter="url(#roughen-9)">
     <g filter="url(#glow-9)">
-      <circle class="us-glow" cx="600" cy="80" r="38" fill="rgba(232,128,114,0.20)" stroke="#e88072" stroke-width="2.5"/>
+      <circle class="us-glow" cx="260" cy="80" r="38" fill="rgba(77,207,201,0.20)" stroke="#4DCFC9" stroke-width="2.5"/>
     </g>
-    <text x="600" y="76" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#e88072" font-weight="700">US</text>
-    <text x="600" y="96" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#eee0cc">$749-997</text>
-    <text x="600" y="132" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#e88072" font-weight="600">Production depth</text>
+    <text x="260" y="76" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#4DCFC9" font-weight="700">ACE</text>
+    <text x="260" y="96" text-anchor="middle" font-family="'Inter', sans-serif" font-size="12" fill="#eee0cc">Free-$5K</text>
+    <text x="260" y="132" text-anchor="middle" font-family="'Inter', sans-serif" font-size="13" fill="#4DCFC9" font-weight="600">Full loop, open-source</text>
   </g>
 </svg>

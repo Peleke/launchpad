@@ -15,17 +15,15 @@
   </style>
   <!-- Gate 1 -->
   <g filter="url(#roughen-11)" transform="rotate(-0.5, 140, 160)">
-    <path d="M 50,40 C 53,37 227,36 230,40 C 233,43 234,278 230,280 C 227,283 53,284 50,280 C 47,277 47,43 50,40 Z" fill="rgba(232,128,114,0.04)" stroke="#eee0cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <!-- Gate bar -->
-    <path d="M 70,160 L 210,160" stroke="#e88072" stroke-width="3" stroke-linecap="round" stroke-dasharray="8,4" opacity="0.8"/>
+    <path d="M 50,40 C 53,37 227,36 230,40 C 233,43 234,278 230,280 C 227,283 53,284 50,280 C 47,277 47,43 50,40 Z" fill="rgba(250,204,21,0.04)" stroke="#facc15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 70,160 L 210,160" stroke="#facc15" stroke-width="3" stroke-linecap="round" stroke-dasharray="8,4" opacity="0.8"/>
     <text x="140" y="70" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#eee0cc" font-weight="700">Gate 1</text>
     <text x="140" y="95" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#8b949e">Week 1</text>
-    <!-- Threshold -->
-    <text x="140" y="140" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#e88072">&lt; 5 enrollments</text>
-    <text x="140" y="200" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#eee0cc">→ contingency</text>
-    <!-- Status light -->
-    <circle cx="140" cy="245" r="16" fill="rgba(232,128,114,0.3)" stroke="#e88072" stroke-width="2"/>
-    <text x="140" y="250" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#e88072">YELLOW</text>
+    <text x="140" y="140" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#facc15">&lt;50 LinkedIn</text>
+    <text x="140" y="185" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#facc15">AND &lt;20 HN</text>
+    <text x="140" y="220" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#eee0cc">= reassess format</text>
+    <circle cx="140" cy="255" r="16" fill="rgba(250,204,21,0.3)" stroke="#facc15" stroke-width="2"/>
+    <text x="140" y="260" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#facc15">YELLOW</text>
   </g>
   <!-- Gate 2 -->
   <g filter="url(#roughen-11)" transform="rotate(0.3, 380, 160)">
@@ -33,10 +31,11 @@
     <path d="M 300,160 L 460,160" stroke="#f87171" stroke-width="3" stroke-linecap="round" stroke-dasharray="8,4" opacity="0.8"/>
     <text x="380" y="70" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#eee0cc" font-weight="700">Gate 2</text>
     <text x="380" y="95" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#8b949e">Month 1</text>
-    <text x="380" y="140" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#f87171">&lt; 15 enrollments</text>
-    <text x="380" y="200" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#f87171" font-weight="700">→ KILL cohort</text>
-    <circle class="red-light" cx="380" cy="245" r="16" fill="rgba(248,113,113,0.3)" stroke="#f87171" stroke-width="2"/>
-    <text x="380" y="250" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#f87171">RED</text>
+    <text x="380" y="140" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#f87171">Zero inbound</text>
+    <text x="380" y="185" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#f87171">in 14 days</text>
+    <text x="380" y="220" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#f87171" font-weight="700">= KILL pipeline</text>
+    <circle class="red-light" cx="380" cy="255" r="16" fill="rgba(248,113,113,0.3)" stroke="#f87171" stroke-width="2"/>
+    <text x="380" y="260" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#f87171">RED</text>
   </g>
   <!-- Gate 3 -->
   <g filter="url(#roughen-11)" transform="rotate(-0.4, 610, 160)">
@@ -44,11 +43,13 @@
     <path d="M 530,160 L 690,160" stroke="#f87171" stroke-width="3" stroke-linecap="round" stroke-dasharray="8,4" opacity="0.8"/>
     <text x="610" y="70" text-anchor="middle" font-family="'Inter', sans-serif" font-size="18" fill="#eee0cc" font-weight="700">Gate 3</text>
     <text x="610" y="95" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#8b949e">Month 3</text>
-    <text x="610" y="140" text-anchor="middle" font-family="'Inter', sans-serif" font-size="16" fill="#f87171">&lt; $15K revenue</text>
-    <text x="610" y="200" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#f87171" font-weight="700">→ KILL business line</text>
-    <circle class="red-light-2" cx="610" cy="245" r="16" fill="rgba(248,113,113,0.3)" stroke="#f87171" stroke-width="2"/>
-    <text x="610" y="250" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#f87171">RED</text>
+    <text x="610" y="140" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#f87171">Zero pilot</text>
+    <text x="610" y="185" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#f87171">conversations</text>
+    <text x="610" y="210" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#f87171">in 45 days</text>
+    <text x="610" y="240" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#f87171" font-weight="700">= KILL offer</text>
+    <circle class="red-light-2" cx="610" cy="268" r="16" fill="rgba(248,113,113,0.3)" stroke="#f87171" stroke-width="2"/>
+    <text x="610" y="273" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#f87171">RED</text>
   </g>
-  <!-- Pivot note -->
-  <text x="360" y="325" text-anchor="middle" font-family="'Inter', sans-serif" font-size="15" fill="#8b949e">Pivot trigger: enterprise demand > individual → enterprise-first model</text>
+  <!-- Bottom note -->
+  <text x="360" y="330" text-anchor="middle" font-family="'Inter', sans-serif" font-size="14" fill="#8b949e">If a gate fires, stop spending. No sunk cost exceptions.</text>
 </svg>

@@ -1,4 +1,4 @@
-<svg viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;">
+<svg viewBox="0 0 700 310" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;">
   <defs>
     <filter id="roughen-3" x="-2%" y="-2%" width="104%" height="104%">
       <feTurbulence type="turbulence" baseFrequency="0.03" numOctaves="2" result="noise" seed="3"/>
@@ -10,36 +10,30 @@
     </filter>
   </defs>
   <text x="350" y="30" text-anchor="middle" font-family="'Inter', sans-serif" font-size="20" fill="#eee0cc" font-weight="700">Opportunity Ranking (Score / 60)</text>
-  <!-- Bar 1: Production Cohort — highlighted -->
+  <!-- Bar 1: Ambient Content Engine — highlighted -->
   <g filter="url(#roughen-3)">
-    <text x="195" y="78" text-anchor="end" font-family="'Inter', sans-serif" font-size="18" fill="#eee0cc">Production Cohort</text>
+    <text x="195" y="78" text-anchor="end" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">Ambient Content Engine</text>
     <g filter="url(#glow-3)">
-      <path d="M 210,58 C 213,55 617,54 620,58 C 623,61 624,88 620,90 C 617,93 213,94 210,90 C 207,87 207,61 210,58 Z" fill="rgba(232,128,114,0.25)" stroke="#e88072" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 210,58 C 213,55 627,54 630,58 C 633,61 634,88 630,90 C 627,93 213,94 210,90 C 207,87 207,61 210,58 Z" fill="rgba(77,207,201,0.25)" stroke="#4DCFC9" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
     </g>
-    <text x="635" y="80" font-family="'Inter', sans-serif" font-size="20" fill="#e88072" font-weight="700">50/60</text>
+    <text x="645" y="80" font-family="'Inter', sans-serif" font-size="20" fill="#4DCFC9" font-weight="700">54/60</text>
   </g>
-  <!-- Bar 2: Security Workshop -->
+  <!-- Bar 2: Bilrost / Hardened Sandbox -->
   <g filter="url(#roughen-3)">
-    <text x="195" y="138" text-anchor="end" font-family="'Inter', sans-serif" font-size="18" fill="#eee0cc">Security Workshop</text>
-    <path d="M 210,118 C 213,115 557,114 560,118 C 563,121 564,148 560,150 C 557,153 213,154 210,150 C 207,147 207,121 210,118 Z" fill="rgba(232,128,114,0.15)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="575" y="140" font-family="'Inter', sans-serif" font-size="18" fill="#e88072">45/60</text>
+    <text x="195" y="138" text-anchor="end" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">Bilrost / Sandbox</text>
+    <path d="M 210,118 C 213,115 517,114 520,118 C 523,121 524,148 520,150 C 517,153 213,154 210,150 C 207,147 207,121 210,118 Z" fill="rgba(77,207,201,0.15)" stroke="#4DCFC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="535" y="140" font-family="'Inter', sans-serif" font-size="18" fill="#4DCFC9">41/60</text>
   </g>
-  <!-- Bar 3: Context Engineering -->
+  <!-- Bar 3: Custom Skills Consulting -->
   <g filter="url(#roughen-3)">
-    <text x="195" y="198" text-anchor="end" font-family="'Inter', sans-serif" font-size="18" fill="#eee0cc">Context Engineering</text>
-    <path d="M 210,178 C 213,175 467,174 470,178 C 473,181 474,208 470,210 C 467,213 213,214 210,210 C 207,207 207,181 210,178 Z" fill="rgba(232,128,114,0.10)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="485" y="200" font-family="'Inter', sans-serif" font-size="18" fill="#e88072">38/60</text>
+    <text x="195" y="198" text-anchor="end" font-family="'Inter', sans-serif" font-size="16" fill="#eee0cc">Skills Consulting</text>
+    <path d="M 210,178 C 213,175 457,174 460,178 C 463,181 464,208 460,210 C 457,213 213,214 210,210 C 207,207 207,181 210,178 Z" fill="rgba(77,207,201,0.10)" stroke="#4DCFC9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="475" y="200" font-family="'Inter', sans-serif" font-size="18" fill="#4DCFC9">35/60</text>
   </g>
-  <!-- Bar 4: Observability Toolkit -->
+  <!-- Bar 4: Do Nothing -->
   <g filter="url(#roughen-3)">
-    <text x="195" y="258" text-anchor="end" font-family="'Inter', sans-serif" font-size="18" fill="#eee0cc">Observability Toolkit</text>
-    <path d="M 210,238 C 213,235 447,234 450,238 C 453,241 454,268 450,270 C 447,273 213,274 210,270 C 207,267 207,241 210,238 Z" fill="rgba(232,128,114,0.08)" stroke="#e88072" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="465" y="260" font-family="'Inter', sans-serif" font-size="18" fill="#e88072">36/60</text>
-  </g>
-  <!-- Bar 5: Do Nothing -->
-  <g filter="url(#roughen-3)">
-    <text x="195" y="318" text-anchor="end" font-family="'Inter', sans-serif" font-size="18" fill="#888888">Do Nothing</text>
-    <path d="M 210,298 C 213,295 347,294 350,298 C 353,301 354,328 350,330 C 347,333 213,334 210,330 C 207,327 207,301 210,298 Z" fill="rgba(136,136,136,0.08)" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="365" y="320" font-family="'Inter', sans-serif" font-size="18" fill="#888888">20/60</text>
+    <text x="195" y="258" text-anchor="end" font-family="'Inter', sans-serif" font-size="16" fill="#888888">Do Nothing</text>
+    <path d="M 210,238 C 213,235 307,234 310,238 C 313,241 314,268 310,270 C 307,273 213,274 210,270 C 207,267 207,241 210,238 Z" fill="rgba(136,136,136,0.08)" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="325" y="260" font-family="'Inter', sans-serif" font-size="18" fill="#888888">12/60</text>
   </g>
 </svg>

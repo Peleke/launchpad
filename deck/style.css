@@ -1,5 +1,5 @@
 :root {
-  --slidev-theme-primary: #e88072;
+  --slidev-theme-primary: #4DCFC9;
   --slidev-theme-default: #e6edf3;
 }
 
@@ -18,6 +18,7 @@ h1, h2, h3 {
 
 h1 { font-weight: 800; }
 
+.teal { color: #4DCFC9; }
 .coral { color: #e88072; }
 .green { color: #4ade80; }
 .red { color: #f87171; }
@@ -25,14 +26,14 @@ h1 { font-weight: 800; }
 .stat-big {
   font-size: 3rem;
   font-weight: 800;
-  color: #e88072;
+  color: #4DCFC9;
   font-family: 'Inter', system-ui, sans-serif;
 }
 
 blockquote {
-  border-left: 3px solid #e88072;
+  border-left: 3px solid #4DCFC9;
   padding: 8px 16px;
-  background: rgba(232,128,114,0.06);
+  background: rgba(77,207,201,0.06);
   border-radius: 0 6px 6px 0;
 }
 blockquote p { color: #e6edf3; font-style: italic; }
