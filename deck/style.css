@@ -192,6 +192,69 @@ h2::after {
 .slidev-vclick-target:nth-child(3) { transition-delay: 0.14s !important; }
 .slidev-vclick-target:nth-child(4) { transition-delay: 0.2s !important; }
 
+/* ──────────────────────────────────────────────
+   Design Pass: Cover & Backgrounds (3A dot grid, 3B halo, 3C glass, 2A badge)
+   ────────────────────────────────────────────── */
+
+@keyframes grid-fade {
+  0%   { opacity: 0.3; }
+  100% { opacity: 0.7; }
+}
+
+.cover-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+/* 3A: Dot grid */
+.cover-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at center, rgba(77,207,201,0.12) 1px, transparent 1px);
+  background-size: 32px 32px;
+  animation: grid-fade 4s ease-in-out infinite alternate;
+  z-index: 0;
+}
+
+/* 3B: Radial halo behind title */
+.cover-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 45%, rgba(77,207,201,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 3C: Glassmorphism card */
+.glass-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(13,17,23,0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(77,207,201,0.12);
+  border-radius: 16px;
+  padding: 36px 48px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(238,224,204,0.04);
+}
+
+/* 2A: Monospace pill badge */
+.date-badge {
+  display: inline-block;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.75rem;
+  color: #4DCFC9;
+  background: rgba(77,207,201,0.10);
+  border: 1px solid rgba(77,207,201,0.25);
+  border-radius: 999px;
+  padding: 2px 12px;
+  margin-left: 8px;
+  vertical-align: middle;
+  letter-spacing: 0.04em;
+}
+
 .slidev-vclick-hidden blockquote {
   opacity: 0 !important;
   transform: translateX(-28px) !important;
