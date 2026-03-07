@@ -51,7 +51,7 @@ Left side is fragmented point tools. Jasper writes. Taplio schedules. Castmagic 
 -->
 
 ---
-transition: fade
+transition: teal-wipe
 ---
 
 ## <span class="teal">Evidence</span> Wall
@@ -188,7 +188,7 @@ Months 1-2 are $0. Pure audience building with articles and LinkedIn. That's the
 -->
 
 ---
-transition: fade
+transition: teal-wipe
 ---
 
 ## <span class="teal">Competitive</span> Map
@@ -228,7 +228,7 @@ Three gates with hard thresholds. Gate 1 at week 1: fewer than 50 LinkedIn impre
 -->
 
 ---
-transition: fade
+transition: teal-wipe
 ---
 
 ## <span class="teal">SWOT</span> Verdict
@@ -304,10 +304,11 @@ Ten artifacts, all traceable. The signal scan fed the decision log, which fed pe
 
 ---
 layout: center
-transition: fade
+transition: teal-wipe
+class: cover-bg
 ---
 
-<p class="text-2xl" style="color:#eee0cc;font-weight:800;">Built with the Hunter Pipeline.</p>
+<p class="text-2xl text-shimmer" style="font-weight:800;">Built with the Hunter Pipeline.</p>
 
 <v-click>
 <img src="/pipeline-flow.svg" style="width:100%;max-width:620px;margin:24px auto;display:block;" />

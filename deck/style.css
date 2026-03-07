@@ -10,26 +10,25 @@
   position: relative;
 }
 
-/* Circuit texture on all content slides */
+/* Dot grid on all content slides */
 .slidev-layout::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('/circuit-pattern.svg');
-  background-size: 200px 200px;
-  background-repeat: repeat;
-  opacity: 0.6;
+  background-image: radial-gradient(circle at center, rgba(77,207,201,0.10) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.35;
   pointer-events: none;
   z-index: 0;
 }
 
-/* Content sits above circuit texture */
+/* Content sits above background texture */
 .slidev-layout > * {
   position: relative;
   z-index: 1;
 }
 
-/* Cover slide: transparent layout so dot grid + halo show through */
+/* Cover + closing slides: transparent layout, hide dot grid */
 .cover-bg .slidev-layout {
   background: transparent !important;
 }
@@ -150,7 +149,7 @@ code {
   font-size: 0.85em;
 }
 
-/* SWOT proceed verdict line */
+/* SWOT proceed verdict line — 1E neon glow */
 .proceed-verdict {
   text-align: center;
   color: #4ade80 !important;
@@ -158,6 +157,10 @@ code {
   font-size: 2.5rem;
   margin-top: 24px;
   letter-spacing: 0.06em;
+  text-shadow:
+    0 0 7px rgba(78,222,128,0.5),
+    0 0 20px rgba(78,222,128,0.3),
+    0 0 40px rgba(78,222,128,0.15);
 }
 
 /* v-click animation overrides — slide up + fade instead of just opacity */
@@ -241,12 +244,12 @@ h2::after {
 .slidev-vclick-target:nth-child(4) { transition-delay: 0.2s !important; }
 
 /* ──────────────────────────────────────────────
-   Design Pass: Cover & Backgrounds (3A dot grid, 3B halo, 3C glass, 2A badge)
+   Design Pass: Cover & Backgrounds (3F circuit, 3B halo, 3C glass, 2A badge)
    ────────────────────────────────────────────── */
 
 @keyframes grid-fade {
-  0%   { opacity: 0.3; }
-  100% { opacity: 0.7; }
+  0%   { opacity: 0.25; }
+  100% { opacity: 0.45; }
 }
 
 .cover-bg {
@@ -254,13 +257,15 @@ h2::after {
   overflow: hidden;
 }
 
-/* 3A: Dot grid */
+/* 3F: Circuit pattern on cover + closing slides */
 .cover-bg::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at center, rgba(77,207,201,0.12) 1px, transparent 1px);
-  background-size: 32px 32px;
+  background-image: url('/circuit-pattern.svg');
+  background-size: 200px 200px;
+  background-repeat: repeat;
+  opacity: 0.35;
   animation: grid-fade 4s ease-in-out infinite alternate;
   z-index: 0;
 }
@@ -313,4 +318,73 @@ h2::after {
   opacity: 1;
   transform: translateX(0) !important;
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* ──────────────────────────────────────────────
+   Design Pass: Full Tier (Tier 3)
+   ────────────────────────────────────────────── */
+
+/* 1A: Gradient text — cover title */
+.cover-bg h1 {
+  background: linear-gradient(135deg, #4DCFC9 0%, #eee0cc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* 1F: Shimmer sweep — closing title */
+@keyframes shimmer-sweep {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg, #eee0cc 0%, #eee0cc 40%, #4DCFC9 50%, #eee0cc 60%, #eee0cc 100%);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer-sweep 2s ease-in-out 0.3s forwards;
+}
+
+/* 4C: Teal wipe transition */
+.teal-wipe-enter-active,
+.teal-wipe-leave-active {
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.teal-wipe-enter-from {
+  opacity: 0;
+  clip-path: inset(0 100% 0 0);
+}
+
+.teal-wipe-enter-to,
+.teal-wipe-leave-from {
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+
+.teal-wipe-leave-to {
+  opacity: 0;
+  clip-path: inset(0 0 0 100%);
+}
+
+/* 3E: Gradient border glow — glass card (Chromium + Safari 16.4+) */
+@property --glow-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-rotate {
+  to { --glow-angle: 360deg; }
+}
+
+.glass-card {
+  background:
+    linear-gradient(rgba(13,17,23,0.55), rgba(13,17,23,0.55)) padding-box,
+    conic-gradient(from var(--glow-angle), transparent 0%, #4DCFC9 25%, transparent 50%, #eee0cc 75%, transparent 100%) border-box;
+  border: 2px solid transparent;
+  animation: border-rotate 3s ease-in-out forwards;
 }
