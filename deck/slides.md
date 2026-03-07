@@ -285,6 +285,8 @@ transition: fade
 
 ## <span class="teal">Appendix</span> — Asset Map
 
+<div class="compact">
+
 | Artifact | Location |
 |:---------|:---------|
 | Signal Scan | `Signal-Scans/` |
@@ -297,6 +299,8 @@ transition: fade
 | [buildlog](https://github.com/Peleke/buildlog-rs) | github.com/Peleke/buildlog-rs |
 | This Deck | `launchpad/deck/slides.md` |
 | Kanban | Obsidian vault |
+
+</div>
 
 <!--
 Ten artifacts, all traceable. The signal scan fed the decision log, which fed persona extraction, which fed offer scoping, which fed the pitch, which generated this deck and the content seeds. Every artifact is in the Obsidian vault or the launchpad repo. The pipeline is the product.

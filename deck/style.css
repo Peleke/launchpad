@@ -140,6 +140,16 @@ table a:hover {
   color: #eee0cc !important;
 }
 
+/* Compact table variant — for data-dense slides */
+.compact table td {
+  padding: 5px 12px !important;
+  font-size: 0.82em;
+}
+.compact table th {
+  padding: 5px 12px !important;
+  font-size: 0.75em;
+}
+
 /* Inline code in tables and body */
 code {
   background: rgba(77,207,201,0.10) !important;
