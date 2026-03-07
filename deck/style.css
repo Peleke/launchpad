@@ -7,6 +7,35 @@
   background: #0d1117 !important;
   color: #e6edf3;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  position: relative;
+}
+
+/* Circuit texture on all content slides */
+.slidev-layout::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/circuit-pattern.svg');
+  background-size: 200px 200px;
+  background-repeat: repeat;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Content sits above circuit texture */
+.slidev-layout > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Cover slide: transparent layout so dot grid + halo show through */
+.cover-bg .slidev-layout {
+  background: transparent !important;
+}
+
+.cover-bg .slidev-layout::before {
+  display: none;
 }
 
 h1, h2, h3 {
@@ -66,23 +95,42 @@ blockquote cite a:hover {
   color: #eee0cc !important;
 }
 
-/* Table styling — header vs rows */
+/* Table styling — card-like rows with hover */
 table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0 4px;
 }
 table th {
   color: #4DCFC9 !important;
   font-weight: 700;
-  font-size: 1.05em;
-  border-bottom: 2px solid rgba(77,207,201,0.3) !important;
-  padding: 8px 12px !important;
+  font-size: 0.85em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-bottom: 2px solid rgba(77,207,201,0.2) !important;
+  padding: 8px 16px !important;
   text-align: left;
 }
 table td {
   color: #e6edf3 !important;
-  padding: 6px 12px !important;
-  border-bottom: 1px solid rgba(238,224,204,0.08) !important;
+  padding: 10px 16px !important;
+  border-bottom: none !important;
+  background: rgba(77,207,201,0.02);
+  transition: background 0.2s ease;
+}
+table tr:hover td {
+  background: rgba(77,207,201,0.06);
+}
+table td:first-child {
+  border-radius: 6px 0 0 6px;
+  border-left: 2px solid transparent;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+table tr:hover td:first-child {
+  border-left-color: #4DCFC9;
+}
+table td:last-child {
+  border-radius: 0 6px 6px 0;
 }
 table a {
   color: #4DCFC9 !important;
