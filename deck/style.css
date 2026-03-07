@@ -324,15 +324,6 @@ h2::after {
    Design Pass: Full Tier (Tier 3)
    ────────────────────────────────────────────── */
 
-/* 1A: Gradient text — cover title */
-.cover-bg h1 {
-  background: linear-gradient(135deg, #4DCFC9 0%, #eee0cc 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
 /* 1F: Shimmer sweep — closing title */
 @keyframes shimmer-sweep {
   0%   { background-position: -200% 0; }
@@ -370,21 +361,17 @@ h2::after {
   clip-path: inset(0 0 0 100%);
 }
 
-/* 3E: Gradient border glow — glass card (Chromium + Safari 16.4+) */
-@property --glow-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
+/* 1A enhanced: Gradient text shimmer on cover title */
+@keyframes title-gradient-shift {
+  0%   { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
 }
 
-@keyframes border-rotate {
-  to { --glow-angle: 360deg; }
-}
-
-.glass-card {
-  background:
-    linear-gradient(rgba(13,17,23,0.55), rgba(13,17,23,0.55)) padding-box,
-    conic-gradient(from var(--glow-angle), transparent 0%, #4DCFC9 25%, transparent 50%, #eee0cc 75%, transparent 100%) border-box;
-  border: 2px solid transparent;
-  animation: border-rotate 3s ease-in-out forwards;
+.cover-bg h1 {
+  background: linear-gradient(90deg, #4DCFC9, #eee0cc, #4DCFC9);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: title-gradient-shift 3s ease-in-out forwards;
 }
