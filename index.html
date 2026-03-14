@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>buildlog — Agentic learning for AI coding tools</title>
+  <meta name="description" content="Your AI agent repeats the same mistakes every session. buildlog measures it, fixes it, and proves it with data. Open source, MIT licensed.">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --accent-hover: #79c0ff;
+      --green: #3fb950;
+      --green-dim: rgba(63, 185, 80, 0.15);
+      --orange: #d29922;
+      --red: #f85149;
+      --purple: #bc8cff;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 840px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0 48px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero h1 .accent { color: var(--green); }
+
+    .hero .sub {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto 28px;
+      line-height: 1.7;
+    }
+
+    .hero-install {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 24px;
+      margin: 0 auto 24px;
+      max-width: 440px;
+      text-align: left;
+      font-family: 'SF Mono', 'Fira Code', Menlo, Consolas, monospace;
+      font-size: 0.88rem;
+      line-height: 1.8;
+    }
+
+    .hero-install .p { color: var(--text-muted); user-select: none; }
+    .hero-install .c { color: #6e7681; }
+
+    .cta-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 11px 24px;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+
+    .btn-primary { background: var(--green); color: #000; }
+    .btn-primary:hover { background: #46d05a; }
+    .btn-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: #1c2129; }
+
+    .stats-row {
+      display: flex;
+      gap: 28px;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-size: 0.9rem;
+    }
+
+    .stat-num { font-weight: 800; color: var(--text); }
+    .stat-label { color: var(--text-muted); }
+
+    /* Sections */
+    section { padding: 64px 0; border-top: 1px solid var(--border); }
+    section h2 { font-size: 1.65rem; font-weight: 700; margin-bottom: 16px; letter-spacing: -0.01em; }
+    section h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; margin-top: 24px; }
+    section p { color: var(--text-muted); margin-bottom: 14px; font-size: 0.98rem; line-height: 1.7; }
+    section p strong { color: var(--text); }
+
+    .code-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 20px;
+      margin: 16px 0;
+      font-family: 'SF Mono', 'Fira Code', Menlo, Consolas, monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      overflow-x: auto;
+    }
+
+    .code-block .p { color: var(--text-muted); user-select: none; }
+    .code-block .c { color: #6e7681; }
+
+    /* Callout */
+    .callout {
+      background: var(--surface);
+      border: 1px solid var(--green);
+      border-left: 4px solid var(--green);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 28px 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .callout strong { color: var(--green); }
+
+    /* SVG diagram */
+    .diagram-wrap {
+      margin: 32px 0;
+      overflow-x: auto;
+      text-align: center;
+    }
+
+    .diagram-wrap svg { max-width: 100%; height: auto; }
+
+    /* Flip cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 28px 0;
+    }
+
+    .flip-card {
+      perspective: 800px;
+      height: 220px;
+      cursor: pointer;
+    }
+
+    .flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-inner { transform: rotateY(180deg); }
+
+    .flip-front, .flip-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 14px;
+      text-align: center;
+    }
+
+    .flip-front { background: var(--surface); }
+
+    .flip-back {
+      background: var(--surface);
+      transform: rotateY(180deg);
+      justify-content: flex-start;
+      padding-top: 24px;
+    }
+
+    .flip-back p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .flip-back .back-title {
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    /* CSS icons */
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    .card-icon svg { width: 48px; height: 48px; }
+
+    .card-title {
+      font-weight: 700;
+      font-size: 0.88rem;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .card-hint {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Agent targets */
+    .agent-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    .agent-tag {
+      padding: 10px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: border-color 0.15s;
+    }
+
+    .agent-tag:hover { border-color: var(--accent); }
+
+    .agent-tag .file {
+      color: var(--text-muted);
+      font-family: 'SF Mono', Menlo, monospace;
+      font-size: 0.73rem;
+      font-weight: 400;
+      margin-left: 6px;
+    }
+
+    /* Gauntlet personas */
+    .persona-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+      margin: 24px 0;
+    }
+
+    .persona-card {
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .persona-card .persona-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+
+    .persona-card .persona-focus {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .persona-card .persona-rules {
+      font-family: 'SF Mono', Menlo, monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+    }
+
+    .persona-card.security { border-color: var(--red); }
+    .persona-card.security .persona-name { color: var(--red); }
+    .persona-card.testing { border-color: var(--orange); }
+    .persona-card.testing .persona-name { color: var(--orange); }
+    .persona-card.bragi { border-color: var(--purple); }
+    .persona-card.bragi .persona-name { color: var(--purple); }
+
+    /* Limits */
+    .limits-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .limit-item {
+      padding: 16px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .limit-item .limit-label {
+      font-weight: 700;
+      font-size: 0.88rem;
+      margin-bottom: 4px;
+      color: var(--orange);
+    }
+
+    .limit-item p { font-size: 0.85rem; margin: 0; line-height: 1.5; }
+
+    /* FAQ */
+    details {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 8px;
+      background: var(--surface);
+    }
+
+    summary {
+      padding: 14px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.93rem;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: "+"; margin-right: 10px; color: var(--accent); font-weight: 700; font-family: 'SF Mono', Menlo, monospace; }
+    details[open] summary::before { content: "\2212"; }
+    details div { padding: 0 20px 14px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; }
+    details div code { background: var(--bg); padding: 2px 6px; border-radius: 3px; font-size: 0.82rem; }
+
+    /* Footer */
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); font-size: 0.85rem; }
+    footer a { color: var(--accent); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* Final CTA */
+    .final-cta { text-align: center; padding: 60px 0; border-top: 1px solid var(--border); }
+    .final-cta h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 12px; }
+    .final-cta p { color: var(--text-muted); margin-bottom: 24px; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .card-grid { grid-template-columns: repeat(2, 1fr); }
+      .flip-card { height: 200px; }
+      .persona-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2rem; }
+      .hero .sub { font-size: 1rem; }
+      .card-grid { grid-template-columns: 1fr 1fr; }
+      .flip-card { height: 190px; }
+      .limits-grid { grid-template-columns: 1fr; }
+      .container { padding: 0 16px; }
+      .hero-install { font-size: 0.82rem; padding: 12px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <h1>AI agents that learn<br>from their mistakes.<br><span class="accent">For real this time.</span></h1>
+      <p class="sub">buildlog captures what your agent gets right and wrong, selects which rules to keep with Thompson Sampling, and proves it with posterior convergence data. Rules that help get promoted. Rules that don't get dropped. The loop runs itself.</p>
+      <div class="hero-install">
+        <span class="p">$ </span>pip install buildlog<br>
+        <span class="p">$ </span>buildlog init-mcp --global -y
+      </div>
+      <div class="cta-group">
+        <a href="https://github.com/Peleke/buildlog-template" class="btn btn-primary">GitHub</a>
+        <a href="https://peleke.github.io/buildlog-template/" class="btn btn-secondary">Docs</a>
+        <a href="https://pypi.org/project/buildlog/" class="btn btn-secondary">PyPI</a>
+      </div>
+      <div class="stats-row">
+        <div><span class="stat-num">v0.22</span> <span class="stat-label">on PyPI</span></div>
+        <div><span class="stat-num">1,496</span> <span class="stat-label">tests</span></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- The Problem -->
+  <section>
+    <div class="container">
+      <h2>Your CLAUDE.md is guessing. buildlog is measuring.</h2>
+      <p>You've edited your agent's instruction file. Added rules from experience. Maybe even organized them by category. <strong>But do you know which ones work?</strong></p>
+      <p>You don't. Nobody does. Every AI coding tool on the market stores rules, memories, or instructions without measuring whether they reduce mistakes. Mem0 stores. LangSmith observes. CodeRabbit reviews. None of them close the loop.</p>
+
+      <div class="callout">
+        <strong>Your AI agent repeats the same mistakes every session. We can prove it.</strong> buildlog tracks Repeated Mistake Rate across sessions. The number is usually higher than you think. The good news: once you can measure it, you can fix it.
+      </div>
+
+      <p>Stop editing CLAUDE.md and hoping for the best. Start measuring.</p>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section>
+    <div class="container">
+      <h2>How it works</h2>
+      <p>A closed feedback loop. Each stage exists because the previous one wasn't enough.</p>
+
+      <div class="diagram-wrap">
+        <svg viewBox="0 0 660 580" xmlns="http://www.w3.org/2000/svg" fill="none" aria-label="buildlog learning loop: capture, review, credit, select, render, measure">
+          <defs>
+            <linearGradient id="flowDown" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#58a6ff" stop-opacity="0.2"/>
+              <stop offset="50%" stop-color="#58a6ff" stop-opacity="0.7"/>
+              <stop offset="100%" stop-color="#58a6ff" stop-opacity="0.2"/>
+            </linearGradient>
+            <linearGradient id="flowGreen" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3fb950" stop-opacity="0.2"/>
+              <stop offset="50%" stop-color="#3fb950" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#3fb950" stop-opacity="0.2"/>
+            </linearGradient>
+            <marker id="ad" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#58a6ff" opacity="0.7"/></marker>
+            <marker id="ag" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#3fb950" opacity="0.8"/></marker>
+            <marker id="ar" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#f85149" opacity="0.7"/></marker>
+            <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+
+          <!-- Background -->
+          <rect width="660" height="580" rx="12" fill="#161b22" stroke="#30363d" stroke-width="1"/>
+          <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0V20H0" fill="none" stroke="#30363d" stroke-width="0.3" opacity="0.3"/></pattern>
+          <rect width="660" height="580" rx="12" fill="url(#grid)"/>
+
+          <!-- Layer 1: Capture -->
+          <g data-layer="capture">
+            <rect x="160" y="24" width="280" height="60" rx="8" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/>
+            <rect x="178" y="40" width="16" height="20" rx="2" stroke="#58a6ff" stroke-width="1.2" fill="none" opacity="0.5"/><line x1="183" y1="47" x2="191" y2="47" stroke="#58a6ff" stroke-width="1" opacity="0.4"/><line x1="183" y1="52" x2="189" y2="52" stroke="#58a6ff" stroke-width="1" opacity="0.4"/>
+            <text x="206" y="48" fill="#8b949e" font-family="monospace" font-size="10">01 &middot; CAPTURE</text>
+            <text x="206" y="66" fill="#e6edf3" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">Commits + Entries</text>
+            <text x="410" y="58" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">via MCP</text>
+          </g>
+
+          <!-- Layer 2: Review -->
+          <g data-layer="review">
+            <rect x="160" y="120" width="280" height="60" rx="8" fill="#0d1117" stroke="#f85149" stroke-width="1.5"/>
+            <path d="M186 136 L176 142 V152 L186 158 L196 152 V142 Z" stroke="#f85149" stroke-width="1.2" fill="none" opacity="0.5"/>
+            <text x="206" y="144" fill="#8b949e" font-family="monospace" font-size="10">02 &middot; REVIEW</text>
+            <text x="206" y="162" fill="#e6edf3" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">Gauntlet Review</text>
+            <text x="410" y="154" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; findings</text>
+          </g>
+
+          <!-- Layer 3: Credit -->
+          <g data-layer="credit">
+            <rect x="160" y="216" width="280" height="60" rx="8" fill="#0d1117" stroke="#d29922" stroke-width="1.5"/>
+            <circle cx="186" cy="246" r="10" stroke="#d29922" stroke-width="1.2" fill="none" opacity="0.5"/><path d="M182 246 L186 250 L192 242" stroke="#d29922" stroke-width="1.5" fill="none" opacity="0.5"/>
+            <text x="206" y="240" fill="#8b949e" font-family="monospace" font-size="10">03 &middot; CREDIT</text>
+            <text x="206" y="258" fill="#e6edf3" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">Rule Attribution</text>
+            <text x="410" y="250" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; posteriors</text>
+          </g>
+
+          <!-- Layer 4: Thompson Sampling (CORE) -->
+          <g data-layer="sampling" filter="url(#glow)">
+            <rect x="160" y="312" width="280" height="60" rx="8" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+            <rect x="156" y="308" width="288" height="68" rx="12" fill="none" stroke="#3fb950" stroke-width="1" opacity="0.2">
+              <animate attributeName="opacity" values="0.3;0.08;0.3" dur="3s" repeatCount="indefinite"/>
+            </rect>
+            <path d="M174 340 Q180 320 186 332 Q192 344 198 326" stroke="#3fb950" stroke-width="1.5" fill="none" opacity="0.6"/>
+            <text x="206" y="336" fill="#8b949e" font-family="monospace" font-size="10">04 &middot; SELECT</text>
+            <text x="206" y="354" fill="#3fb950" font-family="-apple-system, sans-serif" font-size="14" font-weight="700">Thompson Sampling</text>
+            <text x="410" y="346" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; active rules</text>
+            <text x="456" y="348" fill="#3fb950" font-family="monospace" font-size="10" opacity="0.6">&larr; core</text>
+          </g>
+
+          <!-- Layer 5: Render -->
+          <g data-layer="render">
+            <rect x="160" y="408" width="280" height="60" rx="8" fill="#0d1117" stroke="#58a6ff" stroke-width="1.5"/>
+            <rect x="175" y="426" width="10" height="10" rx="1" stroke="#58a6ff" stroke-width="1" fill="none" opacity="0.4"/><rect x="188" y="426" width="10" height="10" rx="1" stroke="#58a6ff" stroke-width="1" fill="none" opacity="0.4"/><rect x="181" y="436" width="10" height="10" rx="1" stroke="#58a6ff" stroke-width="1" fill="none" opacity="0.4"/>
+            <text x="206" y="432" fill="#8b949e" font-family="monospace" font-size="10">05 &middot; RENDER</text>
+            <text x="206" y="450" fill="#e6edf3" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">Agent Instructions</text>
+            <text x="410" y="442" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; CLAUDE.md</text>
+          </g>
+
+          <!-- Layer 6: Measure -->
+          <g data-layer="measure">
+            <rect x="160" y="504" width="280" height="60" rx="8" fill="#0d1117" stroke="#bc8cff" stroke-width="1.5"/>
+            <path d="M174 530 L182 520 L190 535 L198 515" stroke="#bc8cff" stroke-width="1.5" fill="none" opacity="0.6"/>
+            <text x="206" y="528" fill="#8b949e" font-family="monospace" font-size="10">06 &middot; MEASURE</text>
+            <text x="206" y="546" fill="#e6edf3" font-family="-apple-system, sans-serif" font-size="14" font-weight="600">RMR + Convergence</text>
+            <text x="410" y="538" fill="#8b949e" font-family="monospace" font-size="10" text-anchor="end">&rarr; evidence</text>
+          </g>
+
+          <!-- Flow lines -->
+          <line x1="300" y1="84" x2="300" y2="120" stroke="url(#flowDown)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ad)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <line x1="300" y1="180" x2="300" y2="216" stroke="url(#flowDown)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ad)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <line x1="300" y1="276" x2="300" y2="312" stroke="url(#flowDown)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ad)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <line x1="300" y1="372" x2="300" y2="408" stroke="url(#flowGreen)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ag)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <line x1="300" y1="468" x2="300" y2="504" stroke="url(#flowDown)" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ad)">
+            <animate attributeName="stroke-dashoffset" values="0;-14" dur="2s" repeatCount="indefinite"/>
+          </line>
+
+          <!-- Feedback loop (left side) -->
+          <path d="M 160 534 L 80 534 L 80 342 L 160 342" stroke="#3fb950" stroke-width="2" stroke-dasharray="4 3" fill="none" marker-end="url(#ag)">
+            <animate attributeName="stroke-dashoffset" values="0;14" dur="3s" repeatCount="indefinite"/>
+          </path>
+          <text x="72" y="440" fill="#3fb950" font-family="monospace" font-size="10" text-anchor="middle" transform="rotate(-90, 72, 440)" opacity="0.7">belief update</text>
+
+          <!-- Seeds input -->
+          <line x1="100" y1="150" x2="160" y2="150" stroke="#f85149" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ar)" opacity="0.5"/>
+          <text x="96" y="146" fill="#f85149" font-family="monospace" font-size="9" text-anchor="end" opacity="0.6">61 rules</text>
+          <text x="96" y="158" fill="#f85149" font-family="monospace" font-size="9" text-anchor="end" opacity="0.6">3 personas</text>
+
+          <!-- RMR output -->
+          <line x1="440" y1="534" x2="520" y2="534" stroke="#bc8cff" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ad)" opacity="0.5"/>
+          <text x="524" y="530" fill="#bc8cff" font-family="monospace" font-size="9" opacity="0.6">RMR %</text>
+          <text x="524" y="542" fill="#bc8cff" font-family="monospace" font-size="9" opacity="0.6">posteriors</text>
+
+          <!-- Agent output -->
+          <line x1="440" y1="438" x2="520" y2="438" stroke="#58a6ff" stroke-width="1.5" stroke-dasharray="4 3" marker-end="url(#ad)" opacity="0.5"/>
+          <text x="524" y="434" fill="#8b949e" font-family="monospace" font-size="9" opacity="0.6">CLAUDE.md</text>
+          <text x="524" y="446" fill="#8b949e" font-family="monospace" font-size="9" opacity="0.6">.cursorrules</text>
+        </svg>
+      </div>
+
+      <p>Every stage works on its own. Capture without reviewing. Review without the bandit. Render without experiments. But the full loop is where compound improvement happens.</p>
+    </div>
+  </section>
+
+  <!-- Review Gauntlet + Bragi -->
+  <section>
+    <div class="container">
+      <h2>The Review Gauntlet</h2>
+      <p>Three reviewer personas. 61 curated rules from OWASP, ACL, COLING, PNAS, and GPTZero research. Each finding cites the rule that caught it. Those citations are how buildlog knows which rules are working.</p>
+
+      <div class="persona-grid">
+        <div class="persona-card security">
+          <div class="persona-name">Security Karen</div>
+          <div class="persona-focus">OWASP Top 10, injection, auth, secrets, path traversal, SSRF. Catches the stuff your linter misses because it requires context.</div>
+          <div class="persona-rules">13 rules</div>
+        </div>
+        <div class="persona-card testing">
+          <div class="persona-name">Test Terrorist</div>
+          <div class="persona-focus">Coverage gaps, missing edge cases, property-based testing, metamorphic relations, contract tests. Thinks your test suite is too thin.</div>
+          <div class="persona-rules">21 rules</div>
+        </div>
+        <div class="persona-card bragi">
+          <div class="persona-name">Bragi</div>
+          <div class="persona-focus">LLM prose detection. 27 rules derived from peer-reviewed research: em-dash overuse, epistemic flatness, throat-clearing, sentence uniformity, nominalization, both-sides hedging.</div>
+          <div class="persona-rules">27 rules</div>
+        </div>
+      </div>
+
+      <h3>How credits close the loop</h3>
+      <p>When the gauntlet finds an issue, it cites the rule that caught it. buildlog validates the citation against the active rule set, writes a gauntlet credit, and snapshots the rule's posterior (alpha, beta, mean). Over sessions, posteriors converge. You can <strong>see</strong> which rules are carrying their weight and which are noise.</p>
+      <p>This is the part nobody else has. Not the review. Not the rules. The <strong>measurement of whether the rules actually help</strong>.</p>
+    </div>
+  </section>
+
+  <!-- The Receipts -->
+  <section>
+    <div class="container">
+      <h2>Real data from a real codebase</h2>
+      <p>This is buildlog running on itself. 40 sessions, 100 logged mistakes, 81 review cycles. Not a demo.</p>
+
+      <h3>The loop is working</h3>
+      <p>Running reward mean at 0.817 across 81 gauntlet review cycles. 59% accepted on first pass, 41% revised, 0% rejected. The green line is the target. We're above it.</p>
+      <img src="dashboard-overview.png" alt="buildlog dashboard: reward trend at 0.817 mean across 81 events" style="width:100%;border-radius:8px;border:1px solid var(--border);margin:16px 0;" />
+
+      <h3>81 patterns extracted, 12 learnings reinforced</h3>
+      <p>Insights by category (architectural, workflow, tool usage, domain knowledge) extracted from journal entries. Review learnings tracked as reinforced or contradicted across sessions.</p>
+      <img src="dashboard-insights.png" alt="buildlog dashboard: 81 insights across 4 categories, review learnings reinforced by evidence" style="width:100%;border-radius:8px;border:1px solid var(--border);margin:16px 0;" />
+
+      <p><code style="background:var(--surface);padding:2px 6px;border-radius:3px;font-size:0.85rem;">buildlog viz</code> launches this dashboard locally. Your data, your machine.</p>
+    </div>
+  </section>
+
+  <!-- The Stack -->
+  <section>
+    <div class="container">
+      <h2>The first AI coding tool that gets better at its job</h2>
+      <p>Hover to flip. Nine components, each independently useful.</p>
+
+      <div class="card-grid">
+        <!-- MCP Server -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="8" width="36" height="32" rx="4" stroke="#58a6ff" stroke-width="2"/><line x1="6" y1="18" x2="42" y2="18" stroke="#58a6ff" stroke-width="2"/><circle cx="14" cy="13" r="2" fill="#f85149"/><circle cx="22" cy="13" r="2" fill="#d29922"/><circle cx="30" cy="13" r="2" fill="#3fb950"/><line x1="14" y1="26" x2="34" y2="26" stroke="#30363d" stroke-width="2"/><line x1="14" y1="32" x2="28" y2="32" stroke="#30363d" stroke-width="2"/></svg>
+              </div>
+              <div class="card-title">36-Tool MCP Server</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">MCP Server</div>
+              <p>36 tools via Model Context Protocol. Your agent calls buildlog during sessions: log commits, run gauntlet reviews, query posteriors, close feedback loops.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Thompson Sampling -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><path d="M8 40 Q14 10 24 25 Q34 40 40 12" stroke="#3fb950" stroke-width="2.5" fill="none"/><path d="M8 38 Q18 20 24 30 Q30 40 40 18" stroke="#58a6ff" stroke-width="2" fill="none" opacity="0.5"/><circle cx="24" cy="25" r="3" fill="#3fb950"/><line x1="8" y1="42" x2="40" y2="42" stroke="#30363d" stroke-width="1.5"/><line x1="8" y1="8" x2="8" y2="42" stroke="#30363d" stroke-width="1.5"/></svg>
+              </div>
+              <div class="card-title">Thompson Sampling</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Thompson Sampling</div>
+              <p>Beta-Bernoulli contextual bandit. Error classes partition state space. Seeds start at Beta(3,1), non-seeds at Beta(1,1). Posteriors converge with ~20 observations.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gauntlet Credits -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><path d="M24 6 L42 16 L42 32 L24 42 L6 32 L6 16 Z" stroke="#f85149" stroke-width="2" fill="none"/><path d="M24 14 L34 20 L34 28 L24 34 L14 28 L14 20 Z" stroke="#f85149" stroke-width="1.5" fill="none" opacity="0.4"/><circle cx="24" cy="24" r="3" fill="#f85149"/></svg>
+              </div>
+              <div class="card-title">Gauntlet Credits</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Gauntlet Credits</div>
+              <p>When a persona cites a rule in a finding, the rule gets credited. Credits drive posterior updates. No credit assignment problem: the citation IS the attribution.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bragi -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="20" height="28" rx="2" stroke="#bc8cff" stroke-width="2"/><line x1="12" y1="14" x2="24" y2="14" stroke="#30363d" stroke-width="2"/><line x1="12" y1="20" x2="22" y2="20" stroke="#30363d" stroke-width="2"/><line x1="12" y1="26" x2="20" y2="26" stroke="#30363d" stroke-width="2"/><path d="M32 16 L38 12 L44 16 L44 28 L38 32 L32 28 Z" stroke="#bc8cff" stroke-width="1.5" fill="none" opacity="0.5"/><circle cx="38" cy="22" r="3" fill="#bc8cff" opacity="0.4"/></svg>
+              </div>
+              <div class="card-title">Bragi v3</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Bragi LLM Detection</div>
+              <p>27 rules from ACL, COLING, PNAS, GPTZero research. Catches em-dash waterfalls, epistemic flatness, throat-clearing, sentence uniformity, nominalization, hedging. Your docs should sound like you.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Posterior History -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><line x1="8" y1="42" x2="40" y2="42" stroke="#30363d" stroke-width="1.5"/><line x1="8" y1="8" x2="8" y2="42" stroke="#30363d" stroke-width="1.5"/><path d="M12 36 L18 30 L24 32 L30 20 L36 14" stroke="#3fb950" stroke-width="2" fill="none"/><circle cx="12" cy="36" r="2" fill="#3fb950" opacity="0.6"/><circle cx="18" cy="30" r="2" fill="#3fb950" opacity="0.6"/><circle cx="24" cy="32" r="2" fill="#3fb950" opacity="0.6"/><circle cx="30" cy="20" r="2" fill="#3fb950" opacity="0.6"/><circle cx="36" cy="14" r="2" fill="#3fb950"/></svg>
+              </div>
+              <div class="card-title">Posterior History</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Posterior History</div>
+              <p>Every gauntlet credit snapshots alpha, beta, and mean for the credited rule. Query convergence over time. Watch rules stabilize or stall. The receipts for "show me it works."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Extraction -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="20" height="28" rx="2" stroke="#d29922" stroke-width="2"/><line x1="12" y1="14" x2="24" y2="14" stroke="#30363d" stroke-width="2"/><line x1="12" y1="20" x2="22" y2="20" stroke="#30363d" stroke-width="2"/><line x1="12" y1="26" x2="20" y2="26" stroke="#30363d" stroke-width="2"/><path d="M30 22 L40 18 L40 34 L30 30 Z" stroke="#d29922" stroke-width="2" fill="none"/><circle cx="40" cy="26" r="6" stroke="#d29922" stroke-width="2" fill="none"/></svg>
+              </div>
+              <div class="card-title">Extraction</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Extraction Pipeline</div>
+              <p>Regex (fast, free), Anthropic, OpenAI, or Ollama. Semantic dedup via sentence-transformers or OpenAI embeddings. Pluggable at every stage.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Multi-Agent -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="4" y="18" width="14" height="14" rx="3" stroke="#58a6ff" stroke-width="1.5"/><rect x="17" y="6" width="14" height="14" rx="3" stroke="#3fb950" stroke-width="1.5"/><rect x="30" y="18" width="14" height="14" rx="3" stroke="#bc8cff" stroke-width="1.5"/><rect x="10" y="34" width="14" height="10" rx="3" stroke="#d29922" stroke-width="1.5"/><rect x="26" y="34" width="14" height="10" rx="3" stroke="#f85149" stroke-width="1.5"/><line x1="24" y1="20" x2="18" y2="24" stroke="#30363d" stroke-width="1"/><line x1="24" y1="20" x2="30" y2="24" stroke="#30363d" stroke-width="1"/><line x1="17" y1="30" x2="17" y2="34" stroke="#30363d" stroke-width="1"/><line x1="33" y1="32" x2="33" y2="34" stroke="#30363d" stroke-width="1"/></svg>
+              </div>
+              <div class="card-title">Multi-Agent Render</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Multi-Agent Render</div>
+              <p>Same knowledge base renders to Claude Code, Cursor, Copilot, Windsurf, Continue.dev, VS Code. Switch agents, keep what you learned.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SQLite -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><ellipse cx="24" cy="12" rx="16" ry="6" stroke="#58a6ff" stroke-width="2" fill="none"/><path d="M8 12 L8 36" stroke="#58a6ff" stroke-width="2"/><path d="M40 12 L40 36" stroke="#58a6ff" stroke-width="2"/><ellipse cx="24" cy="36" rx="16" ry="6" stroke="#58a6ff" stroke-width="2" fill="none"/><ellipse cx="24" cy="24" rx="16" ry="6" stroke="#30363d" stroke-width="1.5" fill="none"/></svg>
+              </div>
+              <div class="card-title">Global SQLite</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">Global SQLite</div>
+              <p>Single database at ~/.buildlog/buildlog.db. WAL mode. Project isolation via SHA-256. Posterior snapshots, gauntlet credits, mistake history, bandit state. All local.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="flip-card">
+          <div class="flip-inner">
+            <div class="flip-front">
+              <div class="card-icon">
+                <svg viewBox="0 0 48 48" fill="none"><rect x="6" y="6" width="36" height="36" rx="4" stroke="#3fb950" stroke-width="2" fill="none"/><rect x="10" y="24" width="6" height="14" rx="1" fill="#3fb950" opacity="0.4"/><rect x="20" y="18" width="6" height="20" rx="1" fill="#3fb950" opacity="0.6"/><rect x="30" y="12" width="6" height="26" rx="1" fill="#3fb950" opacity="0.8"/></svg>
+              </div>
+              <div class="card-title">Live Dashboard</div>
+              <div class="card-hint">hover to flip</div>
+            </div>
+            <div class="flip-back">
+              <div class="back-title">marimo Dashboard</div>
+              <p><code>buildlog viz</code> launches a live browser dashboard: reward trends, bandit posteriors, session history, mistake analysis, RMR tracking. Interactive, not static.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Agent targets -->
+  <section>
+    <div class="container">
+      <h2>Agent targets</h2>
+      <p>One knowledge base. Every agent format. <code style="background:var(--surface);padding:2px 6px;border-radius:3px;font-size:0.85rem;">buildlog promote --target &lt;agent&gt;</code> writes learned rules to the file your agent reads.</p>
+      <div class="agent-row">
+        <div class="agent-tag">Claude Code <span class="file">CLAUDE.md</span></div>
+        <div class="agent-tag">Cursor <span class="file">.cursor/rules/</span></div>
+        <div class="agent-tag">GitHub Copilot <span class="file">copilot-instructions.md</span></div>
+        <div class="agent-tag">Windsurf <span class="file">.windsurf/rules/</span></div>
+        <div class="agent-tag">Continue.dev <span class="file">.continue/rules/</span></div>
+        <div class="agent-tag">VS Code <span class="file">settings.json</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quickstart -->
+  <section>
+    <div class="container">
+      <h2>Quickstart</h2>
+      <p>Two commands. Works in every project.</p>
+      <div class="code-block">
+        <span class="p">$ </span>pip install buildlog              <span class="c"># or: pipx install buildlog</span><br>
+        <span class="p">$ </span>buildlog init-mcp --global -y     <span class="c"># register MCP + write agent instructions</span>
+      </div>
+      <p>That's it. buildlog is now ambient across every repo. Your agent has all 36 tools and knows how to use them.</p>
+
+      <h3>Per-project setup</h3>
+      <div class="code-block">
+        <span class="p">$ </span>buildlog init --defaults          <span class="c"># scaffold buildlog/, register MCP, update CLAUDE.md</span>
+      </div>
+
+      <h3>With extras</h3>
+      <div class="code-block">
+        <span class="p">$ </span>pip install "buildlog[all]"       <span class="c"># embeddings + LLM extraction + qortex backend</span><br>
+        <span class="c"># or pick: [embeddings] [openai] [anthropic] [ollama] [qortex]</span>
+      </div>
+
+      <p>Requires Python 3.11+.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section>
+    <div class="container">
+      <h2>FAQ</h2>
+
+      <details>
+        <summary>How is this different from editing CLAUDE.md by hand?</summary>
+        <div><p>Manual editing is step 1. buildlog is steps 2 through 6: reviewing with curated personas, crediting rules when they catch issues, selecting which rules to include based on statistical evidence, rendering to your agent's format, and measuring whether mistakes actually decrease. You can edit CLAUDE.md forever and never know what's working.</p></div>
+      </details>
+
+      <details>
+        <summary>How is this different from Mem0 / agent memory?</summary>
+        <div><p>Mem0 stores memories. buildlog measures whether memories help. Storage without measurement is a filing cabinet. You need the filing cabinet, but you also need to know which files are worth keeping. That's what Thompson Sampling does.</p></div>
+      </details>
+
+      <details>
+        <summary>Does this need an API key?</summary>
+        <div><p>No. The base install uses regex extraction and local computation. LLM-backed extraction (Anthropic, OpenAI, Ollama) is available via extras for richer patterns. The core loop, bandit, gauntlet, and dashboard are entirely local.</p></div>
+      </details>
+
+      <details>
+        <summary>What data leaves my machine?</summary>
+        <div><p>Nothing, by default. Everything is in <code>~/.buildlog/buildlog.db</code> (local SQLite). If you enable LLM extraction via API key, prompts go to the provider you chose. Bandit state, posteriors, gauntlet credits, and experiments are entirely local.</p></div>
+      </details>
+
+      <details>
+        <summary>How do I know the posteriors are real?</summary>
+        <div><p>Run <code>buildlog posterior-history --rule-id &lt;id&gt;</code> or open the marimo dashboard with <code>buildlog viz</code>. You'll see alpha, beta, and mean for every snapshot. The math is standard Beta-Bernoulli conjugate updates. If a rule is cited 20 times and the mean is 0.85, that's 20 real observations pulling the distribution toward 1.0.</p></div>
+      </details>
+
+      <details>
+        <summary>Can I use this without Claude Code?</summary>
+        <div><p>Yes. The MCP server is Claude Code-native, but the CLI works standalone and rule rendering works for Cursor, Copilot, Windsurf, Continue.dev, and VS Code. <code>buildlog promote --target cursor</code> writes to <code>.cursor/rules/buildlog-rules.mdc</code>.</p></div>
+      </details>
+
+      <details>
+        <summary>Is this production-ready?</summary>
+        <div><p>Used in production daily across multiple projects. 1,496 tests. Stable API surface. The gauntlet, bandit, and measurement loop work. Extraction quality is the current bottleneck (see limits). Use it, measure it, report what breaks.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <div class="final-cta">
+    <div class="container">
+      <h2>Open source. MIT licensed. On PyPI.</h2>
+      <p>Two commands and your agent starts learning from its mistakes.</p>
+      <div class="cta-group">
+        <a href="https://github.com/Peleke/buildlog-template" class="btn btn-primary">GitHub</a>
+        <a href="https://peleke.github.io/buildlog-template/" class="btn btn-secondary">Documentation</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>Built by <a href="https://github.com/Peleke">Peleke</a> &middot; <a href="https://github.com/Peleke/buildlog-template">Source</a> &middot; <a href="https://pypi.org/project/buildlog/">PyPI</a> &middot; MIT License</p>
+    </div>
+  </footer>
+
+</body>
+</html>
