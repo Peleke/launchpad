@@ -808,33 +808,6 @@
     </div>
   </section>
 
-  <!-- Current limits -->
-  <section>
-    <div class="container">
-      <h2>Current limits</h2>
-      <p>v0.22. The loop works. These are the open problems.</p>
-      <div class="limits-grid">
-        <div class="limit-item">
-          <div class="limit-label">Extraction quality</div>
-          <p>Regex misses nuance. LLM extractors cost money. The middle ground (local Ollama + regex cascade) works but isn't turnkey yet.</p>
-        </div>
-        <div class="limit-item">
-          <div class="limit-label">Single-project scope</div>
-          <p>Rules live per-project. Cross-project convergence (rules independently rediscovered across repos) is designed but not shipped.</p>
-        </div>
-        <div class="limit-item">
-          <div class="limit-label">Long-horizon learning</div>
-          <p>The bandit operates per-gauntlet-citation. Longer arcs of competence building need richer policy models than Beta-Bernoulli.</p>
-        </div>
-        <div class="limit-item">
-          <div class="limit-label">Automatic feedback</div>
-          <p>Gauntlet credits are the primary signal. Automatic signals from test results, CI status, and revision distance are on the roadmap.</p>
-        </div>
-      </div>
-      <p>See the <a href="https://peleke.github.io/buildlog-template/roadmap/" style="color:var(--accent);">roadmap</a> for what's next.</p>
-    </div>
-  </section>
-
   <!-- FAQ -->
   <section>
     <div class="container">
