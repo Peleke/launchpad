@@ -50,13 +50,35 @@ a:hover{color:var(--accent-hover);}
 }
 .hero-headline em{color:var(--accent);font-style:normal;}
 
-/* Strudel embed */
-.strudel-wrap{
+/* Strudel embed — matches hljod lesson player UI */
+.strudel-block{
   max-width:680px;margin:0 auto 1.2rem;
   border:1px solid var(--border);border-radius:8px;
-  overflow:hidden;background:var(--surface);
+  overflow:hidden;position:relative;
 }
-.strudel-wrap strudel-editor{display:block;width:100%;}
+.strudel-block strudel-editor{display:block;width:100%;}
+.strudel-block strudel-editor::part(editor){padding:0;}
+.strudel-block .cm-editor{min-height:auto !important;}
+.strudel-block .cm-scroller{min-height:auto !important;}
+.strudel-label{
+  font-family:'SF Mono',monospace;font-size:.6rem;
+  color:var(--text-faint);letter-spacing:.1em;text-transform:uppercase;
+  padding:.5rem 1rem;background:var(--surface);
+  border-bottom:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.strudel-controls{display:flex;gap:.4rem;}
+.strudel-play,.strudel-stop,.strudel-share{
+  font-family:'SF Mono',monospace;font-size:.65rem;
+  padding:.2rem .6rem;border-radius:3px;cursor:pointer;
+  border:1px solid var(--border);background:var(--surface);color:var(--text-dim);
+  transition:all .2s;letter-spacing:.04em;
+}
+.strudel-play:hover{border-color:var(--green);color:var(--green);background:var(--green-dim);}
+.strudel-stop:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-dim);}
+.strudel-share:hover{border-color:var(--cool);color:var(--cool);background:var(--cool-dim);}
+.strudel-play.playing{border-color:var(--green);color:var(--bg);background:var(--green);}
+.strudel-share.copied{border-color:var(--green);color:var(--bg);background:var(--green);}
 .strudel-caption{
   font-family:'SF Mono',monospace;font-size:.78rem;
   color:var(--text-dim);max-width:600px;margin:0 auto 2rem;
@@ -296,8 +318,20 @@ code{
   <h1 class="hero-title">hlj<span class="a">od</span></h1>
   <p class="hero-headline">Learn music theory by recreating game soundtracks&nbsp;&mdash; <em>in your browser, in live code.</em></p>
 
-  <div class="strudel-wrap">
-    <strudel-editor code='note("f4 a4 b4 [f4 a4] b4 [f4 a4 b4 e5 d5]").s("piano").slow(4)'></strudel-editor>
+  <div class="strudel-block">
+    <div class="strudel-label">
+      <span>lost woods — dorian mode</span>
+      <div class="strudel-controls">
+        <button class="strudel-play" onclick="strudelPlay(this)">&#9654; play</button>
+        <button class="strudel-stop" onclick="strudelStop(this)">&#9632; stop</button>
+        <button class="strudel-share" onclick="strudelShare(this)">&#8599; share</button>
+      </div>
+    </div>
+    <strudel-editor code='note("f4 a4 b4 [f4 a4] b4 [f4 a4 b4 e5 d5]")
+  .s("piano")
+  .color("orange")
+  ._spiral
+  .slow(4)'></strudel-editor>
   </div>
   <p class="strudel-caption">That's <strong>Dorian mode</strong>. That's why Lost Woods sounds haunting. Hit play. Change a note. Hear the difference.</p>
 
@@ -599,6 +633,62 @@ try {
     hydra.setResolution(window.innerWidth, window.innerHeight);
   });
 } catch(e) {}
+</script>
+
+<!-- Strudel player helpers (matches hljod lesson UI) -->
+<script>
+function getEditorFromBtn(btn) {
+  const block = btn.closest('.strudel-block');
+  return block ? block.querySelector('strudel-editor') : null;
+}
+function getEditorCode(el) {
+  if (!el || !el.editor) return '';
+  if (typeof el.editor.getCode === 'function') return el.editor.getCode();
+  if (el.editor.code) return el.editor.code;
+  if (el.editor.view && el.editor.view.state) return el.editor.view.state.doc.toString();
+  if (el.getAttribute('code')) return el.getAttribute('code');
+  return '';
+}
+function strudelPlay(btn) {
+  const el = getEditorFromBtn(btn);
+  if (!el) return;
+  document.querySelectorAll('.strudel-play.playing').forEach(b => b.classList.remove('playing'));
+  document.querySelectorAll('strudel-editor').forEach(other => {
+    if (other !== el && other.editor && other.editor.stop) {
+      try { other.editor.stop(); } catch(e) {}
+    }
+  });
+  if (el.editor) {
+    try {
+      el.editor.evaluate();
+      el.editor.start();
+      btn.classList.add('playing');
+    } catch(e) {
+      try { el.editor.evaluate(); btn.classList.add('playing'); } catch(e2) {}
+    }
+  }
+}
+function strudelStop(btn) {
+  const el = getEditorFromBtn(btn);
+  if (!el) return;
+  if (el.editor && el.editor.stop) {
+    try { el.editor.stop(); } catch(e) {}
+  }
+  const playBtn = btn.closest('.strudel-controls').querySelector('.strudel-play');
+  if (playBtn) playBtn.classList.remove('playing');
+}
+function strudelShare(btn) {
+  const el = getEditorFromBtn(btn);
+  const code = getEditorCode(el);
+  if (!code) return;
+  const url = 'https://strudel.cc/#' + encodeURIComponent(btoa(unescape(encodeURIComponent(code))));
+  navigator.clipboard.writeText(url).then(() => {
+    btn.classList.add('copied');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '&#10003; copied';
+    setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+  }).catch(() => { window.open(url, '_blank'); });
+}
 </script>
 
 </body></html>
