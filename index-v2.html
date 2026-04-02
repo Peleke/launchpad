@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hljod — Learn music theory by recreating game soundtracks in live code</title>
+<meta name="description" content="Learn music theory by recreating game soundtracks — in your browser, in live code. 25 lessons. 30+ game soundtracks. Zero installs.">
+<meta property="og:title" content="hljod — Interactive music theory through game soundtracks">
+<meta property="og:description" content="Learn music theory by recreating game soundtracks — in your browser, in live code. 25 lessons. 30+ game soundtracks. Zero installs.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hljod.peleke.me">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="hljod — Interactive music theory through game soundtracks">
+<meta name="twitter:description" content="Learn music theory by recreating game soundtracks — in your browser, in live code. Hit play. Change a note. Hear why Dorian mode sounds haunting.">
+<script src="https://unpkg.com/@strudel/repl@1.3.0"></script>
+<style>
+:root {
+  --bg: #0a0a0c; --surface: #141418; --surface2: #1a1a1f;
+  --border: #1e1e24; --border-light: #2a2a30;
+  --text: #e8e6e3; --text-dim: #8a8780; --text-faint: #5a584f;
+  --accent: #ff6b35; --accent-hover: #ff8a5c; --accent-dim: #ff6b3522;
+  --cool: #4fc3f7; --cool-dim: #4fc3f722;
+  --green: #66bb6a; --green-dim: #66bb6a22;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:Georgia,'Times New Roman',serif;
+  line-height:1.7;font-size:1.05rem;
+  min-height:100vh;-webkit-font-smoothing:antialiased;
+}
+#hydra-canvas{
+  position:fixed;top:0;left:0;width:100vw;height:100vh;
+  z-index:-1;opacity:0.15;pointer-events:none;
+}
+.wrap{max-width:780px;margin:0 auto;padding:0 2rem;position:relative;z-index:1;}
+code,.mono{font-family:'SF Mono','Fira Code','Cascadia Code',monospace;}
+a{color:var(--accent);text-decoration:none;transition:color .2s;}
+a:hover{color:var(--accent-hover);}
+
+/* ── Hero ── */
+.hero{padding:5rem 0 3rem;text-align:center;}
+.hero-title{
+  font-size:4.5rem;font-weight:200;letter-spacing:.18em;
+  margin-bottom:1.2rem;color:var(--text);
+}
+.hero-title .a{color:var(--accent);}
+.hero-headline{
+  font-size:1.35rem;line-height:1.55;max-width:600px;
+  margin:0 auto 2rem;color:var(--text-dim);
+}
+.hero-headline em{color:var(--accent);font-style:normal;}
+
+/* Strudel embed */
+.strudel-wrap{
+  max-width:680px;margin:0 auto 1.2rem;
+  border:1px solid var(--border);border-radius:8px;
+  overflow:hidden;background:var(--surface);
+}
+.strudel-wrap strudel-editor{display:block;width:100%;}
+.strudel-caption{
+  font-family:'SF Mono',monospace;font-size:.78rem;
+  color:var(--text-dim);max-width:600px;margin:0 auto 2rem;
+  line-height:1.6;text-align:center;
+}
+.strudel-caption strong{color:var(--text);}
+
+/* CTAs */
+.cta-row{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.2rem;}
+.btn{
+  display:inline-block;padding:.85rem 2.4rem;
+  font-family:'SF Mono',monospace;font-size:.78rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  border-radius:5px;text-decoration:none;
+  font-weight:700;transition:all .2s;cursor:pointer;
+}
+.btn-primary{background:var(--accent);color:var(--bg);border:1px solid var(--accent);}
+.btn-primary:hover{background:var(--accent-hover);color:var(--bg);transform:translateY(-1px);}
+.btn-secondary{background:transparent;color:var(--accent);border:1px solid var(--accent);}
+.btn-secondary:hover{background:var(--accent-dim);}
+
+/* Stats row */
+.stats-row{
+  display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;
+  margin:1.5rem 0 0;
+}
+.stat{
+  font-family:'SF Mono',monospace;font-size:.7rem;
+  color:var(--text-faint);letter-spacing:.08em;
+  text-transform:uppercase;
+}
+.stat b{color:var(--text-dim);font-weight:600;}
+
+/* ── Section helpers ── */
+section{padding:4rem 0;}
+.section-border{border-top:1px solid var(--border);}
+.section-label{
+  font-family:'SF Mono',monospace;font-size:.6rem;
+  letter-spacing:.16em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:.8rem;display:block;
+}
+h2{font-size:1.5rem;font-weight:400;margin-bottom:1rem;}
+section p{margin-bottom:1rem;color:var(--text-dim);}
+section strong{color:var(--text);font-weight:600;}
+code{
+  font-size:.82em;background:var(--surface);
+  padding:.12em .4em;border-radius:3px;color:var(--cool);
+}
+
+/* ── Gap callout ── */
+.callout{
+  padding:1.6rem 1.8rem;background:var(--surface);
+  border-left:3px solid var(--accent);border-radius:0 6px 6px 0;
+  margin:0 auto;max-width:680px;
+}
+.callout p{margin:0;color:var(--text-dim);font-size:1rem;line-height:1.7;}
+.callout em{color:var(--accent);font-style:normal;}
+
+/* ── How it works (3 steps) ── */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:1.5rem;}
+.step{
+  padding:1.4rem;background:var(--surface);
+  border:1px solid var(--border);border-radius:8px;
+  text-align:center;
+}
+.step-num{
+  display:inline-block;width:32px;height:32px;line-height:32px;
+  border-radius:50%;background:var(--accent);color:var(--bg);
+  font-family:'SF Mono',monospace;font-size:.75rem;font-weight:700;
+  margin-bottom:.8rem;
+}
+.step h3{font-size:1rem;font-weight:600;margin-bottom:.5rem;}
+.step p{font-size:.88rem;color:var(--text-dim);margin:0 0 .6rem;}
+.step code{font-size:.72rem;display:inline-block;margin-top:.3rem;}
+
+/* ── Curriculum grid ── */
+.curriculum-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-top:1.2rem;}
+.lesson-card{
+  padding:.9rem 1.1rem;background:var(--surface);
+  border:1px solid var(--border);border-radius:6px;
+  position:relative;overflow:hidden;
+}
+.lesson-card .ln{
+  font-family:'SF Mono',monospace;font-size:.58rem;
+  color:var(--accent);letter-spacing:.06em;display:block;margin-bottom:.2rem;
+}
+.lesson-card .lt{font-size:.92rem;color:var(--text);display:block;margin-bottom:.25rem;}
+.lesson-card .lr{font-size:.75rem;color:var(--text-faint);font-style:italic;}
+.badge{
+  position:absolute;top:.7rem;right:.7rem;
+  font-family:'SF Mono',monospace;font-size:.5rem;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:.15rem .5rem;border-radius:3px;
+}
+.badge-live{background:var(--green-dim);color:var(--green);}
+.badge-soon{background:var(--accent-dim);color:var(--accent);}
+
+/* ── Code examples ── */
+.code-examples{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.5rem;}
+.code-card{
+  padding:1.2rem 1.4rem;background:var(--surface);
+  border:1px solid var(--border);border-radius:8px;
+}
+.code-card h3{font-size:.95rem;font-weight:500;margin-bottom:.7rem;}
+.code-card pre{
+  background:#0d0d10;padding:1rem;border-radius:5px;
+  font-family:'SF Mono',monospace;font-size:.75rem;
+  color:var(--cool);line-height:1.6;overflow-x:auto;
+  border:1px solid #1a1a20;
+}
+.code-card .try-link{
+  display:block;margin-top:.6rem;
+  font-family:'SF Mono',monospace;font-size:.65rem;
+  color:var(--accent);letter-spacing:.06em;
+}
+
+/* ── Who this is for ── */
+.persona-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem;}
+.persona-card{
+  padding:1.4rem;background:var(--surface);
+  border:1px solid var(--border);border-radius:8px;
+}
+.persona-icon{font-size:1.6rem;margin-bottom:.6rem;display:block;}
+.persona-card h3{font-size:.95rem;font-weight:600;margin-bottom:.5rem;}
+.persona-card p{font-size:.85rem;color:var(--text-dim);margin:0;}
+
+/* ── Support tiers ── */
+.tier-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-top:1.5rem;}
+.tier{
+  padding:1.2rem;background:var(--surface);
+  border:1px solid var(--border);border-radius:8px;
+  text-align:center;
+}
+.tier.featured{border-color:var(--accent);position:relative;}
+.tier.featured::before{
+  content:'founding';position:absolute;top:-.55rem;left:50%;
+  transform:translateX(-50%);
+  font-family:'SF Mono',monospace;font-size:.5rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:var(--accent);color:var(--bg);
+  padding:.15rem .6rem;border-radius:3px;font-weight:700;
+}
+.tier-price{
+  font-family:'SF Mono',monospace;font-size:1.4rem;
+  color:var(--text);font-weight:700;display:block;margin-bottom:.4rem;
+}
+.tier-price .unit{font-size:.7rem;color:var(--text-dim);font-weight:400;}
+.tier-name{
+  font-family:'SF Mono',monospace;font-size:.6rem;
+  color:var(--accent);letter-spacing:.1em;text-transform:uppercase;
+  display:block;margin-bottom:.5rem;
+}
+.tier p{font-size:.82rem;color:var(--text-dim);margin:0;}
+
+/* ── Email capture ── */
+.email-capture{
+  padding:2.5rem 2rem;background:var(--surface);
+  border:1px solid var(--border);border-radius:10px;
+  text-align:center;max-width:540px;margin:0 auto;
+}
+.email-capture h3{font-size:1.15rem;font-weight:400;margin-bottom:.4rem;}
+.email-capture>p{font-size:.85rem;color:var(--text-dim);margin-bottom:1.2rem;}
+.email-form{display:flex;gap:.5rem;max-width:420px;margin:0 auto;}
+.email-form input[type="email"]{
+  flex:1;padding:.7rem 1rem;background:var(--bg);
+  border:1px solid var(--border-light);border-radius:4px;
+  color:var(--text);font-family:'SF Mono',monospace;font-size:.8rem;
+}
+.email-form input[type="email"]::placeholder{color:var(--text-faint);}
+.email-form input[type="email"]:focus{outline:none;border-color:var(--accent);}
+.email-form button{
+  padding:.7rem 1.6rem;background:var(--accent);color:var(--bg);
+  font-family:'SF Mono',monospace;font-size:.75rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  border:none;border-radius:4px;cursor:pointer;
+  font-weight:700;transition:all .2s;
+}
+.email-form button:hover{background:var(--accent-hover);}
+.email-note{
+  font-family:'SF Mono',monospace;font-size:.5rem;
+  color:var(--text-faint);margin-top:.6rem;letter-spacing:.06em;
+}
+
+/* ── Community links ── */
+.social-links{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:1.2rem 0;}
+.social-link{
+  font-family:'SF Mono',monospace;font-size:.7rem;
+  color:var(--text-dim);text-decoration:none;
+  letter-spacing:.06em;padding:.45rem .9rem;
+  border:1px solid var(--border);border-radius:4px;
+  transition:all .2s;
+}
+.social-link:hover{color:var(--accent);border-color:var(--accent);}
+
+/* ── Footer ── */
+.footer{
+  padding:2rem 0;border-top:1px solid var(--border);
+  text-align:center;margin-top:2rem;
+}
+.footer p{
+  font-family:'SF Mono',monospace;font-size:.55rem;
+  color:var(--text-faint);letter-spacing:.06em;
+}
+.footer a{color:var(--text-dim);text-decoration:none;}
+.footer a:hover{color:var(--accent);}
+
+/* ── Responsive ── */
+@media(max-width:768px){
+  .wrap{padding:0 1.2rem;}
+  .hero{padding:3.5rem 0 2rem;}
+  .hero-title{font-size:3rem;}
+  .hero-headline{font-size:1.1rem;}
+  .steps{grid-template-columns:1fr;}
+  .curriculum-grid{grid-template-columns:1fr;}
+  .code-examples{grid-template-columns:1fr;}
+  .persona-grid{grid-template-columns:1fr;}
+  .tier-grid{grid-template-columns:1fr 1fr;}
+  .email-form{flex-direction:column;}
+  .cta-row{flex-direction:column;align-items:center;}
+  .stats-row{flex-direction:column;align-items:center;gap:.6rem;}
+}
+@media(max-width:480px){
+  .tier-grid{grid-template-columns:1fr;}
+  .hero-title{font-size:2.4rem;letter-spacing:.12em;}
+}
+</style>
+</head><body>
+
+<canvas id="hydra-canvas"></canvas>
+
+<div class="wrap">
+
+<!-- ════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════ -->
+<div class="hero">
+  <h1 class="hero-title">hlj<span class="a">od</span></h1>
+  <p class="hero-headline">Learn music theory by recreating game soundtracks&nbsp;&mdash; <em>in your browser, in live code.</em></p>
+
+  <div class="strudel-wrap">
+    <strudel-editor code='note("f4 a4 b4 [f4 a4] b4 [f4 a4 b4 e5 d5]").s("piano").slow(4)'></strudel-editor>
+  </div>
+  <p class="strudel-caption">That's <strong>Dorian mode</strong>. That's why Lost Woods sounds haunting. Hit play. Change a note. Hear the difference.</p>
+
+  <div class="cta-row">
+    <a href="#lesson-0" class="btn btn-primary">Start Lesson 0 &rarr;</a>
+    <a href="#email-signup" class="btn btn-secondary">Get notified</a>
+  </div>
+
+  <div class="stats-row">
+    <span class="stat"><b>25</b> lessons</span>
+    <span class="stat"><b>30+</b> game soundtracks</span>
+    <span class="stat"><b>zero</b> installs</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════
+     THE GAP
+     ════════════════════════════════════════════════ -->
+<section>
+  <div class="callout">
+    <p>You watch 8-bit Music Theory and think <em>"that's cool."</em> Then you close the tab. hljod is where you open a tab and <em>do</em> it.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     HOW IT WORKS
+     ════════════════════════════════════════════════ -->
+<section class="section-border">
+  <span class="section-label">How it works</span>
+  <h2>Hear it. Break it. Name it.</h2>
+  <div class="steps">
+    <div class="step">
+      <span class="step-num">1</span>
+      <h3>Play</h3>
+      <p>Code makes sound instantly. No setup, no DAW, no instrument.</p>
+      <code>note("c4 e4 g4").s("piano")</code>
+    </div>
+    <div class="step">
+      <span class="step-num">2</span>
+      <h3>Tweak</h3>
+      <p>Change one note. Hear how the mood shifts from bright to dark.</p>
+      <code>note("c4 <strong>eb4</strong> g4").s("piano")</code>
+    </div>
+    <div class="step">
+      <span class="step-num">3</span>
+      <h3>Name</h3>
+      <p>Learn that what you just heard is called a minor triad. Theory after sound.</p>
+      <code>// that's a minor triad</code>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     THE CURRICULUM
+     ════════════════════════════════════════════════ -->
+<section class="section-border">
+  <span class="section-label">The curriculum</span>
+  <h2>Phase 1: The Beat &mdash; production from zero</h2>
+  <p>Patterns, bass, effects, arrangement, sampling. You make noise before you name anything.</p>
+
+  <div class="curriculum-grid">
+    <div class="lesson-card">
+      <span class="badge badge-live">free</span>
+      <span class="ln">L0</span>
+      <span class="lt">First Noise</span>
+      <span class="lr">Zelda Chest Jingle, Mario Coin</span>
+    </div>
+    <div class="lesson-card">
+      <span class="badge badge-live">free</span>
+      <span class="ln">L1</span>
+      <span class="lt">The Break</span>
+      <span class="lr">Metroid Brinstar, Mega Man 2 Wily Stage</span>
+    </div>
+    <div class="lesson-card">
+      <span class="badge badge-live">free</span>
+      <span class="ln">L2</span>
+      <span class="lt">The Bass</span>
+      <span class="lr">Skyrim Dragonborn, Minecraft Subwoofer Lullaby</span>
+    </div>
+    <div class="lesson-card">
+      <span class="badge badge-live">free</span>
+      <span class="ln">L3</span>
+      <span class="lt">Layers</span>
+      <span class="lr">Chrono Trigger Wind Scene, Stardew Valley</span>
+    </div>
+    <div class="lesson-card">
+      <span class="badge badge-live">free</span>
+      <span class="ln">L4</span>
+      <span class="lt">Atmosphere</span>
+      <span class="lr">Dark Souls Firelink Shrine, Zelda BotW</span>
+    </div>
+    <div class="lesson-card">
+      <span class="badge badge-live">free</span>
+      <span class="ln">L5</span>
+      <span class="lt">Movement</span>
+      <span class="lr">Zelda Lost Woods, Undertale Megalovania</span>
+    </div>
+    <div class="lesson-card">
+      <span class="badge badge-live">free</span>
+      <span class="ln">L6</span>
+      <span class="lt">The Drop</span>
+      <span class="lr">FF7 One Winged Angel, Hollow Knight</span>
+    </div>
+    <div class="lesson-card">
+      <span class="badge badge-live">free</span>
+      <span class="ln">L7</span>
+      <span class="lt">Chopping</span>
+      <span class="lr">Amen Break, Chrono Trigger Corridors of Time</span>
+    </div>
+  </div>
+
+  <h2 style="margin-top:2.5rem;">Phase 2: The Harmony &mdash; scales, modes, chords</h2>
+  <p>Kondo, Uematsu, Mitsuda, Meguro. The composers who defined game music, teaching you the theory underneath.</p>
+
+  <div class="curriculum-grid">
+    <div class="lesson-card">
+      <span class="badge badge-live">live</span>
+      <span class="ln">L8a&ndash;b</span>
+      <span class="lt">Scales &amp; Modes</span>
+      <span class="lr">Mario Overworld, Zelda Lost Woods, Lavender Town</span>
+    </div>
+    <div class="lesson-card">
+      <span class="badge badge-live">live</span>
+      <span class="ln">L8c&ndash;e</span>
+      <span class="lt">Melody, Intervals, Non-Chord&nbsp;Tones</span>
+      <span class="lr">Chrono Cross, Persona 5, Silent Hill 2</span>
+    </div>
+    <div class="lesson-card">
+      <span class="badge badge-live">live</span>
+      <span class="ln">L9a&ndash;b</span>
+      <span class="lt">Diatonic Harmony &amp; ii-V-I</span>
+      <span class="lr">Persona 4, Animal Crossing, Last Surprise</span>
+    </div>
+    <div class="lesson-card">
+      <span class="badge badge-soon">coming soon</span>
+      <span class="ln">L9c&ndash;f</span>
+      <span class="lt">Cadences, Texture, Development</span>
+      <span class="lr">FF Main Theme, Ace Attorney, Zelda across 35 years</span>
+    </div>
+    <div class="lesson-card">
+      <span class="badge badge-soon">coming soon</span>
+      <span class="ln">L10&ndash;L13</span>
+      <span class="lt">Phase 3: The Architecture</span>
+      <span class="lr">Chromatic harmony, modulation, voice leading, counterpoint</span>
+    </div>
+    <div class="lesson-card">
+      <span class="badge badge-soon">coming soon</span>
+      <span class="ln">B.0&ndash;6 / J.0&ndash;4</span>
+      <span class="lt">Blues &amp; Jazz Tracks</span>
+      <span class="lr">Cowboy Bebop, Cuphead, Grim Fandango</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     CODE EXAMPLES
+     ════════════════════════════════════════════════ -->
+<section class="section-border">
+  <span class="section-label">Try it yourself</span>
+  <h2>Game music in a few lines of code</h2>
+  <div class="code-examples">
+    <div class="code-card">
+      <h3>Skyrim's bass in 3 lines</h3>
+      <pre>note("d2 d2 d3 d2")
+  .s("sawtooth")
+  .lpf(400).slow(2)</pre>
+      <a href="#lesson-0" class="try-link">Try it in Lesson 2 &rarr;</a>
+    </div>
+    <div class="code-card">
+      <h3>Megalovania's drive in 5 lines</h3>
+      <pre>note("d4 d4 d5 a4 ~ ab4 g4 f4 d4 f4 g4")
+  .s("square")
+  .gain(.6)
+  .lpf(1200)
+  .fast(1.5)</pre>
+      <a href="#lesson-0" class="try-link">Try it in Lesson 5 &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     WHO THIS IS FOR
+     ════════════════════════════════════════════════ -->
+<section class="section-border">
+  <span class="section-label">Who this is for</span>
+  <h2>Three kinds of people find hljod</h2>
+  <div class="persona-grid">
+    <div class="persona-card">
+      <span class="persona-icon" aria-hidden="true">~</span>
+      <h3>The producer who hit the ceiling</h3>
+      <p>You make beats, but you can't explain why your chord progressions work. You want the theory layer underneath your DAW skills.</p>
+    </div>
+    <div class="persona-card">
+      <span class="persona-icon" aria-hidden="true">&gt;</span>
+      <h3>The dev who discovered Strudel</h3>
+      <p>You saw a live coding demo and thought "I want to do that." But Strudel's docs teach Strudel, not music. hljod bridges the gap.</p>
+    </div>
+    <div class="persona-card">
+      <span class="persona-icon" aria-hidden="true">#</span>
+      <h3>The gamer who wants to play what they hear</h3>
+      <p>You've listened to Koji Kondo and Nobuo Uematsu your whole life. Now you want to understand what they did and make your own.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     SUPPORT TIERS
+     ════════════════════════════════════════════════ -->
+<section class="section-border">
+  <span class="section-label">Support the project</span>
+  <h2>hljod is free at its core</h2>
+  <p>If you want to go deeper or support the work:</p>
+  <div class="tier-grid">
+    <div class="tier">
+      <span class="tier-name">Free</span>
+      <span class="tier-price">$0</span>
+      <p>Lessons 0&ndash;7 + 8a&ndash;8b. No account. No credit card. The guarantee.</p>
+    </div>
+    <div class="tier">
+      <span class="tier-name">Supporter</span>
+      <span class="tier-price">$5<span class="unit">/mo</span></span>
+      <p>Vote on the next lesson topic. Your voice shapes the curriculum.</p>
+    </div>
+    <div class="tier">
+      <span class="tier-name">Patron</span>
+      <span class="tier-price">$10<span class="unit">/mo</span></span>
+      <p>Early access to new lessons + patron-only live jams with the instructors.</p>
+    </div>
+    <div class="tier featured">
+      <span class="tier-name">Community</span>
+      <span class="tier-price">$19<span class="unit">/mo</span></span>
+      <p>Founding rate, locked for life. First 30 members. Weekly jams, composition feedback, full access.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     EMAIL CAPTURE
+     ════════════════════════════════════════════════ -->
+<section id="email-signup">
+  <div class="email-capture">
+    <h3>Get new lessons and jam announcements</h3>
+    <p>One email when something ships. No drip campaigns. Unsubscribe anytime.</p>
+    <form class="email-form" action="#" method="POST">
+      <input type="email" name="email" placeholder="you@example.com" required>
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="email-note">No spam. Just lessons and jams.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════
+     COMMUNITY + LINKS
+     ════════════════════════════════════════════════ -->
+<section class="section-border" style="text-align:center;">
+  <p style="font-family:'SF Mono',monospace;font-size:.65rem;color:var(--text-faint);letter-spacing:.1em;margin-bottom:1rem;">BUILT IN PUBLIC &mdash; JOIN THE DISCORD TO VOTE ON THE NEXT LESSON</p>
+  <div class="social-links">
+    <a href="#discord-link" class="social-link">Discord</a>
+    <a href="https://hljod.peleke.me" class="social-link">Course</a>
+    <a href="#kofi-link" class="social-link">Ko-fi</a>
+    <a href="#youtube-link" class="social-link">YouTube</a>
+  </div>
+  <div style="margin-top:2rem;">
+    <a href="#lesson-0" class="btn btn-primary">Start Lesson 0 &rarr;</a>
+  </div>
+  <p style="font-family:'SF Mono',monospace;font-size:.5rem;color:var(--text-faint);letter-spacing:.06em;margin-top:.8rem;">runs in your browser &bull; built on <a href="https://strudel.cc" style="color:var(--cool);">strudel</a> + <a href="https://hydra.ojack.xyz" style="color:var(--cool);">hydra</a></p>
+</section>
+
+<!-- Footer -->
+<div class="footer">
+  <p>hljod &bull; <a href="https://peleke.me">peleke</a> &bull; built with strudel &amp; hydra</p>
+</div>
+
+</div><!-- .wrap -->
+
+<!-- ── Hydra background ── -->
+<script src="https://unpkg.com/hydra-synth@1.3.29/dist/hydra-synth.js"></script>
+<script>
+try {
+  const hydra = new Hydra({
+    canvas: document.getElementById('hydra-canvas'),
+    detectAudio: false,
+    makeGlobal: false,
+    autoLoop: true,
+    width: window.innerWidth,
+    height: window.innerHeight,
+    precision: 'mediump'
+  });
+  const h = hydra.synth;
+  h.osc(8, 0.04, 1.2)
+    .color(1.0, 0.42, 0.22)
+    .rotate(0.1, 0.01)
+    .modulateScale(h.osc(3, 0.1).rotate(0.3), 0.15)
+    .scale(1.02)
+    .saturate(1.3)
+    .kaleid(3)
+    .out();
+  window.addEventListener('resize', function() {
+    hydra.setResolution(window.innerWidth, window.innerHeight);
+  });
+} catch(e) {}
+</script>
+
+</body></html>

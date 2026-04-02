@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>hljod — One Pager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ========================================
+   hljod One-Pager — Colleague / Collaborator / Design Partner
+   Style: LinWheel reference (Inter, dark bg, orange gradient, card-glow)
+   ======================================== */
+
+:root {
+    --bg: #0a0a0c;
+    --card: #141418;
+    --card-border: #1e1e24;
+    --text: #e8e6e3;
+    --text-dim: #9a9890;
+    --text-faint: #5a584f;
+    --accent-1: #ff6b35;
+    --accent-2: #ff8a5c;
+    --accent-3: #ffb088;
+    --green: #4ade80;
+    --blue: #4fc3f7;
+    --yellow: #fbbf24;
+    --purple: #a78bfa;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.6;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem 2.5rem 2rem;
+}
+
+/* ---- Header ---- */
+.header {
+    text-align: center;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 2.5rem;
+}
+
+.logo {
+    font-size: 4rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2), var(--accent-3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.3rem;
+}
+
+.tagline {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--text-dim);
+    letter-spacing: 0.25em;
+    text-transform: lowercase;
+}
+
+/* ---- Section Labels ---- */
+.section-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.75rem;
+    display: block;
+}
+
+/* ---- Sections ---- */
+.section {
+    margin-bottom: 2.5rem;
+}
+
+.section h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.6rem;
+    color: var(--text);
+}
+
+.section p {
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    line-height: 1.7;
+}
+
+/* ---- Card with glow ---- */
+.card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 1.5rem 1.6rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-glow {
+    box-shadow: 0 0 40px rgba(255, 107, 53, 0.06), 0 0 80px rgba(255, 107, 53, 0.03);
+}
+
+.card-glow::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+    border-radius: 10px 10px 0 0;
+}
+
+/* ---- Two-column layout ---- */
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+/* ---- Traction grid (3-column stats) ---- */
+.traction-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.stat-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 1.4rem 1.2rem;
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 0.3rem;
+}
+
+.stat-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+}
+
+/* ---- Market bullets ---- */
+.market-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.market-list li {
+    padding: 0.5rem 0 0.5rem 1.4rem;
+    position: relative;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    line-height: 1.65;
+}
+
+.market-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.95rem;
+    width: 6px;
+    height: 6px;
+    background: var(--accent-1);
+    border-radius: 50%;
+}
+
+.market-list li strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+/* ---- Why Us cards ---- */
+.why-us-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.why-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 1.3rem 1.2rem;
+}
+
+.why-card .why-icon {
+    font-size: 1.4rem;
+    margin-bottom: 0.6rem;
+    display: block;
+}
+
+.why-card h4 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+}
+
+.why-card p {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.55;
+}
+
+/* ---- Roadmap grid (3-column with colored borders) ---- */
+.roadmap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.roadmap-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 1.3rem 1.2rem;
+    border-top: 3px solid transparent;
+}
+
+.roadmap-card.shipped {
+    border-top-color: var(--green);
+}
+
+.roadmap-card.next {
+    border-top-color: var(--accent-1);
+}
+
+.roadmap-card.future {
+    border-top-color: var(--purple);
+}
+
+.roadmap-card .rm-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.7rem;
+    display: block;
+}
+
+.roadmap-card.shipped .rm-label { color: var(--green); }
+.roadmap-card.next .rm-label { color: var(--accent-1); }
+.roadmap-card.future .rm-label { color: var(--purple); }
+
+.roadmap-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.roadmap-card ul li {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    padding: 0.2rem 0;
+    line-height: 1.5;
+}
+
+.roadmap-card ul li::before {
+    content: '\2022';
+    margin-right: 0.5rem;
+    color: var(--text-faint);
+}
+
+/* ---- Revenue model ---- */
+.revenue-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.tier-badge {
+    display: inline-block;
+    padding: 0.3rem 0.75rem;
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-dim);
+}
+
+.tier-arrow {
+    color: var(--accent-1);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.revenue-details {
+    margin-top: 0.6rem;
+}
+
+.revenue-details p {
+    font-size: 0.82rem;
+    color: var(--text-dim);
+    line-height: 1.6;
+}
+
+.revenue-details strong {
+    color: var(--text);
+}
+
+.revenue-highlight {
+    color: var(--accent-2) !important;
+    font-weight: 600;
+}
+
+/* ---- Ask grid (icon cards) ---- */
+.ask-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.ask-card {
+    background: var(--card);
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    padding: 1.4rem 1.2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.ask-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+}
+
+.ask-card .ask-icon {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+    display: block;
+}
+
+.ask-card h4 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.45rem;
+}
+
+.ask-card p {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    line-height: 1.55;
+}
+
+/* ---- Footer ---- */
+.footer {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--card-border);
+    text-align: center;
+}
+
+.footer p {
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    letter-spacing: 0.04em;
+}
+
+.footer a {
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer a:hover {
+    color: var(--accent-1);
+}
+
+.footer .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 0.4rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+    .page { padding: 2rem 1.2rem 1.5rem; }
+    .logo { font-size: 2.8rem; }
+    .two-col,
+    .traction-grid,
+    .why-us-grid,
+    .roadmap-grid,
+    .ask-grid { grid-template-columns: 1fr; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+    .why-us-grid,
+    .ask-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---- Print-friendly ---- */
+@media print {
+    body {
+        background: #fff;
+        color: #111;
+        font-size: 11px;
+    }
+    .page {
+        max-width: 100%;
+        padding: 0.5in;
+    }
+    .logo {
+        -webkit-text-fill-color: var(--accent-1);
+        color: var(--accent-1);
+    }
+    .section-label {
+        -webkit-text-fill-color: var(--accent-1);
+        color: var(--accent-1);
+    }
+    .stat-number {
+        -webkit-text-fill-color: var(--accent-1);
+        color: var(--accent-1);
+    }
+    .card, .stat-card, .why-card, .roadmap-card, .ask-card {
+        background: #f8f8f8;
+        border-color: #ddd;
+        box-shadow: none;
+    }
+    .card-glow::before,
+    .ask-card::before {
+        background: var(--accent-1);
+    }
+    .card-glow {
+        box-shadow: none;
+    }
+    p, li, .stat-label, .why-card p, .ask-card p, .roadmap-card ul li {
+        color: #444;
+    }
+    .market-list li strong, .why-card h4, .ask-card h4, h3, strong {
+        color: #111;
+    }
+    .tagline { color: #666; }
+    .footer p { color: #888; }
+    .footer a { color: #444; }
+    .tier-badge {
+        background: #f0f0f0;
+        border-color: #ddd;
+        color: #444;
+    }
+    .roadmap-card.shipped { border-top-color: #22c55e; }
+    .roadmap-card.next { border-top-color: var(--accent-1); }
+    .roadmap-card.future { border-top-color: #8b5cf6; }
+    .roadmap-card.shipped .rm-label { color: #22c55e; }
+    .roadmap-card.next .rm-label { color: var(--accent-1); }
+    .roadmap-card.future .rm-label { color: #8b5cf6; }
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+    <!-- ============ HEADER ============ -->
+    <header class="header">
+        <div class="logo">hljod</div>
+        <div class="tagline">silence and sound</div>
+    </header>
+
+    <!-- ============ THE PROBLEM ============ -->
+    <div class="section">
+        <span class="section-label">The Problem</span>
+        <div class="card card-glow">
+            <p>Game music inspires millions to want to learn music. But music education ignores game music entirely. Piano teachers are confused when kids ask for "video game music." Producers who make beats can't figure out why game soundtracks sound different. And the 558K people who watch 8-bit Music Theory on YouTube can't interact with anything they learn.</p>
+        </div>
+    </div>
+
+    <!-- ============ THE SOLUTION ============ -->
+    <div class="section">
+        <span class="section-label">The Solution</span>
+        <div class="card card-glow">
+            <p><strong>hljod</strong> is an interactive music theory course where you learn by live-coding recreations of game soundtracks in your browser. No install. No instrument. Type code, hear music, change a note, understand why. The curriculum uses Zelda, Final Fantasy, Undertale, and Persona 5 as the textbook.</p>
+        </div>
+    </div>
+
+    <!-- ============ THE MARKET ============ -->
+    <div class="section">
+        <span class="section-label">The Market</span>
+        <ul class="market-list">
+            <li><strong>Online music education: $3.9-4.6B market, 15% CAGR.</strong> Growing fast, driven by self-paced learners.</li>
+            <li><strong>Nobody combines game music + live coding + interactive browser.</strong> The intersection is completely unoccupied.</li>
+            <li><strong>Strudel (the tool) is exploding:</strong> 441 upvotes on r/livecoding for "my first song." Organic demand, no marketing.</li>
+            <li><strong>Simply Piano makes $200M/yr. Hooktheory charges $149.</strong> The middle is empty. Interactive theory at accessible price = open lane.</li>
+        </ul>
+    </div>
+
+    <!-- ============ WHY NOW ============ -->
+    <div class="section">
+        <span class="section-label">Why Now</span>
+        <ul class="market-list">
+            <li><strong>Strudel is having its moment</strong> -- 300-441 upvote posts, "where do I start?" is a recurring ask across subreddits.</li>
+            <li><strong>Gitori.com launched 5 days ago</strong> with interactive theory but NO game music -- validates the market, leaves the niche wide open.</li>
+            <li><strong>291.4M TikTok views on #videogamemusic.</strong> The audience is massive, active, and underserved.</li>
+            <li><strong>The GameStop/nostalgia generation</strong> grew up on these soundtracks and now has disposable income.</li>
+        </ul>
+    </div>
+
+    <!-- ============ TRACTION ============ -->
+    <div class="section">
+        <span class="section-label">Traction</span>
+        <div class="traction-grid">
+            <div class="stat-card">
+                <div class="stat-number">25</div>
+                <div class="stat-label">Lessons live</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">30+</div>
+                <div class="stat-label">Game soundtracks mapped</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">4/1</div>
+                <div class="stat-label">GTM launch date</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ WHY US ============ -->
+    <div class="section">
+        <span class="section-label">Why Us</span>
+        <div class="why-us-grid">
+            <div class="why-card">
+                <span class="why-icon">&#9881;</span>
+                <h4>Builder who ships</h4>
+                <p>24-week cybersec program at $60MM+ ARR, Qortex, MindMirror, Interlinear. Zero-to-product in weeks, not months.</p>
+            </div>
+            <div class="why-card">
+                <span class="why-icon">&#9835;</span>
+                <h4>Co-delivery</h4>
+                <p>Elite developer + ex-professional musician. Both perspectives. The "developer who teaches code" + "musician who validates theory" pair.</p>
+            </div>
+            <div class="why-card">
+                <span class="why-icon">&#9733;</span>
+                <h4>The curriculum IS the moat</h4>
+                <p>30+ game soundtracks systematically mapped to theory concepts. Nobody else has this mapping.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ ROADMAP ============ -->
+    <div class="section">
+        <span class="section-label">Roadmap</span>
+        <div class="roadmap-grid">
+            <div class="roadmap-card shipped">
+                <span class="rm-label">Shipped</span>
+                <ul>
+                    <li>Phase 1 lessons (L0-L7)</li>
+                    <li>Phase 2 start (L8a-8b)</li>
+                    <li>Landing page</li>
+                    <li>GTM pipeline</li>
+                    <li>Game music canon</li>
+                    <li>Playlist</li>
+                </ul>
+            </div>
+            <div class="roadmap-card next">
+                <span class="rm-label">Next 30 Days</span>
+                <ul>
+                    <li>Reddit launch</li>
+                    <li>Discord community</li>
+                    <li>Ko-fi / Patreon</li>
+                    <li>Live jams</li>
+                    <li>Newsletter</li>
+                    <li>First TikToks</li>
+                </ul>
+            </div>
+            <div class="roadmap-card future">
+                <span class="rm-label">Next 90 Days</span>
+                <ul>
+                    <li>Skool community ($29/mo)</li>
+                    <li>Phase 2 completion</li>
+                    <li>AI tutor integration</li>
+                    <li>100+ email list</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ REVENUE MODEL ============ -->
+    <div class="section">
+        <span class="section-label">Revenue Model</span>
+        <div class="card">
+            <div class="revenue-row">
+                <span class="tier-badge">Free tier</span>
+                <span class="tier-arrow">&rarr;</span>
+                <span class="tier-badge">Ko-fi ($5-10/mo)</span>
+                <span class="tier-arrow">&rarr;</span>
+                <span class="tier-badge">Skool ($29/mo)</span>
+                <span class="tier-arrow">&rarr;</span>
+                <span class="tier-badge">Pro tier (TBD)</span>
+            </div>
+            <div class="revenue-details">
+                <p><strong>Month 3 MRR target:</strong> <span class="revenue-highlight">$1,020-$2,625</span> (conservative, zero ad spend)</p>
+                <p><strong>Kill threshold:</strong> &lt;$500 MRR at Month 3</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ THE ASK ============ -->
+    <div class="section">
+        <span class="section-label">The Ask</span>
+        <div class="ask-grid">
+            <div class="ask-card">
+                <span class="ask-icon">&#128101;</span>
+                <h4>For Design Partners</h4>
+                <p>Join the founding cohort. Co-design the curriculum. First 30 Skool members get $19/mo locked for life.</p>
+            </div>
+            <div class="ask-card">
+                <span class="ask-icon">&#127928;</span>
+                <h4>For Collaborators</h4>
+                <p>Musicians, game music arrangers, music teachers who want to help build the interactive lessons.</p>
+            </div>
+            <div class="ask-card">
+                <span class="ask-icon">&#128161;</span>
+                <h4>For Advisors</h4>
+                <p>Guidance on edtech GTM, intros to music education platforms, feedback on positioning.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <p class="footer-links">
+            <a href="https://hljod.peleke.me">hljod.peleke.me</a>
+            <a href="mailto:peleke.s@pm.me">peleke.s@pm.me</a>
+            <a href="https://linkedin.com/in/peleke">LinkedIn</a>
+        </p>
+    </footer>
+
+</div>
+
+</body>
+</html>
